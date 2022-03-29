@@ -1,6 +1,9 @@
 package usuarios;
 import java.util.ArrayList;
 
+import Pedido.Pedido;
+import sistema.SistemaAplicacion;
+
 import java.util.*;
 import java.io.*;
 /**
@@ -24,31 +27,32 @@ public class Operador extends UsuarioIdentificado{
         this.pedidosDistribuidos = pedidosDistribuidos;
     }
     public Pedido nuevoPedido(int idPedido, boolean urgente, Date fecha, String direccion, int codigoPostal, String descripcion, Cliente Cliente){
-        
+        return null;
 
     }
     public void empaquetarPedido(){
 
     }
     public boolean validarPedido(Pedido p){
+        return true; 
 
     }
-    public void modificarAlto(Parametros p, double alto){
+    public void modificarAlto(SistemaAplicacion p, double alto){
         p.setAlto(alto);
     }
-    public void modificarAncho(Parametros p, double ancho){
+    public void modificarAncho(SistemaAplicacion p, double ancho){
         p.setAncho(ancho);
     }
-    public void modificarLargo(Parametros p, double largo){
+    public void modificarLargo(SistemaAplicacion p, double largo){
         p.setLargo(largo);
     }
-    public void modificarPeso(Parametros p, double peso){
+    public void modificarPeso(SistemaAplicacion p, double peso){
         p.setPesoMaximo(peso);
     }
-    public void modificarIntentos(Parametros p, int intentos){
+    public void modificarIntentos(SistemaAplicacion p, int intentos){
         p.setMaxIntentos(intentos);
     }
-    public void modificarDirecciones(Parametros p, int direcciones){
+    public void modificarDirecciones(SistemaAplicacion p, int direcciones){
         p.setMaxDirecciones(direcciones);
     }
     public void planificarEnvio(){

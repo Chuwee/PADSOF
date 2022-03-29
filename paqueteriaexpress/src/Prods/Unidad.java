@@ -1,6 +1,6 @@
 package Prods;
 
-public class Unidad {
+public abstract class Unidad {
 
     private int identificador;
     private double peso;

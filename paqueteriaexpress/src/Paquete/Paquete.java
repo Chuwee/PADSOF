@@ -2,6 +2,8 @@ package Paquete;
 
 import java.util.ArrayList;
 
+import Prods.Unidad;
+
 public class Paquete {
     private int idPaquete;
     private String direccion;
@@ -11,7 +13,7 @@ public class Paquete {
     public Paquete(int idPaquete, String direccion) {
         this.idPaquete = idPaquete;
         this.direccion = direccion;
-        this.peso = null;
+        this.peso = 0;
         unidades = new ArrayList<Unidad>();
     }
 

@@ -6,6 +6,24 @@ public class Producto {
     private double largo;
     private double ancho;
     private double alto;
+    private double peso;
+    private double precio;
+
+    public double getPeso() {
+        return this.peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public double getPrecio() {
+        return this.precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
 
     public double getLargo() {
         return this.largo;
@@ -71,6 +89,7 @@ public class Producto {
             
         }
     } */
+
 
 
 

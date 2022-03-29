@@ -1,5 +1,7 @@
 package usuarios;
 
+import Transporte.Camion;
+
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
  * 
@@ -28,6 +30,7 @@ public class Repartidor extends UsuarioIdentificado{
 
     }
     public Camion ver_camion_asignado(){
+        return null; 
         
     }
     

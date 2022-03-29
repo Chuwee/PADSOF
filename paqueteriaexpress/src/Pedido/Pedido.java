@@ -1,7 +1,8 @@
 package Pedido;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
+import Prods.Unidad;
 
 enum EstadoPedido {
     EnConstruccion,
@@ -31,7 +32,7 @@ public class Pedido {
     EstadoPedido estado) {
         this.idPedido = idPedido;
         this.urgente = urgente;
-        this.precio = null;
+        this.precio = 0;
         this.fecha = null;
         this.codigoPostal = codigoPostal;
         this.descripcion = descripcion;
@@ -128,6 +129,16 @@ public class Pedido {
 
     public void setEstado(EstadoPedido estado) {
         this.estado = estado;
+    }
+    public boolean validarPedido(){
+        return true; 
+
+    }
+    private double calcularPrecio(){
+        return 0; 
+    }
+    private double calcularPrecioUrgente(){
+        return 0; 
     }
 
 }
