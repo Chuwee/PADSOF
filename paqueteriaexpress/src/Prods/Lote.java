@@ -1,6 +1,6 @@
 package Prods;
 
-public class Lote {
+public class Lote extends Unidad {
     private double tamano;
     private int unidades;
 

@@ -1,28 +1,14 @@
 package Prods;
 
-public class Producto {
+public class Producto extends Unidad {
     private String descripcion;
     private int unidades;
     private double largo;
     private double ancho;
     private double alto;
-    private double peso;
-    private double precio;
-
-    public double getPeso() {
-        return this.peso;
-    }
-
-    public void setPeso(double peso) {
-        this.peso = peso;
-    }
-
-    public double getPrecio() {
-        return this.precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    
+    public double calcularPrecio() {
+    	return this.getPrecio()*unidades;
     }
 
     public double getLargo() {
@@ -49,18 +35,6 @@ public class Producto {
         this.alto = alto;
     }
 
-    /* private ArrayList<Integer> getVariant(double[] arr) {
-        int counter = 0;
-        ArrayList<Integer> array = new ArrayList<Integer>(arr.length);
-        for (int i = 0; i < arr.length; i++){
-            if(arr[i] != -1)
-            {    
-                array.add(i);
-            }
-        }
-        return (counter==0)?null:array;
-    } */
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -81,14 +55,6 @@ public class Producto {
         double dimensions[] = {largo, ancho, alto};
         return dimensions;
     }
-
-   /*  public void setDimensions(double largo, double ancho, double alto) {
-        double[] dims = {largo, ancho, alto};
-        ArrayList<Integer> variants = getVariant(dims);
-        for(Integer i : variants) {
-            
-        }
-    } */
 
 
 
