@@ -1,0 +1,16 @@
+Diagrama de clases:
+
+- Falta guardar parámetros globales como máximoReintentos, máximoDirecciones
+- Operador: planificarReparto()
+- Repartidor: logout distinto?
+- ¿Cómo se tratan las dimensiones especiales? (camion)
+- marcar_Paquetes_entregados(): Incluye no entregados?
+- Cardinalidad Reparto-Camiones (Podría ser *-*)
+- Quitar TipoAlimentación (enum)
+- Congelado: atributo booleano de Refrigerado (quitar clase)
+- Añadir calcularPrecio a unidad (método abstracto)
+- Pedido: Cliente se debe hacer con una asociación
+- "No se recoge el tratamiento de datos de las estadísticas.
+	Falta un tratamiento de la planificación del reparto: lo más fácil sería un método y lo más
+	completo una clase, por ejemplo, que recogiera parte de ese proceso y mostrara la relación
+	que hay entre repartidor y camión en el momento del reparto."
