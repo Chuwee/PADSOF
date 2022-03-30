@@ -99,6 +99,7 @@ public class Operador extends UsuarioIdentificado{
     	return true;
     }
     public boolean validarPedido(SistemaAplicacion sistema,Pedido p){
+    	
         return true; 
     }
     public void empaquetarPedido(SistemaAplicacion sist, Pedido pedido){
@@ -124,8 +125,8 @@ public class Operador extends UsuarioIdentificado{
     			}
     		}else if(u instanceof Lote) {
     			Lote lote=(Lote)u;
-    			for(Producto prod : lote.getProductos()) {
-    				if(prod instanceof ProductoFragil) {
+    			
+    				if(lote.getTipopaquete().equals(TipoPaquete.ESTANDAR)) {
     					Paquete p=new Paquete(id, u.getDireccion());
             			p.getUnidades().add(lote);
             			p.setPeso(u.getPeso());
@@ -133,8 +134,8 @@ public class Operador extends UsuarioIdentificado{
             			sist.getPaquetes().add(p);
             			id++;
             			num_empaquetado++;
-            			break;
-    				}
+            			
+   
     			}
     		}
     	}
@@ -150,6 +151,7 @@ public class Operador extends UsuarioIdentificado{
     		Paquete p_alimentacion = new Paquete(id, pedido.getDireccion());
     		id++;
     		for(Unidad u : pedido.getUnidades()) {
+    			if(u.getEmpaquetado()==false) {
     			if(u instanceof Refrigerado) {
     				Refrigerado r= (Refrigerado)u;
     				if(r.isCongelado()) {
@@ -166,11 +168,77 @@ public class Operador extends UsuarioIdentificado{
     						num_empaquetado++;
     					}
     				}
+    			}else if(u instanceof Producto) {
+    				if(p_estandar.getPeso()+u.getPeso()<=maxPeso) {
+						p_estandar.getUnidades().add(u);
+						p_estandar.setPeso(u.getPeso()+p_estandar.getPeso());
+						u.setEmpaquetado(true);
+						num_empaquetado++;
+    				}
+    			}else if(u instanceof DimensionesEspeciales) {
+    				if(p_dim_esp.getPeso()+u.getPeso()<=maxPeso) {
+    					p_dim_esp.getUnidades().add(u);
+    					p_dim_esp.setPeso(u.getPeso()+p_dim_esp.getPeso());
+    					u.setEmpaquetado(true);
+    					num_empaquetado++;
+    				}
+    			}else if(u instanceof ProductoAlimentacion) {
+    				if(p_alimentacion.getPeso()+u.getPeso()<=maxPeso) {
+    					p_alimentacion.getUnidades().add(u);
+    					p_alimentacion.setPeso(u.getPeso()+p_dim_esp.getPeso());
+    					u.setEmpaquetado(true);
+    					num_empaquetado++;
+    				}
+    			}else if(u instanceof Lote) {
+    				Lote lote=(Lote)u;
+    				if(lote.getTipopaquete().equals(TipoPaquete.ESTANDAR)) {
+    					if(p_estandar.getPeso()+u.getPeso()<=maxPeso) {
+    						p_estandar.getUnidades().add(u);
+    						p_estandar.setPeso(u.getPeso()+p_estandar.getPeso());
+    						u.setEmpaquetado(true);
+    						num_empaquetado++;
+        				}
+    					
+    					
+    				}else if(lote.getTipopaquete().equals(TipoPaquete.CONGELADO)) {
+    					if(p_congelado.getPeso()+u.getPeso()<=maxPeso) {
+    						p_congelado.getUnidades().add(u);
+    						p_congelado.setPeso(u.getPeso()+p_congelado.getPeso());
+    						u.setEmpaquetado(true);
+    						num_empaquetado++;
+        				}
+    					
+    					
+    				}else if(lote.getTipopaquete().equals(TipoPaquete.REFRIGERADO)) {
+    					if(p_refrigerado.getPeso()+u.getPeso()<=maxPeso) {
+    						p_refrigerado.getUnidades().add(u);
+    						p_refrigerado.setPeso(u.getPeso()+p_refrigerado.getPeso());
+    						u.setEmpaquetado(true);
+    						num_empaquetado++;
+        				}
+    					
+    					
+    				}else if(lote.getTipopaquete().equals(TipoPaquete.ALIMENTACION)) {
+    					if(p_alimentacion.getPeso()+u.getPeso()<=maxPeso) {
+    						p_alimentacion.getUnidades().add(u);
+    						p_alimentacion.setPeso(u.getPeso()+p_alimentacion.getPeso());
+    						u.setEmpaquetado(true);
+    						num_empaquetado++;
+        				}
+    					
+    				}
+    				
+    			}
     			}
     		}
     		
     		
     	}
+    		sist.getPaquetes().add(p_alimentacion);
+    		sist.getPaquetes().add(p_estandar);
+    		sist.getPaquetes().add(p_congelado);
+    		sist.getPaquetes().add(p_refrigerado);
+    		sist.getPaquetes().add(p_dim_esp);
     	}
     	
 
