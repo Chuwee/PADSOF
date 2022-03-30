@@ -2,6 +2,7 @@ package usuarios;
 import java.util.ArrayList;
 
 import Pedido.Pedido;
+import Prods.Unidad;
 import sistema.SistemaAplicacion;
 
 import java.util.*;
@@ -32,6 +33,7 @@ public class Operador extends UsuarioIdentificado{
         return p; 
 
     }
+<<<<<<< HEAD
     public boolean añadirUnidad(Pedido p) {
     	p.
     	
@@ -39,6 +41,17 @@ public class Operador extends UsuarioIdentificado{
     }
     public boolean validarPedido(SistemaAplicacion sistema,Pedido p){
         return true; 
+=======
+    public void empaquetarPedido(SistemaAplicacion sist, Pedido pedido){
+    	double maxPeso = sist.getPesoMaximo();
+    	for(Unidad u : pedido.getUnidades()) {
+    		
+    	}
+
+    }
+    public boolean validarPedido(Pedido p){
+    	return true; 
+>>>>>>> refs/remotes/origin/main
 
     }
     public void modificarAlto(SistemaAplicacion p, double alto){
