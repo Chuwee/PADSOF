@@ -90,7 +90,7 @@ public class Operador extends UsuarioIdentificado{
     	
     }
     public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades) {
-    	for (Producto p: )
+    	return true;
     }
     public boolean validarPedido(SistemaAplicacion sistema,Pedido p){
         return true; 
