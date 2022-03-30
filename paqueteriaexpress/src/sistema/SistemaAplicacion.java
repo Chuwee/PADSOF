@@ -2,6 +2,7 @@ package sistema;
 import java.util.ArrayList;
 import java.util.List;
 
+import Paquete.Paquete;
 import Pedido.Pedido;
 import Transporte.Camion;
 import usuarios.UsuarioIdentificado;
@@ -9,7 +10,20 @@ public class SistemaAplicacion {
     private List<Camion> camiones;
     private List<UsuarioIdentificado> usuarios;
     private List<Pedido> pedidos;
-
+    private List<Paquete> paquetes;
+	private double pesoMaximo;
+	private double largo;
+    private double ancho;
+    private double alto;
+    private int maxDirecciones;
+    private int maxIntentos;
+    
+    public List<Paquete> getPaquetes(){
+    	return this.paquetes;
+    }
+    public void setPaquetes(List<Paquete> paquetes) {
+    	this.paquetes=paquetes;
+    }
     public List<Camion> getCamiones() {
         return this.camiones;
     }
@@ -33,14 +47,6 @@ public class SistemaAplicacion {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
-
-    private double pesoMaximo;
-    private double largo;
-    private double ancho;
-    private double alto;
-    private int maxDirecciones;
-    private int maxIntentos;
-
 
     public double getPesoMaximo() {
         return this.pesoMaximo;

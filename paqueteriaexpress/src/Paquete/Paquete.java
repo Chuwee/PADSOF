@@ -7,7 +7,7 @@ import Prods.Unidad;
 public class Paquete {
     private int idPaquete;
     private String direccion;
-    private int peso;
+    private double peso;
     private ArrayList<Unidad> unidades;
 
     public Paquete(int idPaquete, String direccion) {
@@ -45,12 +45,12 @@ public class Paquete {
         this.direccion = direccion;
     }
 
-    public int getPeso() {
+    public double getPeso() {
         return this.peso;
     }
 
-    public void setPeso(int peso) {
-        this.peso = peso;
+    public void setPeso(double d) {
+        this.peso = d;
     }
     
 }
