@@ -52,14 +52,18 @@ public class Operador extends UsuarioIdentificado{
     	}
     	for(Unidad u : pedido.getUnidades()) {
     		if(u instanceof ProductoFragil) {
-    			Paquete p=new Paquete(id, u.getDireccion());
-    			p.getUnidades().add(u);
-    			p.setPeso(u.getPeso());
-    			u.setEmpaquetado(true);
-    			sist.getPaquetes().add(p);
-    			id++;
+    			Producto prod=(Producto)u;
+    			for(int i=0;i<prod.getUnidades();i++) {
+    				Paquete p=new Paquete(id, u.getDireccion());
+        			p.getUnidades().add(u);
+        			p.setPeso(u.getPeso());
+        			u.setEmpaquetado(true);
+        			sist.getPaquetes().add(p);
+        			id++;
+    			}
     		}
     	}
+    	
 
     }
     public boolean validarPedido(Pedido p){
