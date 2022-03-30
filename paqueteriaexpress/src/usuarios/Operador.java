@@ -1,8 +1,9 @@
 package usuarios;
 import java.util.ArrayList;
 
-import Pedido.Pedido;
-import Prods.Unidad;
+import Paquete.Paquete;
+import Pedido.*;
+import Prods.*;
 import sistema.SistemaAplicacion;
 
 import java.util.*;
@@ -28,31 +29,36 @@ public class Operador extends UsuarioIdentificado{
         this.pedidosDistribuidos = pedidosDistribuidos;
     }
     public Pedido nuevoPedido(int idPedido, boolean urgente, Date fecha, String direccion, int codigoPostal, String descripcion, Cliente cliente){
-        Pedido p=new Pedido(idPedido, urgente, direccion, codigoPostal, descripcion, EnConstruccion, fecha);
+        Pedido p=new Pedido(idPedido, urgente, direccion, codigoPostal, descripcion, EstadoPedido.EnConstruccion, fecha);
         cliente.getPedidosUser().add(p);
         return p; 
 
     }
-<<<<<<< HEAD
+
     public boolean añadirUnidad(Pedido p) {
-    	p.
-    	
+    	return true;
     	
     }
     public boolean validarPedido(SistemaAplicacion sistema,Pedido p){
         return true; 
-=======
+    }
     public void empaquetarPedido(SistemaAplicacion sist, Pedido pedido){
     	double maxPeso = sist.getPesoMaximo();
+    	int id;
+    	if(sist.getPaquetes().isEmpty()) {
+    		id=0;
+    	}else {
+    		id=sist.getPaquetes().size();
+    	}
     	for(Unidad u : pedido.getUnidades()) {
-    		
+    		if(u instanceof ProductoFragil) {
+    			Paquete p=new Paquete(id, u.getDireccion());
+    		}
     	}
 
     }
     public boolean validarPedido(Pedido p){
     	return true; 
->>>>>>> refs/remotes/origin/main
-
     }
     public void modificarAlto(SistemaAplicacion p, double alto){
         p.setAlto(alto);
