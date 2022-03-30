@@ -35,54 +35,58 @@ public class Operador extends UsuarioIdentificado{
 
     }
 
-    public boolean añadirProductoStandard(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    public boolean añadirProductoStandard(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto)
+    				throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo{
     	if(peso>sist.getPesoMaximo()) {
-    		return false; 
+    		throw new ErrorPeso(); 
     	}
     	if(largo>sist.getAlto()) {
-    		return false; 
+    		throw new ErrorLargo();
     	}
     	if(ancho>sist.getAncho()) {
-    		return false; 
+    		throw new ErrorAncho(); 
     	}
     	if(alto>sist.getLargo()) {
-    		return false; 
+    		throw new ErrorLargo(); 
     	}
     	Producto prod=new Producto(idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto);
     	p.getUnidades().add(prod);
     	return true;
     	
     }
-    public boolean añadirProductoAlimentacion(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    public boolean añadirProductoAlimentacion(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) 
+    
+    		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
     	if(peso>sist.getPesoMaximo()) {
-    		return false; 
+    		throw new ErrorPeso();  
     	}
     	if(largo>sist.getAlto()) {
-    		return false; 
+    		throw new ErrorAlto(); 
     	}
     	if(ancho>sist.getAncho()) {
-    		return false; 
+    		throw new ErrorAncho();  
     	}
     	if(alto>sist.getLargo()) {
-    		return false; 
+    		throw new ErrorLargo();  
     	}
     	Producto prod= new ProductoAlimentacion(idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
     	return true;
     	
     }
-    public boolean añadirProductoFragil(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean asegurado) {
+    public boolean añadirProductoFragil(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean asegurado)
+    		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
     	if(peso>sist.getPesoMaximo()) {
-    		return false; 
+    		throw new ErrorPeso();  
     	}
     	if(largo>sist.getAlto()) {
-    		return false; 
+    		throw new ErrorAlto(); 
     	}
     	if(ancho>sist.getAncho()) {
-    		return false; 
+    		throw new ErrorAncho();  
     	}
     	if(alto>sist.getLargo()) {
-    		return false; 
+    		throw new ErrorLargo();  
     	}
     	Producto prod=new ProductoFragil(asegurado, idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
