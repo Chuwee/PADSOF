@@ -88,7 +88,7 @@ public class Operador extends UsuarioIdentificado{
     	
     }
     public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades) {
-    	for (Producto p: )
+    	return true;
     }
     public boolean validarPedido(SistemaAplicacion sistema,Pedido p){
         return true; 
@@ -103,15 +103,18 @@ public class Operador extends UsuarioIdentificado{
     	}
     	for(Unidad u : pedido.getUnidades()) {
     		if(u instanceof ProductoFragil) {
-    			Producto prod=(Producto)u;
-    			for(int i=0;i<prod.getUnidades();i++) {
-    				Paquete p=new Paquete(id, u.getDireccion());
-        			p.getUnidades().add(u);
-        			p.setPeso(u.getPeso());
-        			u.setEmpaquetado(true);
-        			sist.getPaquetes().add(p);
-        			id++;
-    			}
+    			Paquete p=new Paquete(id, u.getDireccion());
+        		p.getUnidades().add(u);
+        		p.setPeso(u.getPeso());
+        		u.setEmpaquetado(true);
+        		sist.getPaquetes().add(p);
+        		id++;
+    		}
+    	}
+    	
+    	for(Unidad u:pedido.getUnidades()) {
+    		if(u instanceof ProductoAlimentacion) {
+    			
     		}
     	}
     	
