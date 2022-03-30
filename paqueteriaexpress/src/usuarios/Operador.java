@@ -1,6 +1,8 @@
 package usuarios;
 import java.util.ArrayList;
 
+import GlobalVars.TipoPaquete;
+import GlobalVars.Vars;
 import Paquete.Paquete;
 import Pedido.*;
 import Prods.*;
@@ -37,16 +39,16 @@ public class Operador extends UsuarioIdentificado{
 
     public boolean añadirProductoStandard(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto)
     				throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo{
-    	if(peso>sist.getPesoMaximo()) {
+    	if(peso>Vars.getMaxPeso_from_type(TipoPaquete.ESTANDAR)) {
     		throw new ErrorPeso(); 
     	}
-    	if(largo>sist.getAlto()) {
-    		throw new ErrorLargo();
+    	if(alto>sist.getAlto()) {
+    		throw new ErrorAlto();
     	}
     	if(ancho>sist.getAncho()) {
     		throw new ErrorAncho(); 
     	}
-    	if(alto>sist.getLargo()) {
+    	if(largo>sist.getLargo()) {
     		throw new ErrorLargo(); 
     	}
     	Producto prod=new Producto(idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto);
@@ -57,16 +59,16 @@ public class Operador extends UsuarioIdentificado{
     public boolean añadirProductoAlimentacion(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) 
     
     		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
-    	if(peso>sist.getPesoMaximo()) {
+		if(peso>Vars.getMaxPeso_from_type(TipoPaquete.ALIMENTACION)) {
     		throw new ErrorPeso();  
     	}
-    	if(largo>sist.getAlto()) {
+    	if(alto>sist.getAlto()) {
     		throw new ErrorAlto(); 
     	}
     	if(ancho>sist.getAncho()) {
     		throw new ErrorAncho();  
     	}
-    	if(alto>sist.getLargo()) {
+    	if(largo>sist.getLargo()) {
     		throw new ErrorLargo();  
     	}
     	Producto prod= new ProductoAlimentacion(idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
@@ -76,16 +78,16 @@ public class Operador extends UsuarioIdentificado{
     }
     public boolean añadirProductoFragil(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean asegurado)
     		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
-    	if(peso>sist.getPesoMaximo()) {
+    	if(peso>Vars.getMaxPeso_from_type(TipoPaquete.FRAGIL)) {
     		throw new ErrorPeso();  
     	}
-    	if(largo>sist.getAlto()) {
+    	if(alto>sist.getAlto()) {
     		throw new ErrorAlto(); 
     	}
     	if(ancho>sist.getAncho()) {
     		throw new ErrorAncho();  
     	}
-    	if(alto>sist.getLargo()) {
+    	if(largo>sist.getLargo()) {
     		throw new ErrorLargo();  
     	}
     	Producto prod=new ProductoFragil(asegurado, idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 

@@ -19,7 +19,7 @@ public class Vars {
 	}
 	
 	public static int getSuplementoAsegurado() {
-		return 5;
+		return 5;																							
 	}
 	
 	public double getMaxDim_fromParam(DimensionParam param) {

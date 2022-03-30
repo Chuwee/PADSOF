@@ -2,6 +2,7 @@ package sistema;
 import java.util.ArrayList;
 import java.util.List;
 
+import GlobalVars.Vars;
 import Paquete.Paquete;
 import Pedido.Pedido;
 import Transporte.Camion;
@@ -95,5 +96,6 @@ public class SistemaAplicacion {
     public void setMaxIntentos(int maxIntentos) {
         this.maxIntentos = maxIntentos;
     }
+	
 
 }
