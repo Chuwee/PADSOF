@@ -30,7 +30,7 @@ public class Operador extends UsuarioIdentificado{
     }
     public Pedido nuevoPedido(int idPedido, boolean urgente, Date fecha, String direccion, int codigoPostal, String descripcion, Cliente cliente){
         Pedido p=new Pedido(idPedido, urgente, direccion, codigoPostal, descripcion, EstadoPedido.EnConstruccion, fecha);
-        cliente.getPedidosUser().add(p);
+        cliente.getPedidosUser().add(idPedido);
         return p; 
 
     }
@@ -53,6 +53,11 @@ public class Operador extends UsuarioIdentificado{
     	for(Unidad u : pedido.getUnidades()) {
     		if(u instanceof ProductoFragil) {
     			Paquete p=new Paquete(id, u.getDireccion());
+    			p.getUnidades().add(u);
+    			p.setPeso(u.getPeso());
+    			u.setEmpaquetado(true);
+    			sist.getPaquetes().add(p);
+    			id++;
     		}
     	}
 

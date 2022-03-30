@@ -1,8 +1,15 @@
 package Prods;
 
 public class Lote extends Unidad {
-    private double tamano;
+	private double tamano;
     private int unidades;
+    
+    public Lote(int id, double peso, double precio, String direccion, double tamano, int unidades) {
+		super(id, peso, precio, direccion);
+		this.tamano=tamano;
+		this.unidades=unidades;
+	}
+
 
     public double getTamano() {
         return this.tamano;

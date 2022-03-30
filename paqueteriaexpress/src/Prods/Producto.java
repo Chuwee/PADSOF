@@ -7,6 +7,15 @@ public class Producto extends Unidad {
     private double ancho;
     private double alto;
     
+    public Producto(int id, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    	super(id, peso, precio, direccion);
+    	this.descripcion=descripcion;
+    	this.unidades=unidades;
+    	this.largo=largo;
+    	this.ancho=ancho;
+    	this.alto=alto;
+    }
+    
     public double calcularPrecio() {
     	return this.getPrecio()*unidades;
     }
