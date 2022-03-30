@@ -30,14 +30,65 @@ public class Operador extends UsuarioIdentificado{
     }
     public Pedido nuevoPedido(int idPedido, boolean urgente, Date fecha, String direccion, int codigoPostal, String descripcion, Cliente cliente){
         Pedido p=new Pedido(idPedido, urgente, direccion, codigoPostal, descripcion, EstadoPedido.EnConstruccion, fecha);
-        cliente.getPedidosUser().add(p);
+        cliente.getPedidosUser().add(idPedido);
         return p; 
 
     }
 
-    public boolean añadirUnidad(Pedido p) {
+    public boolean añadirProductoStandard(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    	if(peso>sist.getPesoMaximo()) {
+    		return false; 
+    	}
+    	if(largo>sist.getAlto()) {
+    		return false; 
+    	}
+    	if(ancho>sist.getAncho()) {
+    		return false; 
+    	}
+    	if(alto>sist.getLargo()) {
+    		return false; 
+    	}
+    	Producto prod=new Producto(idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto);
+    	p.getUnidades().add(prod);
     	return true;
     	
+    }
+    public boolean añadirProductoAlimentacion(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    	if(peso>sist.getPesoMaximo()) {
+    		return false; 
+    	}
+    	if(largo>sist.getAlto()) {
+    		return false; 
+    	}
+    	if(ancho>sist.getAncho()) {
+    		return false; 
+    	}
+    	if(alto>sist.getLargo()) {
+    		return false; 
+    	}
+    	Producto p; 
+    	return true;
+    	
+    }
+    public boolean añadirProductoFragil(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    	if(peso>sist.getPesoMaximo()) {
+    		return false; 
+    	}
+    	if(largo>sist.getAlto()) {
+    		return false; 
+    	}
+    	if(ancho>sist.getAncho()) {
+    		return false; 
+    	}
+    	if(alto>sist.getLargo()) {
+    		return false; 
+    	}
+    	Producto p; 
+    	return true;
+    	
+    }
+    public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades) {
+    	for (Producto p: )
     }
     public boolean validarPedido(SistemaAplicacion sistema,Pedido p){
         return true; 
