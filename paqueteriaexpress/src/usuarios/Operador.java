@@ -26,14 +26,18 @@ public class Operador extends UsuarioIdentificado{
     public void setPedidosDistribuidos(int pedidosDistribuidos) {
         this.pedidosDistribuidos = pedidosDistribuidos;
     }
-    public Pedido nuevoPedido(int idPedido, boolean urgente, Date fecha, String direccion, int codigoPostal, String descripcion, Cliente Cliente){
-        return null;
+    public Pedido nuevoPedido(int idPedido, boolean urgente, Date fecha, String direccion, int codigoPostal, String descripcion, Cliente cliente){
+        Pedido p=new Pedido(idPedido, urgente, direccion, codigoPostal, descripcion, EnConstruccion, fecha);
+        cliente.getPedidosUser().add(p);
+        return p; 
 
     }
-    public void empaquetarPedido(){
-
+    public boolean añadirUnidad(Pedido p) {
+    	p.
+    	
+    	
     }
-    public boolean validarPedido(Pedido p){
+    public boolean validarPedido(SistemaAplicacion sistema,Pedido p){
         return true; 
 
     }
@@ -55,7 +59,7 @@ public class Operador extends UsuarioIdentificado{
     public void modificarDirecciones(SistemaAplicacion p, int direcciones){
         p.setMaxDirecciones(direcciones);
     }
-    public void planificarEnvio(){
+    public void planificarReparto(){
 
     }
     
