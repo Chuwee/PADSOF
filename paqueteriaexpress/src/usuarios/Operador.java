@@ -66,11 +66,12 @@ public class Operador extends UsuarioIdentificado{
     	if(alto>sist.getLargo()) {
     		return false; 
     	}
-    	Producto p; 
+    	Producto prod= new ProductoAlimentacion(idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
+    	p.getUnidades().add(prod);
     	return true;
     	
     }
-    public boolean añadirProductoFragil(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    public boolean añadirProductoFragil(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean asegurado) {
     	if(peso>sist.getPesoMaximo()) {
     		return false; 
     	}
@@ -83,12 +84,13 @@ public class Operador extends UsuarioIdentificado{
     	if(alto>sist.getLargo()) {
     		return false; 
     	}
-    	Producto p; 
+    	Producto prod=new ProductoFragil(asegurado, idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
+    	p.getUnidades().add(prod);
     	return true;
     	
     }
     public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades) {
-    	return true;
+    	for (Producto p: )
     }
     public boolean validarPedido(SistemaAplicacion sistema,Pedido p){
         return true; 
@@ -103,18 +105,15 @@ public class Operador extends UsuarioIdentificado{
     	}
     	for(Unidad u : pedido.getUnidades()) {
     		if(u instanceof ProductoFragil) {
-    			Paquete p=new Paquete(id, u.getDireccion());
-        		p.getUnidades().add(u);
-        		p.setPeso(u.getPeso());
-        		u.setEmpaquetado(true);
-        		sist.getPaquetes().add(p);
-        		id++;
-    		}
-    	}
-    	
-    	for(Unidad u:pedido.getUnidades()) {
-    		if(u instanceof ProductoAlimentacion) {
-    			
+    			Producto prod=(Producto)u;
+    			for(int i=0;i<prod.getUnidades();i++) {
+    				Paquete p=new Paquete(id, u.getDireccion());
+        			p.getUnidades().add(u);
+        			p.setPeso(u.getPeso());
+        			u.setEmpaquetado(true);
+        			sist.getPaquetes().add(p);
+        			id++;
+    			}
     		}
     	}
     	
