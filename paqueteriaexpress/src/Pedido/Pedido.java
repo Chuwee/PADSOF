@@ -4,16 +4,6 @@ import java.util.Date;
 import java.util.ArrayList;
 import Prods.Unidad;
 
-enum EstadoPedido {
-    EnConstruccion,
-    EnReparto,
-    EnRepartoFallido1,
-    Entregado,
-    Construido,
-    Validado,
-    PendienteEmpaquetar,
-    NoEntregado
-}
 
 public class Pedido {
     private int idPedido;
@@ -29,7 +19,7 @@ public class Pedido {
 
     public Pedido(int idPedido, boolean urgente, String direccion, 
     int codigoPostal, String descripcion,
-    EstadoPedido estado) {
+    EstadoPedido estado, Date fecha) {
         this.idPedido = idPedido;
         this.urgente = urgente;
         this.precio = 0;

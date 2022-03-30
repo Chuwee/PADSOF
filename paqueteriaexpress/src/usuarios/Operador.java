@@ -2,6 +2,7 @@ package usuarios;
 import java.util.ArrayList;
 
 import Pedido.Pedido;
+import Prods.Unidad;
 import sistema.SistemaAplicacion;
 
 import java.util.*;
@@ -30,11 +31,15 @@ public class Operador extends UsuarioIdentificado{
         return null;
 
     }
-    public void empaquetarPedido(){
+    public void empaquetarPedido(SistemaAplicacion sist, Pedido pedido){
+    	double maxPeso = sist.getPesoMaximo();
+    	for(Unidad u : pedido.getUnidades()) {
+    		
+    	}
 
     }
     public boolean validarPedido(Pedido p){
-        return true; 
+    	return true; 
 
     }
     public void modificarAlto(SistemaAplicacion p, double alto){
