@@ -98,6 +98,7 @@ public class Operador extends UsuarioIdentificado{
     public void empaquetarPedido(SistemaAplicacion sist, Pedido pedido){
     	double maxPeso = sist.getPesoMaximo();
     	int id;
+    	int num_empaquetado=0;
     	if(sist.getPaquetes().isEmpty()) {
     		id=0;
     	}else {
@@ -108,13 +109,62 @@ public class Operador extends UsuarioIdentificado{
     			Producto prod=(Producto)u;
     			for(int i=0;i<prod.getUnidades();i++) {
     				Paquete p=new Paquete(id, u.getDireccion());
-        			p.getUnidades().add(u);
+        			p.getUnidades().add(prod);
         			p.setPeso(u.getPeso());
         			u.setEmpaquetado(true);
         			sist.getPaquetes().add(p);
         			id++;
+        			num_empaquetado++;
+    			}
+    		}else if(u instanceof Lote) {
+    			Lote lote=(Lote)u;
+    			for(Producto prod : lote.getProductos()) {
+    				if(prod instanceof ProductoFragil) {
+    					Paquete p=new Paquete(id, u.getDireccion());
+            			p.getUnidades().add(lote);
+            			p.setPeso(u.getPeso());
+            			u.setEmpaquetado(true);
+            			sist.getPaquetes().add(p);
+            			id++;
+            			num_empaquetado++;
+            			break;
+    				}
     			}
     		}
+    	}
+    	while(num_empaquetado!=pedido.getUnidades().size()) {
+    		Paquete p_estandar = new Paquete(id, pedido.getDireccion());
+    		id++;
+    		Paquete p_congelado = new Paquete(id, pedido.getDireccion());
+    		id++;
+    		Paquete p_refrigerado = new Paquete(id, pedido.getDireccion());
+    		id++;
+    		Paquete p_dim_esp = new Paquete(id, pedido.getDireccion());
+    		id++;
+    		Paquete p_alimentacion = new Paquete(id, pedido.getDireccion());
+    		id++;
+    		for(Unidad u : pedido.getUnidades()) {
+    			if(u instanceof Refrigerado) {
+    				Refrigerado r= (Refrigerado)u;
+    				if(r.isCongelado()) {
+    					if(p_congelado.getPeso()+r.getPeso()<=maxPeso) {
+    						p_congelado.getUnidades().add(r);
+    						p_congelado.setPeso(r.getPeso()+p_congelado.getPeso());
+    						r.setEmpaquetado(true);
+    						num_empaquetado++;
+    				}else {
+    					if(p_refrigerado.getPeso()+r.getPeso()<=maxPeso) {
+    						p_refrigerado.getUnidades().add(r);
+    						p_refrigerado.setPeso(r.getPeso()+p_congelado.getPeso());
+    						r.setEmpaquetado(true);
+    						num_empaquetado++;
+    					}
+    				}
+    			}
+    		}
+    		
+    		
+    	}
     	}
     	
 
