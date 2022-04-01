@@ -9,23 +9,39 @@ public class Lote extends Unidad {
 	private double tamano;
     private int unidades;
     private List<Producto> productos;
+    private List<Lote> lotes;
     private TipoPaquete tipopaquete;
     
     public Lote(int id, double precio, String direccion, double tamano, int unidades) {
 		super(id, precio, direccion);
 		this.tamano=tamano;
 		this.unidades=unidades;
-		this.productos=new ArrayList<Producto>();
+		this.productos=null;
+		this.lotes = null;
 	}
+    
     @Override
     public double calcularPrecio() {
     	double counter = 0;
     	for(Producto p : productos) {
     		counter+=p.calcularPrecio();
     	}
+    	for(Lote l: lotes) {
+    		counter+=l.calcularPrecio();
+    	}
     	return counter;
     }
-
+    
+    public double calcularPeso() {
+    	double counter = 0;
+    	for(Producto p: productos) {
+    		counter+=p.getPeso();
+    	}
+    	for(Lote l: lotes) {
+    		counter+=l.getPeso();
+    	}
+    	return counter;
+    }
 
     public double getTamano() {
         return this.tamano;
@@ -49,8 +65,15 @@ public class Lote extends Unidad {
 	}
 
 
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
+	public void anadirProducto(Producto p) {
+		if(this.productos == null) {
+			this.productos = new ArrayList<Producto>();
+		}
+		this.productos.add(p);
+	}
+	
+	public void eliminarProducto(Producto p) {
+		this.productos.remove(p);
 	}
 
 

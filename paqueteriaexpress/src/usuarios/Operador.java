@@ -71,7 +71,7 @@ public class Operador extends UsuarioIdentificado{
     	if(largo>sist.getLargo()) {
     		throw new ErrorLargo();  
     	}
-    	Producto prod= new ProductoAlimentacion(idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
+    	Producto prod= new ProductoAlimentacion(idProducto, peso, direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
     	return true;
     	
@@ -90,7 +90,7 @@ public class Operador extends UsuarioIdentificado{
     	if(largo>sist.getLargo()) {
     		throw new ErrorLargo();  
     	}
-    	Producto prod=new ProductoFragil(asegurado, idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
+    	Producto prod=new ProductoFragil(asegurado, idProducto, peso, direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
     	return true;
     	
@@ -103,6 +103,7 @@ public class Operador extends UsuarioIdentificado{
         return true; 
     }
     public void empaquetarPedido(SistemaAplicacion sist, Pedido pedido){
+    	empaquetarPedido(new SistemaAplicacion(.), new Pedido())
     	double maxPeso = sist.getPesoMaximo();
     	int id;
     	int num_empaquetado=0;
@@ -242,6 +243,11 @@ public class Operador extends UsuarioIdentificado{
     	}
     	
 
+    }
+    
+    
+    public void planificarReparto(Pedido p) {
+    	
     }
     public boolean validarPedido(Pedido p){
     	return true; 

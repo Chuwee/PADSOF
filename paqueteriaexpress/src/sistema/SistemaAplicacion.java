@@ -7,6 +7,9 @@ import Paquete.Paquete;
 import Pedido.Pedido;
 import Transporte.Camion;
 import usuarios.UsuarioIdentificado;
+
+import java.util.PriorityQueue;
+
 public class SistemaAplicacion {
     private List<Camion> camiones;
     private List<UsuarioIdentificado> usuarios;
@@ -18,6 +21,7 @@ public class SistemaAplicacion {
     private double alto;
     private int maxDirecciones;
     private int maxIntentos;
+    private PriorityQueue<Pedido> qOrders = new PriorityQueue<Pedido>();
     
     public List<Paquete> getPaquetes(){
     	return this.paquetes;
