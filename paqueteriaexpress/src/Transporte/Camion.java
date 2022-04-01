@@ -1,9 +1,14 @@
 package Transporte;
 
+import java.util.ArrayList;
+
+import Paquete.Paquete;
+
 public abstract class Camion {
     private double pesoMaximo;
     private String matricula;
     private EstadoCamion estado;
+    private ArrayList<Paquete> paquetes;
 
     public double getPesoMaximo() {
         return this.pesoMaximo;
@@ -32,7 +37,16 @@ public abstract class Camion {
         this.pesoMaximo=pesoMaximo; 
         this.matricula=matricula; 
         this.estado=estado; 
+        this.paquetes=new ArrayList<Paquete>();
     }
+
+	public ArrayList<Paquete> getPaquetes() {
+		return paquetes;
+	}
+
+	public void setPaquetes(ArrayList<Paquete> paquetes) {
+		this.paquetes = paquetes;
+	}
 
 
 }
