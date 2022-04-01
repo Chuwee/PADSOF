@@ -10,6 +10,13 @@ import sistema.SistemaAplicacion;
 
 import java.util.*;
 import java.io.*;
+
+abstract class CodigoPostal {
+	public static int getSize() {
+		return 16;
+	}
+}
+
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
  * 
@@ -93,7 +100,6 @@ public class Operador extends UsuarioIdentificado{
     	Producto prod=new ProductoFragil(asegurado, idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
     	return true;
-    	
     }
     public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades) {
     	return true;
@@ -102,6 +108,37 @@ public class Operador extends UsuarioIdentificado{
     	
         return true; 
     }
+    public boolean comprobarCodigoPostal(Pedido p) throws IOException{
+    	boolean contiene=false; 
+    	int codigo;
+    	codigo=p.getCodigoPostal();
+    	try {
+            File fil= new File("codigos.txt");
+    		BufferedReader buffer=new BufferedReader(new FileReader(fil));
+        	String linea; 
+    		while((linea=buffer.readLine())!=null) {
+        		int linea1=Integer.parseInt(linea);
+        		if(linea1==codigo) {
+        			contiene=true;
+        			return contiene; 
+        		}
+        		else {
+        			contiene=false;
+        		}
+        	}
+    		buffer.close();
+    	}catch(FileNotFoundException e) {
+    		System.out.println("El fichero no se ha encontrado\n");
+    	}catch(NullPointerException e) {
+    		System.out.println("No se ha seleccionado ningún archivo\n");
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return contiene;
+    	
+	}
+    	
+    	
     public void empaquetarPedido(SistemaAplicacion sist, Pedido pedido){
     	double maxPeso = sist.getPesoMaximo();
     	int id;
