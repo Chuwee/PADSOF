@@ -1,6 +1,9 @@
 package usuarios;
 import java.util.ArrayList;
 
+import Pedido.Pedido;
+import sistema.SistemaAplicacion;
+
 import java.util.*;
 import java.io.*;
 /**
@@ -12,11 +15,11 @@ public class Cliente extends UsuarioIdentificado {
     private String dirContacto;
     private ArrayList<Integer> pedidosUser;
 
-	public Cliente(int TarjetaDeCredito, String dirContacto, ArrayList<Integer> pedidosUser, String NIF, String Nombre, String Usuario, String Contrasena, String email){
+	public Cliente(int TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email){
         super(NIF, Nombre, Usuario, Contrasena, email);
         this.TarjetaDeCredito = TarjetaDeCredito;
 		this.dirContacto=dirContacto;
-		this.pedidosUser=pedidosUser;
+		this.pedidosUser=new ArrayList<Integer>();
 
     }
 
@@ -52,8 +55,15 @@ public class Cliente extends UsuarioIdentificado {
     public void descargarFactura(int id_pedido){
 
     }
-    public void verPedidos(){
-
+    public void verPedidos(SistemaAplicacion sist){
+    	for(int id : this.pedidosUser) {
+    		for(Pedido p :sist.getPedidos()) {
+    			if(p.getIdPedido()==id) {
+    				System.out.println("Nº de pedido: "+ id+" Estado: "+ p.getEstado()+"\n");
+    			}
+    		}
+    	}
+  
     }
     public void logout(){
 
