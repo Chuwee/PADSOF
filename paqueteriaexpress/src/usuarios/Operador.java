@@ -276,8 +276,7 @@ public class Operador extends UsuarioIdentificado{
     		sist.getPaquetes().add(p_congelado);
     		sist.getPaquetes().add(p_refrigerado);
     		sist.getPaquetes().add(p_dim_esp);
-    	}
-    	
+    	}  	
 
     }
     public boolean validarPedido(Pedido p){

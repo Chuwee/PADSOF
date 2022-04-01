@@ -9,12 +9,14 @@ public class Paquete {
     private String direccion;
     private double peso;
     private ArrayList<Unidad> unidades;
+    private boolean entregado;
 
     public Paquete(int idPaquete, String direccion) {
         this.idPaquete = idPaquete;
         this.direccion = direccion;
         this.peso = 0;
         unidades = new ArrayList<Unidad>();
+        this.setEntregado(false);
     }
 
     public ArrayList<Unidad> getUnidades() {
@@ -52,5 +54,13 @@ public class Paquete {
     public void setPeso(double d) {
         this.peso = d;
     }
+
+	public boolean isEntregado() {
+		return entregado;
+	}
+
+	public void setEntregado(boolean entregado) {
+		this.entregado = entregado;
+	}
     
 }
