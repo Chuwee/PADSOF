@@ -8,12 +8,20 @@ public class Lote extends Unidad {
     private int unidades;
     private List<Producto> productos;
     
-    public Lote(int id, double peso, double precio, String direccion, double tamano, int unidades) {
-		super(id, peso, precio, direccion);
+    public Lote(int id, double precio, String direccion, double tamano, int unidades) {
+		super(id, precio, direccion);
 		this.tamano=tamano;
 		this.unidades=unidades;
 		this.productos=new ArrayList<Producto>();
 	}
+    @Override
+    public double calcularPrecio() {
+    	double counter = 0;
+    	for(Producto p : productos) {
+    		counter+=p.calcularPrecio();
+    	}
+    	return counter;
+    }
 
 
     public double getTamano() {

@@ -7,17 +7,18 @@ public class Producto extends Unidad {
     private double ancho;
     private double alto;
     
-    public Producto(int id, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
-    	super(id, peso, precio, direccion);
+    public Producto(int id, double peso, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    	super(id, peso, direccion);
     	this.descripcion=descripcion;
     	this.unidades=unidades;
     	this.largo=largo;
     	this.ancho=ancho;
-    	this.alto=alto;
+    	this.alto=alto;	
     }
     
+    @Override
     public double calcularPrecio() {
-    	return this.getPrecio()*unidades;
+    	return super.calcularPrecio()*unidades;
     }
 
     public double getLargo() {
@@ -64,9 +65,5 @@ public class Producto extends Unidad {
         double dimensions[] = {largo, ancho, alto};
         return dimensions;
     }
-
-
-
-
 
 }

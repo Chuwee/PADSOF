@@ -4,14 +4,12 @@ public abstract class Unidad {
 
     private int identificador;
     private double peso;
-    private double precio;
     private String direccion;
     private boolean empaquetado;
     
-    public Unidad(int id, double peso, double precio, String direccion) {
+    public Unidad(int id, double peso, String direccion) {
     	this.identificador=id;
     	this.peso=peso;
-    	this.precio=precio;
     	this.direccion=direccion;
     	this.empaquetado=false;
     }
@@ -37,19 +35,20 @@ public abstract class Unidad {
     public void setPeso(double peso) {
         this.peso = peso;
     }
-
-    public double getPrecio() {
-        return this.precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
+    
     public String getDireccion() {
     	return this.direccion;
     }
     public void setDireccion(String direccion) {
     	this.direccion=direccion;
+    }
+    
+    public double calcularPrecio() {
+    	if (peso < 1) 
+    		return 0.4;
+    	else if(peso < 5)
+    		return 0.6;
+    	return 5;
     }
     
 }
