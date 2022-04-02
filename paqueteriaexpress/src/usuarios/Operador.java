@@ -266,9 +266,12 @@ public class Operador extends UsuarioIdentificado{
     }
     
     private int asignarCola(Paquete p) {
+    	
     	if(p.isUrgente())
     		return Vars.getColaPrioridad(ColasPrioridad.URGENTES);
+    	
     	EstadoPaquete ep = p.getEstadoPaquete();
+    	
     	switch(ep) {
 	    	case NoEntregadoFaltaCamiones:
 	    		return Vars.getColaPrioridad(ColasPrioridad.NOENTREGADOSFALTACAMIONES);
@@ -279,12 +282,16 @@ public class Operador extends UsuarioIdentificado{
     	}
     }
     
-    public void planificarReparto(Paquete p) {
+    private void anadirPaqueteACola(Paquete p) {
     	int cola = asignarCola(p);
     	sist.anadirPaqueteACola(p, cola);
     }
+    
     public boolean validarPedido(Pedido p){
-    	return true; 
+    	p.validar();
+    	if(p.getEstado() == EstadoPedido.Validado)
+    		return true;
+    	return false;
     }
     public void modificarAlto(SistemaAplicacion p, double alto){
         p.setAlto(alto);
