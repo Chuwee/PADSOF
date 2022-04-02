@@ -1,11 +1,17 @@
 package Prods;
 
+import java.util.ArrayList;
+import java.sql.Date;
+
+import Pedido.Pedido;
+
 public abstract class Unidad {
 
     private int identificador;
     private double peso;
     private String direccion;
     private boolean empaquetado;
+    private Pedido pedido;
     
     public Unidad(int id, double peso, String direccion) {
     	this.identificador=id;
@@ -49,6 +55,13 @@ public abstract class Unidad {
     	else if(peso < 5)
     		return 0.6;
     	return 5;
+    }
+    
+    public void estaEnPedido(Pedido p) {
+    	pedido = p;
+    }
+    public Date getDate() {
+    	return pedido.getFecha();
     }
     
 }
