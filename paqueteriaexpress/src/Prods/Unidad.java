@@ -1,5 +1,7 @@
 package Prods;
 
+import Paquete.Paquete;
+
 public abstract class Unidad {
 
     private int identificador;
@@ -50,5 +52,24 @@ public abstract class Unidad {
     		return 0.6;
     	return 5;
     }
+    public boolean isFragil() {
+    	return false;
+    }
+    public boolean isLote() {
+    	return false;
+    }
+    public boolean isRefrigerado() {
+    	return false;
+    }
+    public boolean isEstandar() {
+    	return false;
+    }
+    public boolean isDimEsp() {
+    	return false;
+    }
+    public boolean isAlimentacion() {
+    	return false;
+    }
+    
     
 }

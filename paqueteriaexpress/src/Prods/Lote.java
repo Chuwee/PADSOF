@@ -85,5 +85,10 @@ public class Lote extends Unidad {
 	public void setTipopaquete(TipoPaquete tipopaquete) {
 		this.tipopaquete = tipopaquete;
 	}
+	
+	@Override
+	public boolean isLote() {
+    	return true;
+    }
 
 }

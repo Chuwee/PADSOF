@@ -140,7 +140,6 @@ public class Operador extends UsuarioIdentificado{
     	
     	
     public void empaquetarPedido(SistemaAplicacion sist, Pedido pedido){
-    	empaquetarPedido(new SistemaAplicacion(.), new Pedido())
     	double maxPeso = sist.getPesoMaximo();
     	int id;
     	int num_empaquetado=0;
@@ -150,25 +149,21 @@ public class Operador extends UsuarioIdentificado{
     		id=sist.getPaquetes().size();
     	}
     	for(Unidad u : pedido.getUnidades()) {
-    		if(u instanceof ProductoFragil) {
+    		if(u.isFragil()) {
     			Producto prod=(Producto)u;
     			for(int i=0;i<prod.getUnidades();i++) {
     				Paquete p=new Paquete(id, u.getDireccion());
-        			p.getUnidades().add(prod);
-        			p.setPeso(u.getPeso());
-        			u.setEmpaquetado(true);
+        			this.empaquetar(u, p);
         			sist.getPaquetes().add(p);
         			id++;
         			num_empaquetado++;
     			}
-    		}else if(u instanceof Lote) {
+    		}else if(u.isLote()) {
     			Lote lote=(Lote)u;
     			
     				if(lote.getTipopaquete().equals(TipoPaquete.ESTANDAR)) {
     					Paquete p=new Paquete(id, u.getDireccion());
-            			p.getUnidades().add(lote);
-            			p.setPeso(u.getPeso());
-            			u.setEmpaquetado(true);
+            			this.empaquetar(u, p);
             			sist.getPaquetes().add(p);
             			id++;
             			num_empaquetado++;
@@ -190,77 +185,59 @@ public class Operador extends UsuarioIdentificado{
     		id++;
     		for(Unidad u : pedido.getUnidades()) {
     			if(u.getEmpaquetado()==false) {
-    			if(u instanceof Refrigerado) {
+    			if(u.isRefrigerado()) {
     				Refrigerado r= (Refrigerado)u;
     				if(r.isCongelado()) {
     					if(p_congelado.getPeso()+r.getPeso()<=maxPeso) {
-    						p_congelado.getUnidades().add(r);
-    						p_congelado.setPeso(r.getPeso()+p_congelado.getPeso());
-    						r.setEmpaquetado(true);
+    						this.empaquetar(u, p_congelado);
     						num_empaquetado++;
     				}else {
     					if(p_refrigerado.getPeso()+r.getPeso()<=maxPeso) {
-    						p_refrigerado.getUnidades().add(r);
-    						p_refrigerado.setPeso(r.getPeso()+p_congelado.getPeso());
-    						r.setEmpaquetado(true);
+    						this.empaquetar(u, p_refrigerado);
     						num_empaquetado++;
     					}
     				}
-    			}else if(u instanceof Producto) {
+    			}else if(u.isEstandar()) {
     				if(p_estandar.getPeso()+u.getPeso()<=maxPeso) {
-						p_estandar.getUnidades().add(u);
-						p_estandar.setPeso(u.getPeso()+p_estandar.getPeso());
-						u.setEmpaquetado(true);
+    					this.empaquetar(u, p_estandar);
 						num_empaquetado++;
     				}
-    			}else if(u instanceof DimensionesEspeciales) {
+    			}else if(u.isDimEsp()) {
     				if(p_dim_esp.getPeso()+u.getPeso()<=maxPeso) {
-    					p_dim_esp.getUnidades().add(u);
-    					p_dim_esp.setPeso(u.getPeso()+p_dim_esp.getPeso());
-    					u.setEmpaquetado(true);
+    					this.empaquetar(u, p_dim_esp);
     					num_empaquetado++;
     				}
-    			}else if(u instanceof ProductoAlimentacion) {
+    			}else if(u.isAlimentacion()) {
     				if(p_alimentacion.getPeso()+u.getPeso()<=maxPeso) {
-    					p_alimentacion.getUnidades().add(u);
-    					p_alimentacion.setPeso(u.getPeso()+p_dim_esp.getPeso());
-    					u.setEmpaquetado(true);
+    					this.empaquetar(u, p_alimentacion);
     					num_empaquetado++;
     				}
-    			}else if(u instanceof Lote) {
+    			}else if(u.isLote()) {
     				Lote lote=(Lote)u;
     				if(lote.getTipopaquete().equals(TipoPaquete.ESTANDAR)) {
     					if(p_estandar.getPeso()+u.getPeso()<=maxPeso) {
-    						p_estandar.getUnidades().add(u);
-    						p_estandar.setPeso(u.getPeso()+p_estandar.getPeso());
-    						u.setEmpaquetado(true);
+    						this.empaquetar(u, p_estandar);
     						num_empaquetado++;
         				}
     					
     					
     				}else if(lote.getTipopaquete().equals(TipoPaquete.CONGELADO)) {
     					if(p_congelado.getPeso()+u.getPeso()<=maxPeso) {
-    						p_congelado.getUnidades().add(u);
-    						p_congelado.setPeso(u.getPeso()+p_congelado.getPeso());
-    						u.setEmpaquetado(true);
+    						this.empaquetar(u, p_congelado);
     						num_empaquetado++;
         				}
     					
     					
     				}else if(lote.getTipopaquete().equals(TipoPaquete.REFRIGERADO)) {
     					if(p_refrigerado.getPeso()+u.getPeso()<=maxPeso) {
-    						p_refrigerado.getUnidades().add(u);
-    						p_refrigerado.setPeso(u.getPeso()+p_refrigerado.getPeso());
-    						u.setEmpaquetado(true);
+    						this.empaquetar(u, p_refrigerado);
     						num_empaquetado++;
         				}
     					
     					
     				}else if(lote.getTipopaquete().equals(TipoPaquete.ALIMENTACION)) {
     					if(p_alimentacion.getPeso()+u.getPeso()<=maxPeso) {
-    						p_alimentacion.getUnidades().add(u);
-    						p_alimentacion.setPeso(u.getPeso()+p_alimentacion.getPeso());
-    						u.setEmpaquetado(true);
+    						this.empaquetar(u, p_alimentacion);
     						num_empaquetado++;
         				}
     					
@@ -279,6 +256,13 @@ public class Operador extends UsuarioIdentificado{
     		sist.getPaquetes().add(p_dim_esp);
     	}  	
 
+    }
+    
+    private void empaquetar(Unidad u, Paquete p) {
+    	p.getUnidades().add(u);
+		p.setPeso(u.getPeso()+p.getPeso());
+		u.setEmpaquetado(true);
+    	
     }
     
     

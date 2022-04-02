@@ -65,5 +65,10 @@ public class Producto extends Unidad {
         double dimensions[] = {largo, ancho, alto};
         return dimensions;
     }
+    
+    @Override
+    public boolean isEstandar() {
+    	return true;
+    }
 
 }
