@@ -1,6 +1,7 @@
 package Pedido;
 
-import java.util.Date;
+import java.sql.Date;
+import usuarios.Cliente;
 import java.util.ArrayList;
 import Prods.Unidad;
 
@@ -12,7 +13,7 @@ public class Pedido {
     private Date fecha;
     private String direccion;
     private int codigoPostal;
-    /* private Cliente cliente; */
+    private Cliente cliente;
     private String descripcion;
     private EstadoPedido estado;
     private ArrayList<Unidad> unidades;
@@ -42,6 +43,7 @@ public class Pedido {
      * @param newUnit
      */
     public void anadirUnidad(Unidad newUnit) {
+    	newUnit.estaEnPedido(this);
         this.unidades.add(newUnit);
     }
 

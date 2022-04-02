@@ -1,6 +1,7 @@
 package Paquete;
 
 import java.util.ArrayList;
+import java.sql.Date;
 
 import Prods.Unidad;
 
@@ -25,6 +26,17 @@ public class Paquete {
 
     public void anadirUnidad(Unidad newUnit) {
         this.unidades.add(newUnit);
+    }
+    
+    public Date getDate() {
+    	if(this.unidades == null)
+    			return null;
+    	Date min = unidades.get(0).getDate();
+    	for(Unidad u : unidades) {
+    		if(min.before(u.getDate()))
+    			min = u.getDate();
+    	}
+    	return min;
     }
 
     public void quitarUnidad(Unidad Unit) {
