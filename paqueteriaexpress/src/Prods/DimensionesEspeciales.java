@@ -11,5 +11,9 @@ public class DimensionesEspeciales extends Producto {
 	public boolean isDimEsp() {
     	return true;
     }
+	@Override
+    public boolean isEstandar() {
+    	return false;
+    }
     
 }

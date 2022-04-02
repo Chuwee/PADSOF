@@ -23,5 +23,9 @@ public class ProductoFragil extends Producto {
 	public boolean isFragil() {
 		return true;
 	}
+	@Override
+    public boolean isEstandar() {
+    	return false;
+    }
 	
 }

@@ -160,7 +160,6 @@ public class Operador extends UsuarioIdentificado{
     			}
     		}else if(u.isLote()) {
     			Lote lote=(Lote)u;
-    			
     				if(lote.getTipopaquete().equals(TipoPaquete.ESTANDAR)) {
     					Paquete p=new Paquete(id, u.getDireccion());
             			this.empaquetar(u, p);
@@ -168,7 +167,6 @@ public class Operador extends UsuarioIdentificado{
             			id++;
             			num_empaquetado++;
             			
-   
     			}
     		}
     	}
@@ -261,8 +259,7 @@ public class Operador extends UsuarioIdentificado{
     private void empaquetar(Unidad u, Paquete p) {
     	p.getUnidades().add(u);
 		p.setPeso(u.getPeso()+p.getPeso());
-		u.setEmpaquetado(true);
-    	
+		u.setEmpaquetado(true);	
     }
     
     

@@ -19,4 +19,8 @@ public class Refrigerado extends ProductoAlimentacion {
 	public boolean isRefrigerado() {
     	return true;
     }
+	@Override
+    public boolean isAlimentacion() {
+    	return false;
+    }
 }

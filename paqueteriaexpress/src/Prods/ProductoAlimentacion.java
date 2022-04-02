@@ -9,4 +9,8 @@ public class ProductoAlimentacion extends Producto {
     public boolean isAlimentacion() {
     	return true;
     }
+    @Override
+    public boolean isEstandar() {
+    	return false;
+    }
 }
