@@ -12,12 +12,8 @@ import sistema.SistemaAplicacion;
 
 import java.util.*;
 import java.io.*;
+import java.sql.Date;
 
-abstract class CodigoPostal {
-	public static int getSize() {
-		return 16;
-	}
-}
 
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
@@ -40,7 +36,7 @@ public class Operador extends UsuarioIdentificado{
     public void setPedidosDistribuidos(int pedidosDistribuidos) {
         this.pedidosDistribuidos = pedidosDistribuidos;
     }
-    public Pedido nuevoPedido(int idPedido, boolean urgente, Date fecha, String direccion, int codigoPostal, String descripcion, Cliente cliente){
+    public Pedido nuevoPedido(int idPedido, boolean urgente, String direccion, int codigoPostal, String descripcion, Cliente cliente, Date fecha){
         Pedido p=new Pedido(idPedido, urgente, direccion, codigoPostal, descripcion, EstadoPedido.EnConstruccion, fecha);
         cliente.getPedidosUser().add(idPedido);
         return p; 
@@ -61,7 +57,7 @@ public class Operador extends UsuarioIdentificado{
     	if(largo>sist.getLargo()) {
     		throw new ErrorLargo(); 
     	}
-    	Producto prod=new Producto(idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto);
+    	Producto prod=new Producto(idProducto, peso, direccion, descripcion, unidades, largo, ancho, alto);
     	p.getUnidades().add(prod);
     	return true;
     	
@@ -100,7 +96,7 @@ public class Operador extends UsuarioIdentificado{
     	if(largo>sist.getLargo()) {
     		throw new ErrorLargo();  
     	}
-    	Producto prod=new ProductoFragil(asegurado, idProducto, peso, direccion, descripcion, unidades, largo, ancho, alto); 
+    	Producto prod=new ProductoFragil(asegurado, idProducto, peso, precio,direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
     	return true;
     }
