@@ -160,7 +160,7 @@ public class Operador extends UsuarioIdentificado{
     			}
     		}else if(u.isLote()) {
     			Lote lote=(Lote)u;
-    				if(lote.getTipopaquete().equals(TipoPaquete.ESTANDAR)) {
+    				if(lote.getTipopaquete().equals(TipoPaquete.FRAGIL)) {
     					Paquete p=new Paquete(id, u.getDireccion());
             			this.empaquetar(u, p);
             			sist.getPaquetes().add(p);
