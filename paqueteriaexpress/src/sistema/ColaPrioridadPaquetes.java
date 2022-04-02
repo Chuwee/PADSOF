@@ -24,7 +24,7 @@ public class ColaPrioridadPaquetes {
 	
 	/* ¿Cuántos niveles de prioridad hay? Debemos usar una cola para cada nivel de prioridad */
 	
-	public void ColaPrioridad() {
+	public ColaPrioridadPaquetes() {
 		Colas = new ArrayList<PriorityQueue<Paquete>>(Vars.getNumPriorities());
 		for(int i = 0; i < Vars.getNumPriorities(); i++) {
 			Colas.add(new PriorityQueue<Paquete>(new ComparePaquetes())); // Testear esto 
