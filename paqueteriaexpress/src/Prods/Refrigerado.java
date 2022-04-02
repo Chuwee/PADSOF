@@ -14,4 +14,13 @@ public class Refrigerado extends ProductoAlimentacion {
 	public void setCongelado(boolean congelado) {
 		this.congelado = congelado;
 	}
+	
+	@Override
+	public boolean isRefrigerado() {
+    	return true;
+    }
+	@Override
+    public boolean isAlimentacion() {
+    	return false;
+    }
 }

@@ -19,5 +19,13 @@ public class ProductoFragil extends Producto {
 	public double calcularPrecio() {
 		return super.calcularPrecio()+2+5*(asegurado?1:0);
 	}
+	@Override
+	public boolean isFragil() {
+		return true;
+	}
+	@Override
+    public boolean isEstandar() {
+    	return false;
+    }
 	
 }
