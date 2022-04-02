@@ -27,6 +27,19 @@ public class Vars {
 		}
 	};
 	
+	private static List<ColasPrioridad> colasPrioridad = new ArrayList<ColasPrioridad>() {
+		{
+			add(0, ColasPrioridad.URGENTES);
+			add(1, ColasPrioridad.NOENTREGADOSFALTACAMIONES);
+			add(2, ColasPrioridad.DEVUELTOS);
+			add(3, ColasPrioridad.RESTO);
+		}
+	};
+	
+	public static int getNumColasPrioridad() {
+		return colasPrioridad.size();
+	}
+	
 	public static int getMaxPeso_from_type(TipoPaquete arg) {
 		return maxPesoPaquetes.get(arg);
 	}
@@ -49,6 +62,10 @@ public class Vars {
 	
 	public static int getPriority_fromType(TipoPaquete tp) {
 		return prioridadPaquetes.indexOf(tp);
+	}
+	
+	public static int getColaPrioridad(ColasPrioridad c) {
+		return colasPrioridad.indexOf(c);
 	}
 	
 }

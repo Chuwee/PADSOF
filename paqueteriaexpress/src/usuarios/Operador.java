@@ -1,8 +1,10 @@
 package usuarios;
 import java.util.ArrayList;
 
+import GlobalVars.ColasPrioridad;
 import GlobalVars.TipoPaquete;
 import GlobalVars.Vars;
+import Paquete.EstadoPaquete;
 import Paquete.Paquete;
 import Pedido.*;
 import Prods.*;
@@ -23,11 +25,12 @@ abstract class CodigoPostal {
  */
 public class Operador extends UsuarioIdentificado{
     private int pedidosDistribuidos;
+    SistemaAplicacion sist;
 
-    public Operador(int pedidosDistribuidos, String NIF, String Nombre, String Usuario, String Contrasena, String email){
+    public Operador(SistemaAplicacion sist, int pedidosDistribuidos, String NIF, String Nombre, String Usuario, String Contrasena, String email){
         super(NIF, Nombre, Usuario, Contrasena, email);
         this.pedidosDistribuidos = pedidosDistribuidos;
-
+        this.sist = sist;
     }
 
     public int getPedidosDistribuidos() {
@@ -262,9 +265,23 @@ public class Operador extends UsuarioIdentificado{
 		u.setEmpaquetado(true);	
     }
     
+    private int asignarCola(Paquete p) {
+    	if(p.isUrgente())
+    		return Vars.getColaPrioridad(ColasPrioridad.URGENTES);
+    	EstadoPaquete ep = p.getEstadoPaquete();
+    	switch(ep) {
+	    	case NoEntregadoFaltaCamiones:
+	    		return Vars.getColaPrioridad(ColasPrioridad.NOENTREGADOSFALTACAMIONES);
+	    	case PendienteFallido1:
+	    		return Vars.getColaPrioridad(ColasPrioridad.DEVUELTOS);
+	    	default:
+	    		return Vars.getColaPrioridad(ColasPrioridad.RESTO);
+    	}
+    }
     
-    public void planificarReparto(Pedido p) {
-    	
+    public void planificarReparto(Paquete p) {
+    	int cola = asignarCola(p);
+    	sist.anadirPaqueteACola(p, cola);
     }
     public boolean validarPedido(Pedido p){
     	return true; 

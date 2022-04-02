@@ -1,10 +1,8 @@
 package Prods;
 
-import java.util.ArrayList;
 import java.sql.Date;
 
 import Pedido.Pedido;
-import Paquete.Paquete;
 
 public abstract class Unidad {
 
@@ -82,6 +80,9 @@ public abstract class Unidad {
     }
     public Date getDate() {
     	return pedido.getFecha();
+    }
+    public boolean isUrgente() {
+    	return pedido.isUrgente();
     }
     
 }

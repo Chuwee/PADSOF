@@ -2,6 +2,7 @@ package Paquete;
 
 import java.util.ArrayList;
 import java.sql.Date;
+import GlobalVars.TipoPaquete;
 
 import Prods.Unidad;
 
@@ -11,14 +12,25 @@ public class Paquete {
     private double peso;
     private ArrayList<Unidad> unidades;
     private boolean entregado;
+    private EstadoPaquete estadoPaquete;
+    private TipoPaquete tp;
 
-    public Paquete(int idPaquete, String direccion) {
+	public Paquete(int idPaquete, String direccion, TipoPaquete tp) {
         this.idPaquete = idPaquete;
         this.direccion = direccion;
         this.peso = 0;
+        this.setTp(tp);
         unidades = new ArrayList<Unidad>();
         this.setEntregado(false);
     }
+	
+	public EstadoPaquete getEstadoPaquete() {
+		return estadoPaquete;
+	}
+
+	public void setEstadoPaquete(EstadoPaquete estadoPaquete) {
+		this.estadoPaquete = estadoPaquete;
+	}
 
     public ArrayList<Unidad> getUnidades() {
         return this.unidades;
@@ -75,4 +87,19 @@ public class Paquete {
 		this.entregado = entregado;
 	}
     
+	public boolean isUrgente() {
+		for(Unidad u: unidades) {
+			if(u.isUrgente())
+				return true;
+		}
+		return false;
+	}
+
+	public TipoPaquete getTp() {
+		return tp;
+	}
+
+	public void setTp(TipoPaquete tp) {
+		this.tp = tp;
+	}
 }

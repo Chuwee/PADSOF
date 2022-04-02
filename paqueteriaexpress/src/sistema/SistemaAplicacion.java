@@ -7,8 +7,7 @@ import Paquete.Paquete;
 import Pedido.Pedido;
 import Transporte.Camion;
 import usuarios.UsuarioIdentificado;
-
-import java.util.PriorityQueue;
+import GlobalVars.ColasPrioridad;
 
 public class SistemaAplicacion {
     private List<Camion> camiones;
@@ -21,7 +20,18 @@ public class SistemaAplicacion {
     private double alto;
     private int maxDirecciones;
     private int maxIntentos;
-    private PriorityQueue<Pedido> qOrders = new PriorityQueue<Pedido>();
+    ArrayList<ColaPrioridadPaquetes> colasPrioridad;
+    
+    public SistemaAplicacion() {
+    	colasPrioridad = new ArrayList<ColaPrioridadPaquetes>();
+    	for(int i = 0; i < Vars.getNumColasPrioridad(); i++) {
+    		colasPrioridad.add(new ColaPrioridadPaquetes());
+    	}
+    }
+    
+    public void anadirPaqueteACola(Paquete p, int index) {
+    	colasPrioridad.get(index).addPaquete(p);
+    }
     
     public List<Paquete> getPaquetes(){
     	return this.paquetes;
@@ -32,35 +42,27 @@ public class SistemaAplicacion {
     public List<Camion> getCamiones() {
         return this.camiones;
     }
-
     public void setCamiones(List<Camion> camiones) {
         this.camiones = camiones;
     }
-
     public List<UsuarioIdentificado> getUsuarios() {
         return this.usuarios;
     }
-
     public void setUsuarios(List<UsuarioIdentificado> usuarios) {
         this.usuarios = usuarios;
     }
-
     public List<Pedido> getPedidos() {
         return this.pedidos;
     }
-
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
-
     public double getPesoMaximo() {
         return this.pesoMaximo;
     }
-
     public void setPesoMaximo(double pesoMaximo) {
         this.pesoMaximo = pesoMaximo;
     }
-
     public double getLargo() {
         return this.largo;
     }

@@ -31,8 +31,8 @@ public class ColaPrioridadPaquetes {
 		}
 	}
 	
-	public void addPaquete(Paquete p, TipoPaquete tp) {
-		Colas.get(Vars.getPriority_fromType(tp)).add(p);
+	public void addPaquete(Paquete p) {
+		Colas.get(Vars.getPriority_fromType(p.getTp())).add(p);
 	}
 	
 	public Paquete popPaquete() {
