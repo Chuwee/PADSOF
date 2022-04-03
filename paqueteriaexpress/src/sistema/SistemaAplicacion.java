@@ -129,8 +129,12 @@ public class SistemaAplicacion {
 	}
     public UsuarioIdentificado login(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado{
     	for(Cliente c: clientes) {
-    		if(c.getUsuario().equals(usuario)&&c.getContrasena().equals(contrasena)) {
-    			return c;
+    		if(c.getUsuario().equals(usuario)) {
+    			if(c.getContrasena().equals(contrasena)) {
+    				return c;
+    			}else {
+    				throw new ContrasenaIncorrecta();
+    			}
     		}
     	}
     	for(Operador o: operadores) {
@@ -143,8 +147,12 @@ public class SistemaAplicacion {
     		}
     	}
     	for(Repartidor r: repartidores) {
-    		if(r.getUsuario().equals(usuario)&&r.getContrasena().equals(contrasena)) {
-    			return r;
+    		if(r.getUsuario().equals(usuario)) {
+    			if(r.getContrasena().equals(contrasena)) {
+    				return r;
+    			}else {
+    				throw new ContrasenaIncorrecta();
+    			}
     		}
     	}
     	throw new UsuarioNoEncontrado();
