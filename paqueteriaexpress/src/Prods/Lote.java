@@ -100,7 +100,7 @@ public class Lote extends Unidad {
 		this.productos.remove(p);
 	}
 
-
+	@Override
 	public TipoPaquete getTipopaquete() {
 		return tipopaquete;
 	}

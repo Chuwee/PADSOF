@@ -231,17 +231,14 @@ public class Operador extends UsuarioIdentificado {
 		int num_empaquetado = 0;
 		for (Unidad u : pedido.getUnidades()) {
 			if (u.isFragil()) {
-				Producto prod = (Producto) u;
-				for (int i = 0; i < prod.getUnidades(); i++) {
-					Paquete p = new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
-					this.empaquetar(u, p);
-					this.anadirPaqueteACola(p);
-					id++;
-					num_empaquetado++;
-				}
+				Paquete p = new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
+				this.empaquetar(u, p);
+				this.anadirPaqueteACola(p);
+				id++;
+				num_empaquetado++;
+				
 			} else if (u.isLote()) {
-				Lote lote = (Lote) u;
-				if (lote.getTipopaquete().equals(TipoPaquete.FRAGIL)) {
+				if (u.getTipopaquete().equals(TipoPaquete.FRAGIL)) {
 					Paquete p = new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
 					this.empaquetar(u, p);
 					this.anadirPaqueteACola(p);
@@ -275,8 +272,7 @@ public class Operador extends UsuarioIdentificado {
 					} else if (u.isLiquido()) {
 						num_empaquetado = this.empaquetar(u, p_alimentacion, maxPeso, num_empaquetado);
 					} else if (u.isLote()) {
-						Lote lote = (Lote) u;
-						switch (lote.getTipopaquete()) {
+						switch (u.getTipopaquete()) {
 							case ESTANDAR:
 								num_empaquetado = this.empaquetar(u, p_estandar, maxPeso, num_empaquetado);
 							case CONGELADO:

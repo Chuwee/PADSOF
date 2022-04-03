@@ -2,6 +2,7 @@ package Prods;
 
 import java.sql.Date;
 
+import GlobalVars.TipoPaquete;
 import Pedido.Pedido;
 import usuarios.ErrorAlto;
 import usuarios.ErrorAncho;
@@ -78,5 +79,8 @@ public abstract class Unidad {
     public boolean isUrgente() {
     	return pedido.isUrgente();
     }
+    public TipoPaquete getTipopaquete() {
+		return TipoPaquete.TOTAL;
+	}
     
 }
