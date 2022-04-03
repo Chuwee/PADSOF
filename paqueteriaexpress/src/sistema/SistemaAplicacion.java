@@ -95,9 +95,21 @@ public class SistemaAplicacion {
         return;
     }
 
+    private Paquete popCola() {
+        Paquete p;
+        for(int i = 0; i < colasPrioridad.size(); i++) {
+            p = colasPrioridad.get(i).popPaquete();
+            if(p != null)
+                return p;
+        }
+        return null;
+    }
+
     public void planificarRepartoGlobal() {
-        for(Paquete p: paquetes)
+        Paquete p = popCola();
+        while(p != null) {
             planificarReparto(p);
+        }
     }
     
     public void anadirPaqueteACola(Paquete p, int index) {
