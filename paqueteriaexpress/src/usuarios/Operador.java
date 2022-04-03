@@ -1,13 +1,9 @@
 package usuarios;
-<<<<<<< HEAD
-
-=======
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
  * 
  */
 import java.util.ArrayList;
->>>>>>> 930ede0b76cd643f63721bcddac25d7cd4d9fb80
 import java.util.List;
 
 import GlobalVars.ColasPrioridad;
@@ -33,6 +29,7 @@ import java.sql.Date;
 import es.uam.eps.padsof.telecard.*;
 
 
+
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María
  *         del Pinar Sacristán Matesanz
@@ -41,6 +38,15 @@ import es.uam.eps.padsof.telecard.*;
 public class Operador extends UsuarioIdentificado {
 	private int pedidosDistribuidos;
 	SistemaAplicacion sist;
+	private static ArrayList<TipoPaquete> arrPaquetes = new ArrayList<TipoPaquete>() {
+		{
+			add(0, TipoPaquete.ESTANDAR);
+			add(1, TipoPaquete.CONGELADO);
+			add(2, TipoPaquete.DIMESPECIALES);
+			add(3, TipoPaquete.LIQUIDO);
+			add(4, TipoPaquete.REFRIGERADO);
+		}
+	};
 
 	public Operador(SistemaAplicacion sist, int pedidosDistribuidos, String NIF, String Nombre, String Usuario,
 			String Contrasena, String email) {
@@ -222,71 +228,33 @@ public class Operador extends UsuarioIdentificado {
 	public void empaquetarPedido(Pedido pedido) {
 		double maxPeso = sist.getPesoMaximo();
 		int id = sist.getId_paquetes();
+		int index = 0;
 		int num_empaquetado = 0;
 		for (Unidad u : pedido.getUnidades()) {
-			if (u.isFragil()) {
+			if (u.getTipoPaquete() == TipoPaquete.FRAGIL){
 				Paquete p = new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
-				this.empaquetar(u, p);
-				this.anadirPaqueteACola(p);
+				empaquetar(u, p);
+				anadirPaqueteACola(p);
 				id++;
 				num_empaquetado++;
-				
-			} else if (u.isLote()) {
-				if (u.getTipoPaquete().equals(TipoPaquete.FRAGIL)) {
-					Paquete p = new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
-					this.empaquetar(u, p);
-					this.anadirPaqueteACola(p);
-					id++;
-					num_empaquetado++;
-				}
 			}
 		}
+
 		while (num_empaquetado != pedido.getUnidades().size()) {
-			Paquete p_estandar = new Paquete(id, pedido.getDireccion(), TipoPaquete.ESTANDAR);
-			id++;
-			Paquete p_congelado = new Paquete(id, pedido.getDireccion(), TipoPaquete.CONGELADO);
-			id++;
-			Paquete p_refrigerado = new Paquete(id, pedido.getDireccion(), TipoPaquete.REFRIGERADO);
-			id++;
-			Paquete p_dim_esp = new Paquete(id, pedido.getDireccion(), TipoPaquete.DIMESPECIALES);
-			id++;
-			Paquete p_alimentacion = new Paquete(id, pedido.getDireccion(), TipoPaquete.ALIMENTACION);
-			id++;
+			ArrayList<Paquete> paquetes = new ArrayList<Paquete>(5);
+			for(int i = 0; i < 5; i++) {
+				paquetes.add(new Paquete(id, pedido.getDireccion(), arrPaquetes.get(i)));
+				id++;
+			}
 			for (Unidad u : pedido.getUnidades()) {
-				if (u.getEmpaquetado() == false) {
-					if (u.isRefrigerado()) {
-						num_empaquetado = this.empaquetar(u, p_refrigerado, maxPeso, num_empaquetado);
-					} else if (u.isCongelado()) {
-						num_empaquetado = this.empaquetar(u, p_congelado, maxPeso, num_empaquetado);
-
-					} else if (u.isEstandar()) {
-						num_empaquetado = this.empaquetar(u, p_estandar, maxPeso, num_empaquetado);
-					} else if (u.isDimEsp()) {
-						num_empaquetado = this.empaquetar(u, p_dim_esp, maxPeso, num_empaquetado);
-					} else if (u.isLiquido()) {
-						num_empaquetado = this.empaquetar(u, p_alimentacion, maxPeso, num_empaquetado);
-					} else if (u.isLote()) {
-						switch (u.getTipoPaquete()) {
-							case ESTANDAR:
-								num_empaquetado = this.empaquetar(u, p_estandar, maxPeso, num_empaquetado);
-							case CONGELADO:
-								num_empaquetado = this.empaquetar(u, p_congelado, maxPeso, num_empaquetado);
-							case REFRIGERADO:
-								num_empaquetado = this.empaquetar(u, p_refrigerado, maxPeso, num_empaquetado);
-							case ALIMENTACION:
-								num_empaquetado = this.empaquetar(u, p_alimentacion, maxPeso, num_empaquetado);
-							default:
-								num_empaquetado = this.empaquetar(u, p_dim_esp, maxPeso, num_empaquetado);
-						}
-
-					}
+				if (u.getEmpaquetado() == false)
+				{
+					index = arrPaquetes.indexOf(u.getTipoPaquete());
+					num_empaquetado = empaquetar(u, paquetes.get(index), maxPeso, num_empaquetado);
 				}
 			}
-			this.anadirPaqueteACola(p_alimentacion);
-			this.anadirPaqueteACola(p_estandar);
-			this.anadirPaqueteACola(p_congelado);
-			this.anadirPaqueteACola(p_refrigerado);
-			this.anadirPaqueteACola(p_dim_esp);
+			for(Paquete p : paquetes)
+				anadirPaqueteACola(p);
 		}
 		sist.setId_paquetes(id);
 

@@ -17,7 +17,6 @@ public class Lote extends Unidad {
     private int unidades;
     private List<Producto> productos;
     private List<Lote> lotes;
-    private TipoPaquete tipopaquete;
     
     public Lote(int id, double tamano, int unidades) {
 		super(id);
@@ -102,17 +101,6 @@ public class Lote extends Unidad {
 	public void eliminarProducto(Producto p) {
 		this.productos.remove(p);
 	}
-
-	@Override
-	public TipoPaquete getTipopaquete() {
-		return tipopaquete;
-	}
-
-
-	public void setTipopaquete(TipoPaquete tipopaquete) {
-		this.tipopaquete = tipopaquete;
-	}
-	
 	@Override
 	public boolean isLote() {
     	return true;
