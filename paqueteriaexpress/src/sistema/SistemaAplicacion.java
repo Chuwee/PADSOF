@@ -2,11 +2,19 @@ package sistema;
 import java.util.*;
 
 
+import GlobalVars.ColasPrioridad;
 import GlobalVars.Vars;
 import Paquete.*;
 import Pedido.Pedido;
 import Transporte.Camion;
+<<<<<<< HEAD
 import usuarios.*;
+=======
+import Transporte.EstadoCamion;
+import Transporte.PesoCamionException;
+import Transporte.TipoCamion;
+import usuarios.UsuarioIdentificado;
+>>>>>>> 5a94a154c383acb3c8a8fed91a1d4b8540f62d5b
 
 public class SistemaAplicacion {
     private List<Camion> camiones;
@@ -27,6 +35,66 @@ public class SistemaAplicacion {
     	for(int i = 0; i < Vars.getNumColasPrioridad(); i++) {
     		colasPrioridad.add(new ColaPrioridadPaquetes());
     	}
+    }
+
+    public int numPaquetesTotal() {
+        int counter = 0;
+        for(ColaPrioridadPaquetes cola : colasPrioridad) {
+            counter+=cola.size();
+        }
+        return counter;
+    }
+
+    private Camion getCamionApropiado_fromTipo(TipoCamion tipo, Paquete p) {
+        double peso = p.getPeso();
+        boolean lookForRefrigerado = (tipo == TipoCamion.RefrigeradoCongelado)
+            || (tipo == TipoCamion.RefrigeradoLiquido) || (tipo == TipoCamion.RefrigeradoRefrigerado);
+        
+        for(Camion c : camiones) {
+            if(c.getEstado()!=EstadoCamion.AVERIADO && 
+            (c.getTipo() == tipo || (lookForRefrigerado && c.getTipo() == TipoCamion.RefrigeradoNoAsignado))) {
+                if(c.canAdd(peso))
+                {
+                    c.setTipo(tipo);
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void noHayCamiones(Paquete p) {
+        if(p.isUrgente()) {
+            anadirPaqueteACola(p, Vars.getColaPrioridad(ColasPrioridad.URGENTES));
+            return;
+        }
+        anadirPaqueteACola(p, Vars.getColaPrioridad(ColasPrioridad.NOENTREGADOSFALTACAMIONES));
+    }
+
+    public void planificarReparto(Paquete p) {
+        /*Debemos planificar el reparto del paquete p*/
+        /**
+         * Debemos meterlo en un camión apropiado.
+         */
+        TipoCamion tipo = Vars.TipoPaquete_to_TipoCamion(p.getTp());
+        Camion c = getCamionApropiado_fromTipo(tipo, p);
+        if(c!=null)
+        {
+            try {
+                c.anadirPaquete(p);
+            }
+            catch(PesoCamionException ex) {
+                System.out.println("Camión "+c.getMatricula()+" lleno.");
+            }
+        }
+        else
+            noHayCamiones(p);
+        return;
+    }
+
+    public void planificarRepartoGlobal() {
+        for(Paquete p: paquetes)
+            planificarReparto(p);
     }
     
     public void anadirPaqueteACola(Paquete p, int index) {
