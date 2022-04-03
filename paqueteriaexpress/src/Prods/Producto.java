@@ -1,5 +1,8 @@
 package Prods;
-
+/**
+ * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
+ * 
+ */
 import sistema.SistemaAplicacion;
 import usuarios.ErrorAlto;
 import usuarios.ErrorAncho;
@@ -16,8 +19,8 @@ public class Producto extends Unidad {
     boolean valido;
     SistemaAplicacion sist;
     
-    public Producto(SistemaAplicacion sist, int id, double peso, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
-    	super(id, direccion);
+    public Producto(SistemaAplicacion sist, int id, double peso, String descripcion, int unidades, double largo, double ancho, double alto) {
+    	super(id);
     	this.descripcion=descripcion;
     	this.unidades=unidades;
     	this.largo=largo;
@@ -47,7 +50,7 @@ public class Producto extends Unidad {
     
     @Override
     public double calcularPrecio() {
-    	return this.getPeso()<1?0.4:(this.getPeso()<5?0.6:1);
+    	return this.unidades*(this.getPeso()<1?0.4:(this.getPeso()<5?0.6:1));
     }
 
     public double getLargo() {

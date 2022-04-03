@@ -1,5 +1,12 @@
 package sistema;
+<<<<<<< HEAD
 import java.text.SimpleDateFormat;
+=======
+/**
+ * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
+ * 
+ */
+>>>>>>> e046d6e5779ff9e522d22b4680ef315b052c818f
 import java.util.*;
 
 

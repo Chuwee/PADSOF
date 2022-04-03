@@ -1,5 +1,8 @@
 package Prods;
-
+/**
+ * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
+ * 
+ */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +19,8 @@ public class Lote extends Unidad {
     private List<Lote> lotes;
     private TipoPaquete tipopaquete;
     
-    public Lote(int id, String direccion, double tamano, int unidades) {
-		super(id, direccion);
+    public Lote(int id, double tamano, int unidades) {
+		super(id);
 		this.tamano=tamano;
 		this.unidades=unidades;
 		this.productos=null;
