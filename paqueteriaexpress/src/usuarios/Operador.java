@@ -72,10 +72,44 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     }
     public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades, List<Producto> prod, List<Lote> lot) {
     	Lote l=new Lote(idLote, precio, direccion, tam, unidades);
+    	if(prod.get(0).isDimEsp()) {
+    		l.setTipopaquete(TipoPaquete.DIMESPECIALES);
+    		for(Producto producto:prod) {
+    			l.anadirProducto(producto);
+    		}
+    	}
+    	else if(prod.get(0).isRefrigerado()) {
+    		l.setTipopaquete(TipoPaquete.REFRIGERADO);
+    		for(Producto producto:prod) {
+    			l.anadirProducto(producto);
+    		}
+    	}
+    	else if(prod.get(0).isRefrigerado()) {
+    		l.setTipopaquete(TipoPaquete.CONGELADO);
+    		for(Producto producto:prod) {
+    			l.anadirProducto(producto);
+    		}
+    	}
+    	else if(prod.get(0).isAlimentacion()) {
+    		l.setTipopaquete(TipoPaquete.LIQUIDO);
+    		for(Producto producto:prod) {
+    			l.anadirProducto(producto);
+    		}
+    	}
+    	
     	for(Producto producto:prod) {
-    		l.anadirProducto(producto);
     		if(producto.isFragil()) {
     			l.setTipopaquete(TipoPaquete.FRAGIL);
+    			l.anadirProducto(producto);
+    		}
+    		else if(producto.isEstandar()) {
+    			l.setTipopaquete(TipoPaquete.ESTANDAR);
+    			l.anadirProducto(producto);
+    		}
+   
+    		else if(producto.isRefrigerado()) {
+    			l.setTipopaquete(TipoPaquete.REFRIGERADO);
+    			l.anadirProducto(producto);
     		}
     	}
     	for(Lote lotes:lot) {

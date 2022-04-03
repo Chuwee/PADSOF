@@ -27,4 +27,5 @@ public class Refrigerado extends ProductoAlimentacion {
     public boolean isAlimentacion() {
     	return false;
     }*/
+	
 }
