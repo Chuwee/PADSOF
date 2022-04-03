@@ -1,5 +1,8 @@
 package Pedido;
-
+/**
+ * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
+ * 
+ */
 import java.sql.Date;
 import usuarios.Cliente;
 import usuarios.ErrorAlto;

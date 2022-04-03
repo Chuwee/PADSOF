@@ -1,5 +1,13 @@
 package usuarios;
+<<<<<<< HEAD
 
+=======
+/**
+ * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
+ * 
+ */
+import java.util.ArrayList;
+>>>>>>> 930ede0b76cd643f63721bcddac25d7cd4d9fb80
 import java.util.List;
 
 import GlobalVars.ColasPrioridad;
@@ -343,6 +351,7 @@ public class Operador extends UsuarioIdentificado {
 
 	public boolean validarPedido(Pedido p) {
 		p.validar();
+	
 		if (p.getEstado() == EstadoPedido.Validado) {
 			return true;
 		}

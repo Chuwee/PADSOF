@@ -8,7 +8,6 @@ import org.junit.Test;
 import Prods.ProductoFragil;
 import sistema.SistemaAplicacion;
 
-
 public class ProductoFragilTest2 {
 	SistemaAplicacion sist=new SistemaAplicacion();
 	ProductoFragil pf=new ProductoFragil(sist, true, 12, 3, 0, "Taza", 1, 12, 14, 10);

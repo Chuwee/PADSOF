@@ -1,7 +1,9 @@
 package Prods;
-
+/**
+ * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
+ * 
+ */
 import sistema.SistemaAplicacion;
-
 public class DimensionesEspeciales extends Producto {
 
 	public DimensionesEspeciales(SistemaAplicacion sist, int id, double peso, double precio, String descripcion, int unidades,

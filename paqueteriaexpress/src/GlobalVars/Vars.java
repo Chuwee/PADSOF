@@ -1,5 +1,8 @@
 package GlobalVars;
-
+/**
+ * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
+ * 
+ */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
