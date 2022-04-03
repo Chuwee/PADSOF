@@ -10,10 +10,9 @@ import Paquete.Paquete;
 import Pedido.*;
 import Prods.*;
 import Transporte.Camion;
-<<<<<<< HEAD
-=======
+
 import Transporte.EstadoCamion;
->>>>>>> 8375a2ccdb9b70b6d558b943f8bf0c8f4c1b14c8
+
 import sistema.SistemaAplicacion;
 
 import java.io.BufferedReader;
