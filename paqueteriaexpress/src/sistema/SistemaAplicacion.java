@@ -1,15 +1,19 @@
 package sistema;
+<<<<<<< HEAD
+import java.text.SimpleDateFormat;
+=======
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
  * 
  */
+>>>>>>> e046d6e5779ff9e522d22b4680ef315b052c818f
 import java.util.*;
 
 
 import GlobalVars.ColasPrioridad;
 import GlobalVars.Vars;
 import Paquete.*;
-import Pedido.Pedido;
+import Pedido.*;
 import Transporte.Camion;
 
 import usuarios.*;
@@ -28,6 +32,7 @@ public class SistemaAplicacion {
     private List<Operador> operadores;
     private List<Pedido> pedidos;
     private List<Paquete> paquetesEntregados;
+    private List<Paquete> paquetesNoEntregados;
 	private double pesoMaximo;
 	private double largo;
     private double ancho;
@@ -35,6 +40,8 @@ public class SistemaAplicacion {
     private int maxDirecciones;
     private int maxIntentos;
     private int id_paquetes;
+    private Map<String, Double> ingresosMensuales;
+    private Map<String, Integer> pedidosMensuales;
     ArrayList<ColaPrioridadPaquetes> colasPrioridad;
     
     public SistemaAplicacion() {
@@ -176,6 +183,37 @@ public class SistemaAplicacion {
     	throw new UsuarioNoEncontrado();
     }
     
+    private void calcularIngresosMensuales() {
+    	ingresosMensuales=new HashMap<String, Double>();
+    	SimpleDateFormat formater;
+    	String fecha;
+    	formater=new SimpleDateFormat("MM-yy");
+    	for(Pedido p: pedidos) {
+    		if(!p.getEstado().equals(EstadoPedido.Validado)&&!p.getEstado().equals(EstadoPedido.EnConstruccion)
+    				&&!p.getEstado().equals(EstadoPedido.Construido)) {
+    			fecha=formater.format(p.getFecha());
+    			if(ingresosMensuales.putIfAbsent(fecha, p.getPrecio())!=null) {
+    				ingresosMensuales.put(fecha, p.getPrecio()+ ingresosMensuales.get(fecha));
+    			}
+    		}
+    	}
+    }
+    
+    private void calcularPedidosMensuales() {
+    	pedidosMensuales= new HashMap<String, Integer>();
+    	SimpleDateFormat formater;
+    	String fecha;
+    	formater=new SimpleDateFormat("MM-yy");
+    	for(Pedido p: pedidos) {
+    			fecha=formater.format(p.getFecha());
+    			if(pedidosMensuales.putIfAbsent(fecha, 1)!=null) {
+    				ingresosMensuales.put(fecha, 1+ ingresosMensuales.get(fecha));
+    			}
+    	}
+    	
+    }
+    
+    
     public List<Paquete> getPaquetesEntregados(){
     	return this.paquetesEntregados;
     }
@@ -276,6 +314,31 @@ public class SistemaAplicacion {
 			return true; 
 		}
 		throw new InvalidCardNumberException(numTarjeta); 
+	}
+
+	public List<Paquete> getPaquetesNoEntregados() {
+		return paquetesNoEntregados;
+	}
+
+	public void setPaquetesNoEntregados(List<Paquete> paquetesNoEntregados) {
+		this.paquetesNoEntregados = paquetesNoEntregados;
+	}
+	public Map<String, Double> getIngresosMensuales() {
+		calcularIngresosMensuales();
+		return ingresosMensuales;
+	}
+
+	public void setIngresosMenuslaes(Map<String, Double> ingresosMensuales) {
+		this.ingresosMensuales = ingresosMensuales;
+	}
+
+	public Map<String, Integer> getPedidosMensuales() {
+		this.calcularPedidosMensuales();
+		return pedidosMensuales;
+	}
+
+	public void setPedidosMensuales(Map<String, Integer> pedidosMensuales) {
+		this.pedidosMensuales = pedidosMensuales;
 	}
 	
 
