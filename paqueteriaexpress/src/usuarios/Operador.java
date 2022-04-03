@@ -58,20 +58,34 @@ public class Operador extends UsuarioIdentificado{
     	return true;
     	
     }
-    public boolean añadirProductoAlimentacionLiquido(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    public boolean añadirProductoLiquido(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
     
     	Producto prod= new Liquido(sist,idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
     	return true;
     	
     }
-public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean congelado) {
+public boolean añadirProductoRefrigerado(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean congelado) {
 		
     	Producto prod= new Refrigerado(sist,idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto, congelado); 
     	p.getUnidades().add(prod);
     	return true;
     	
     }
+public boolean añadirProductoCongelado(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean congelado) {
+	
+	Producto prod= new Refrigerado(sist,idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto, congelado); 
+	p.getUnidades().add(prod);
+	return true;
+	
+}
+public boolean añadirProductoDimEsp(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean congelado) {
+	
+	Producto prod= new DimensionesEspeciales (sist,idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
+	p.getUnidades().add(prod);
+	return true;
+	
+}
     public boolean añadirProductoFragil(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean asegurado){
     
     	Producto prod=new ProductoFragil(sist,asegurado, idProducto, peso, precio,direccion, descripcion, unidades, largo, ancho, alto); 
@@ -80,6 +94,7 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     }
     public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades, List<Producto> prod, List<Lote> lot) {
     	Lote l=new Lote(idLote, direccion, tam, unidades);
+    	int flag=0; 
     	if(prod.get(0).isDimEsp()) {
     		l.setTipopaquete(TipoPaquete.DIMESPECIALES);
     		for(Producto producto:prod) {
@@ -87,18 +102,18 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     		}
     	}
     	else if(prod.get(0).isRefrigerado()) {
-    		Refrigerado p1=(Refrigerado) prod; 
-    		if(p1.isCongelado()==false) {
     		l.setTipopaquete(TipoPaquete.REFRIGERADO);
-    		}
-    		else {
-    			l.setTipopaquete(TipoPaquete.CONGELADO);
-    		}
     		for(Producto producto:prod) {
     			l.anadirProducto(producto);
     		}
     	}
-    	else if(prod.get(0).isAlimentacion()) {
+    	else if(prod.get(0).isCongelado()) {
+    		l.setTipopaquete(TipoPaquete.CONGELADO);
+    		for(Producto producto:prod) {
+    			l.anadirProducto(producto);
+    		}
+    	}
+    	else if(prod.get(0).isLiquido()) {
     		l.setTipopaquete(TipoPaquete.LIQUIDO);
     		for(Producto producto:prod) {
     			l.anadirProducto(producto);
@@ -106,16 +121,54 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     	}
     	for(Producto producto:prod) {
     		if(producto.isFragil()) {
+    			flag=1;
     			l.setTipopaquete(TipoPaquete.FRAGIL);
     			l.anadirProducto(producto);
     		}
        	}
-    	for(Lote lotes:lot) {
-    		l.anadirLote(lotes);
-    		if(lotes.isFragil()) {
-    			l.setTipopaquete(TipoPaquete.FRAGIL);
+    	if(flag==0) {
+       		l.setTipopaquete(TipoPaquete.ESTANDAR);
+    		for(Producto producto:prod) {
+    			l.anadirProducto(producto);
+    		}
+       	}
+    	if(lot.get(0).isDimEsp()) {
+    		l.setTipopaquete(TipoPaquete.DIMESPECIALES);
+    		for(Lote l1:lot) {
+    			l.anadirLote(l1);
     		}
     	}
+    	else if(lot.get(0).isRefrigerado()) {
+    		l.setTipopaquete(TipoPaquete.REFRIGERADO);
+    		for(Lote l1:lot) {
+    			l.anadirLote(l1);;
+    		}
+    	}
+    	else if(lot.get(0).isCongelado()) {
+    		l.setTipopaquete(TipoPaquete.CONGELADO);
+    		for(Lote l1:lot) {
+    			l.anadirLote(l1);;
+    		}
+    	}
+    	else if(lot.get(0).isLiquido()) {
+    		l.setTipopaquete(TipoPaquete.LIQUIDO);
+    		for(Lote l1:lot) {
+    			l.anadirLote(l1);
+    		}
+    	}
+    	for(Lote l1:lot) {
+    		if(l1.isFragil()) {
+    			flag=1;
+    			l.setTipopaquete(TipoPaquete.FRAGIL);
+    			l.anadirLote(l1);
+    		}
+       	}
+    	if(flag==0) {
+       		l.setTipopaquete(TipoPaquete.ESTANDAR);
+    		for(Lote l1:lot) {
+    			l.anadirLote(l1);
+    		}
+       	}
     	p.getUnidades().add(l);
     	return true; 
     }
