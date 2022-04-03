@@ -136,9 +136,9 @@ public class SistemaAplicacion {
     	for(Operador o: operadores) {
     		if(o.getUsuario().equals(usuario)) {
     			if(o.getContrasena().equals(contrasena)) {
-    				throw new ContrasenaIncorrecta();
-    			}else {
     				return o;
+    			}else {
+    				throw new ContrasenaIncorrecta();
     			}
     		}
     	}
