@@ -100,9 +100,11 @@ public class Producto extends Unidad {
     	return true;
     }
 
+
     @Override
     public double getPeso() {
         return this.peso;
     }
+
 
 }

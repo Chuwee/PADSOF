@@ -89,6 +89,12 @@ public class Lote extends Unidad {
 		}
 		this.productos.add(p);
 	}
+	public void anadirLote(Lote l) {
+		if(this.lotes == null) {
+			this.lotes = new ArrayList<Lote>();
+		}
+		this.lotes.add(l);
+	}
 	
 	public void eliminarProducto(Producto p) {
 		this.productos.remove(p);

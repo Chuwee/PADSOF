@@ -27,5 +27,13 @@ public class Refrigerado extends ProductoAlimentacion {
     	}
 		return true;
     }
+<<<<<<< HEAD
 
+=======
+	/*@Override
+    public boolean isAlimentacion() {
+    	return false;
+    }*/
+	
+>>>>>>> fffc5a4d49c49eccc172fd462e6a56d9b4be87f5
 }

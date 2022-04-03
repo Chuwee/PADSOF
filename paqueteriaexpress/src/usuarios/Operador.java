@@ -51,85 +51,73 @@ public class Operador extends UsuarioIdentificado{
 
     }
 
-    public boolean añadirProductoStandard(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto)
-    				throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo{
-    	if(peso>Vars.getMaxPeso_from_type(TipoPaquete.ESTANDAR)) {
-    		throw new ErrorPeso(); 
-    	}
-    	if(alto>sist.getAlto()) {
-    		throw new ErrorAlto();
-    	}
-    	if(ancho>sist.getAncho()) {
-    		throw new ErrorAncho(); 
-    	}
-    	if(largo>sist.getLargo()) {
-    		throw new ErrorLargo(); 
-    	}
+    public boolean añadirProductoStandard(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    				
     	Producto prod=new Producto(sist,idProducto, peso, direccion, descripcion, unidades, largo, ancho, alto);
     	p.getUnidades().add(prod);
     	return true;
     	
     }
-    public boolean añadirProductoAlimentacionLiquido(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) 
+    public boolean añadirProductoAlimentacionLiquido(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
     
-    		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
-		if(peso>Vars.getMaxPeso_from_type(TipoPaquete.ALIMENTACION)) {
-    		throw new ErrorPeso();  
-    	}
-    	if(alto>sist.getAlto()) {
-    		throw new ErrorAlto(); 
-    	}
-    	if(ancho>sist.getAncho()) {
-    		throw new ErrorAncho();  
-    	}
-    	if(largo>sist.getLargo()) {
-    		throw new ErrorLargo();  
-    	}
     	Producto prod= new Liquido(sist,idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
     	return true;
     	
     }
-public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean congelado) 
-    
-    		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
-		if(peso>Vars.getMaxPeso_from_type(TipoPaquete.ALIMENTACION)) {
-    		throw new ErrorPeso();  
-    	}
-    	if(alto>sist.getAlto()) {
-    		throw new ErrorAlto(); 
-    	}
-    	if(ancho>sist.getAncho()) {
-    		throw new ErrorAncho();  
-    	}
-    	if(largo>sist.getLargo()) {
-    		throw new ErrorLargo();  
-    	}
+public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean congelado) {
+		
     	Producto prod= new Refrigerado(sist,idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto, congelado); 
     	p.getUnidades().add(prod);
     	return true;
     	
     }
-    public boolean añadirProductoFragil(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean asegurado)
-    		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
-    	if(peso>Vars.getMaxPeso_from_type(TipoPaquete.FRAGIL)) {
-    		throw new ErrorPeso();  
-    	}
-    	if(alto>sist.getAlto()) {
-    		throw new ErrorAlto(); 
-    	}
-    	if(ancho>sist.getAncho()) {
-    		throw new ErrorAncho();  
-    	}
-    	if(largo>sist.getLargo()) {
-    		throw new ErrorLargo();  
-    	}
+    public boolean añadirProductoFragil(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean asegurado){
+    
     	Producto prod=new ProductoFragil(sist,asegurado, idProducto, peso, precio,direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
     	return true;
     }
-    public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades) {
-    	return true;
+    public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades, List<Producto> prod, List<Lote> lot) {
+    	Lote l=new Lote(idLote, direccion, tam, unidades);
+    	if(prod.get(0).isDimEsp()) {
+    		l.setTipopaquete(TipoPaquete.DIMESPECIALES);
+    		for(Producto producto:prod) {
+    			l.anadirProducto(producto);
+    		}
+    	}
+    	else if(prod.get(0).isRefrigerado()) {
+    		Refrigerado p1=(Refrigerado) prod; 
+    		if(p1.isCongelado()==false) {
+    		l.setTipopaquete(TipoPaquete.REFRIGERADO);
+    		}
+    		else {
+    			l.setTipopaquete(TipoPaquete.CONGELADO);
+    		}
+    		for(Producto producto:prod) {
+    			l.anadirProducto(producto);
+    		}
+    	}
+    	else if(prod.get(0).isAlimentacion()) {
+    		l.setTipopaquete(TipoPaquete.LIQUIDO);
+    		for(Producto producto:prod) {
+    			l.anadirProducto(producto);
+    		}
+    	}
+    	for(Producto producto:prod) {
+    		if(producto.isFragil()) {
+    			l.setTipopaquete(TipoPaquete.FRAGIL);
+    			l.anadirProducto(producto);
+    		}
+       	}
+    	for(Lote lotes:lot) {
+    		l.anadirLote(lotes);
+    		if(lotes.isFragil()) {
+    			l.setTipopaquete(TipoPaquete.FRAGIL);
+    		}
+    	}
+    	p.getUnidades().add(l);
+    	return true; 
     }
     public boolean comprobarCodigoPostal(Pedido p) throws IOException{
     	int codigo=p.getCodigoPostal();
@@ -148,12 +136,14 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
 			buffer.close();
     	}catch(FileNotFoundException e) {
     		System.out.println("El fichero no se ha encontrado\n");
+
     	}catch(NumberFormatException e) {
 			System.out.println(""+e);
 		}catch(IOException e) {
 			System.out.println(""+e);
 		}
     	return false;
+
 	}
     	
     	
