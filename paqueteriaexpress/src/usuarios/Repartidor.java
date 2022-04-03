@@ -39,6 +39,7 @@ public class Repartidor extends UsuarioIdentificado{
     public void marcarPaqueteEntregado(Paquete p){
     	p.setEntregado(true);
     	p.setEstadoPaquete(EstadoPaquete.Entregado);
+    	
 
     }
     public void marcarPaqueteNoEntregado(Paquete p){
