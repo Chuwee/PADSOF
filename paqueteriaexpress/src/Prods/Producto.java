@@ -47,7 +47,7 @@ public class Producto extends Unidad {
     
     @Override
     public double calcularPrecio() {
-    	return this.getPeso()<1?0.4:(this.getPeso()<5?0.6:5);
+    	return this.getPeso()<1?0.4:(this.getPeso()<5?0.6:1);
     }
 
     public double getLargo() {
