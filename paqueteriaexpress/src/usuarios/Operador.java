@@ -1,6 +1,5 @@
 package usuarios;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import GlobalVars.ColasPrioridad;
@@ -62,7 +61,7 @@ public class Operador extends UsuarioIdentificado {
 	public boolean añadirProductoStandard(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio,
 			String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
 
-		Producto prod = new Producto(sist, idProducto, peso, direccion, descripcion, unidades, largo, ancho, alto);
+		Producto prod = new Producto(sist, idProducto, peso, descripcion, unidades, largo, ancho, alto);
 		p.getUnidades().add(prod);
 		return true;
 
@@ -71,7 +70,7 @@ public class Operador extends UsuarioIdentificado {
 	public boolean añadirProductoLiquido(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio,
 			String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
 
-		Producto prod = new Liquido(sist, idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho,
+		Producto prod = new Liquido(sist, idProducto, peso, precio, descripcion, unidades, largo, ancho,
 				alto);
 		p.getUnidades().add(prod);
 		return true;
@@ -82,7 +81,7 @@ public class Operador extends UsuarioIdentificado {
 			double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto,
 			boolean congelado) {
 
-		Producto prod = new Refrigerado(sist, idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho,
+		Producto prod = new Refrigerado(sist, idProducto, peso, precio, descripcion, unidades, largo, ancho,
 				alto, congelado);
 		p.getUnidades().add(prod);
 		return true;
@@ -93,7 +92,7 @@ public class Operador extends UsuarioIdentificado {
 			String direccion, String descripcion, int unidades, double largo, double ancho, double alto,
 			boolean congelado) {
 
-		Producto prod = new Refrigerado(sist, idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho,
+		Producto prod = new Refrigerado(sist, idProducto, peso, precio, descripcion, unidades, largo, ancho,
 				alto, congelado);
 		p.getUnidades().add(prod);
 		return true;
@@ -104,7 +103,7 @@ public class Operador extends UsuarioIdentificado {
 			String direccion, String descripcion, int unidades, double largo, double ancho, double alto,
 			boolean congelado) {
 
-		Producto prod = new DimensionesEspeciales(sist, idProducto, peso, precio, direccion, descripcion, unidades,
+		Producto prod = new DimensionesEspeciales(sist, idProducto, peso, precio, descripcion, unidades,
 				largo, ancho, alto);
 		p.getUnidades().add(prod);
 		return true;
@@ -115,7 +114,7 @@ public class Operador extends UsuarioIdentificado {
 			String direccion, String descripcion, int unidades, double largo, double ancho, double alto,
 			boolean asegurado) {
 
-		Producto prod = new ProductoFragil(sist, asegurado, idProducto, peso, precio, direccion, descripcion, unidades,
+		Producto prod = new ProductoFragil(sist, asegurado, idProducto, peso, precio, descripcion, unidades,
 				largo, ancho, alto);
 		p.getUnidades().add(prod);
 		return true;
@@ -123,7 +122,7 @@ public class Operador extends UsuarioIdentificado {
 
 	public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam,
 			int unidades, List<Producto> prod, List<Lote> lot) {
-		Lote l = new Lote(idLote, direccion, tam, unidades);
+		Lote l = new Lote(idLote, tam, unidades);
 		int flag = 0;
 		if (prod.get(0).isDimEsp()) {
 			l.setTipopaquete(TipoPaquete.DIMESPECIALES);
