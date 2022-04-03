@@ -13,7 +13,6 @@ import usuarios.*;
 import Transporte.EstadoCamion;
 import Transporte.PesoCamionException;
 import Transporte.TipoCamion;
-import usuarios.UsuarioIdentificado;
 
 
 public class SistemaAplicacion {
@@ -122,6 +121,28 @@ public class SistemaAplicacion {
     			}
     		}
     	}
+    }
+    public void RegistrarCliente(int TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email) {
+		Cliente c=new Cliente(TarjetaDeCredito, dirContacto, NIF, Nombre, Usuario, Contrasena, email);
+		clientes.add(c);
+	}
+    public UsuarioIdentificado login(String usuario, String contrasena) {
+    	for(Cliente c: clientes) {
+    		if(c.getUsuario().equals(usuario)&&c.getContrasena().equals(contrasena)) {
+    			return c;
+    		}
+    	}
+    	for(Operador o: operadores) {
+    		if(o.getUsuario().equals(usuario)&&o.getContrasena().equals(contrasena)) {
+    			return o;
+    		}
+    	}
+    	for(Repartidor r: repartidores) {
+    		if(r.getUsuario().equals(usuario)&&r.getContrasena().equals(contrasena)) {
+    			return r;
+    		}
+    	}
+    	return null;
     }
     
     public List<Paquete> getPaquetes(){
