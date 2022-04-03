@@ -16,8 +16,8 @@ public class Lote extends Unidad {
     private List<Lote> lotes;
     private TipoPaquete tipopaquete;
     
-    public Lote(int id, double precio, String direccion, double tamano, int unidades) {
-		super(id, precio, direccion);
+    public Lote(int id, String direccion, double tamano, int unidades) {
+		super(id, direccion);
 		this.tamano=tamano;
 		this.unidades=unidades;
 		this.productos=null;
@@ -46,6 +46,11 @@ public class Lote extends Unidad {
     	}
     	return counter;
     }
+
+	@Override
+	public double getPeso() {
+		return calcularPeso();
+	}
     
     public void validar() throws ErrorAlto, ErrorAncho, ErrorLargo, ErrorPeso {
     	for(Producto p : productos) {
