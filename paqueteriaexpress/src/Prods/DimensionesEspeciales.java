@@ -4,9 +4,9 @@ import sistema.SistemaAplicacion;
 
 public class DimensionesEspeciales extends Producto {
 
-	public DimensionesEspeciales(SistemaAplicacion sist, int id, double peso, double precio, String direccion, String descripcion, int unidades,
+	public DimensionesEspeciales(SistemaAplicacion sist, int id, double peso, double precio, String descripcion, int unidades,
 			double largo, double ancho, double alto) {
-		super(sist, id, peso, direccion, descripcion, unidades, largo, ancho, alto);
+		super(sist, id, peso, descripcion, unidades, largo, ancho, alto);
 	}
 	
 	@Override

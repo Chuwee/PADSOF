@@ -8,7 +8,7 @@ public class ProductoFragil extends Producto {
 	private boolean asegurado;
 
 	public ProductoFragil(SistemaAplicacion sist, boolean asegurado,int id, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
-    	super(sist, id, peso, direccion, descripcion, unidades, largo, ancho ,alto);
+    	super(sist, id, peso, descripcion, unidades, largo, ancho ,alto);
     	this.asegurado=asegurado;
     }
 	
