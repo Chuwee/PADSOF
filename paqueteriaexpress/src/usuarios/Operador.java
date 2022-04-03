@@ -43,89 +43,49 @@ public class Operador extends UsuarioIdentificado{
 
     }
 
-    public boolean añadirProductoStandard(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto)
-    				throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo{
-    	if(peso>Vars.getMaxPeso_from_type(TipoPaquete.ESTANDAR)) {
-    		throw new ErrorPeso(); 
-    	}
-    	if(alto>sist.getAlto()) {
-    		throw new ErrorAlto();
-    	}
-    	if(ancho>sist.getAncho()) {
-    		throw new ErrorAncho(); 
-    	}
-    	if(largo>sist.getLargo()) {
-    		throw new ErrorLargo(); 
-    	}
+    public boolean añadirProductoStandard(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    				
     	Producto prod=new Producto(sist,idProducto, peso, direccion, descripcion, unidades, largo, ancho, alto);
     	p.getUnidades().add(prod);
     	return true;
     	
     }
-    public boolean añadirProductoAlimentacionLiquido(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) 
+    public boolean añadirProductoAlimentacionLiquido(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
     
-    		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
-		if(peso>Vars.getMaxPeso_from_type(TipoPaquete.ALIMENTACION)) {
-    		throw new ErrorPeso();  
-    	}
-    	if(alto>sist.getAlto()) {
-    		throw new ErrorAlto(); 
-    	}
-    	if(ancho>sist.getAncho()) {
-    		throw new ErrorAncho();  
-    	}
-    	if(largo>sist.getLargo()) {
-    		throw new ErrorLargo();  
-    	}
     	Producto prod= new Liquido(sist,idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
     	return true;
     	
     }
-public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean congelado) 
-    
-    		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
-		if(peso>Vars.getMaxPeso_from_type(TipoPaquete.ALIMENTACION)) {
-    		throw new ErrorPeso();  
-    	}
-    	if(alto>sist.getAlto()) {
-    		throw new ErrorAlto(); 
-    	}
-    	if(ancho>sist.getAncho()) {
-    		throw new ErrorAncho();  
-    	}
-    	if(largo>sist.getLargo()) {
-    		throw new ErrorLargo();  
-    	}
+public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean congelado) {
+		
     	Producto prod= new Refrigerado(sist,idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto, congelado); 
     	p.getUnidades().add(prod);
     	return true;
     	
     }
-    public boolean añadirProductoFragil(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean asegurado)
-    		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
-    	if(peso>Vars.getMaxPeso_from_type(TipoPaquete.FRAGIL)) {
-    		throw new ErrorPeso();  
-    	}
-    	if(alto>sist.getAlto()) {
-    		throw new ErrorAlto(); 
-    	}
-    	if(ancho>sist.getAncho()) {
-    		throw new ErrorAncho();  
-    	}
-    	if(largo>sist.getLargo()) {
-    		throw new ErrorLargo();  
-    	}
+    public boolean añadirProductoFragil(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean asegurado){
+    
     	Producto prod=new ProductoFragil(sist,asegurado, idProducto, peso, precio,direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
     	return true;
     }
-    public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades) {
+    public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades, List<Producto> prod, List<Lote> lot) {
+    	Lote l=new Lote(idLote, precio, direccion, tam, unidades);
+    	for(Producto producto:prod) {
+    		l.anadirProducto(producto);
+    		if(producto.isFragil()) {
+    			l.setTipopaquete(TipoPaquete.FRAGIL);
+    		}
+    	}
+    	for(Lote lotes:lot) {
+    		l.anadirLote(lotes);
+    		if(lotes.isFragil()) {
+    			l.setTipopaquete(TipoPaquete.FRAGIL);
+    		}
+    	}
+    	p.getUnidades().add(l);
     	return true;
-    }
-    public boolean validarPedido(SistemaAplicacion sistema,Pedido p){
-    	
-        return true; 
     }
     public boolean comprobarCodigoPostal(Pedido p) throws IOException{
     	boolean contiene=false; 
@@ -153,8 +113,7 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     	}catch(Exception e) {
     		e.printStackTrace();
     	}
-    	return contiene;
-    	
+    	return contiene;	
 	}
     	
     	
