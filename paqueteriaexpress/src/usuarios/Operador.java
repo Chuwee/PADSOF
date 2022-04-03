@@ -173,7 +173,7 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     			for(int i=0;i<prod.getUnidades();i++) {
     				Paquete p=new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
         			this.empaquetar(u, p);
-        			sist.getPaquetes().add(p);
+        			this.asignarCola(p);
         			id++;
         			num_empaquetado++;
     			}
@@ -182,7 +182,7 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     				if(lote.getTipopaquete().equals(TipoPaquete.FRAGIL)) {
     					Paquete p=new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
             			this.empaquetar(u, p);
-            			sist.getPaquetes().add(p);
+            			this.asignarCola(p);
             			id++;
             			num_empaquetado++;
             			
@@ -205,74 +205,51 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     			if(u.isRefrigerado()) {
     				Refrigerado r= (Refrigerado)u;
     				if(r.isCongelado()) {
-    					if(p_congelado.getPeso()+r.getPeso()<=maxPeso) {
-    						this.empaquetar(u, p_congelado);
-    						num_empaquetado++;
+						num_empaquetado=this.empaquetar(u, p_congelado, maxPeso, num_empaquetado);
     				}else {
-    					if(p_refrigerado.getPeso()+r.getPeso()<=maxPeso) {
-    						this.empaquetar(u, p_refrigerado);
-    						num_empaquetado++;
-    					}
+						num_empaquetado=this.empaquetar(u, p_refrigerado, maxPeso, num_empaquetado);	
     				}
     			}else if(u.isEstandar()) {
-    				if(p_estandar.getPeso()+u.getPeso()<=maxPeso) {
-    					this.empaquetar(u, p_estandar);
-						num_empaquetado++;
-    				}
+    					num_empaquetado=this.empaquetar(u, p_estandar, maxPeso, num_empaquetado);	
     			}else if(u.isDimEsp()) {
-    				if(p_dim_esp.getPeso()+u.getPeso()<=maxPeso) {
-    					this.empaquetar(u, p_dim_esp);
-    					num_empaquetado++;
-    				}
+    					num_empaquetado=this.empaquetar(u, p_dim_esp, maxPeso, num_empaquetado);
     			}else if(u.isAlimentacion()) {
-    				if(p_alimentacion.getPeso()+u.getPeso()<=maxPeso) {
-    					this.empaquetar(u, p_alimentacion);
-    					num_empaquetado++;
-    				}
+    					num_empaquetado=this.empaquetar(u, p_alimentacion,maxPeso, num_empaquetado);
     			}else if(u.isLote()) {
     				Lote lote=(Lote)u;
-    				if(lote.getTipopaquete().equals(TipoPaquete.ESTANDAR)) {
-    					if(p_estandar.getPeso()+u.getPeso()<=maxPeso) {
-    						this.empaquetar(u, p_estandar);
-    						num_empaquetado++;
-        				}
-    					
-    					
-    				}else if(lote.getTipopaquete().equals(TipoPaquete.CONGELADO)) {
-    					if(p_congelado.getPeso()+u.getPeso()<=maxPeso) {
-    						this.empaquetar(u, p_congelado);
-    						num_empaquetado++;
-        				}
-    					
-    					
-    				}else if(lote.getTipopaquete().equals(TipoPaquete.REFRIGERADO)) {
-    					if(p_refrigerado.getPeso()+u.getPeso()<=maxPeso) {
-    						this.empaquetar(u, p_refrigerado);
-    						num_empaquetado++;
-        				}
-    					
-    					
-    				}else if(lote.getTipopaquete().equals(TipoPaquete.ALIMENTACION)) {
-    					if(p_alimentacion.getPeso()+u.getPeso()<=maxPeso) {
-    						this.empaquetar(u, p_alimentacion);
-    						num_empaquetado++;
-        				}
-    					
+    				switch(lote.getTipopaquete()) {
+    				case ESTANDAR:
+    					num_empaquetado=this.empaquetar(u, p_estandar, maxPeso, num_empaquetado);
+    				case CONGELADO:
+    					num_empaquetado=this.empaquetar(u, p_congelado, maxPeso, num_empaquetado);
+    				case REFRIGERADO:
+    					num_empaquetado=this.empaquetar(u, p_refrigerado, maxPeso, num_empaquetado);
+    				case ALIMENTACION:
+    					num_empaquetado=this.empaquetar(u, p_alimentacion, maxPeso, num_empaquetado);
+    				default:
+    					num_empaquetado=this.empaquetar(u, p_dim_esp, maxPeso, num_empaquetado);
     				}
     				
     			}
     			}
     		}
-    		
-    		
-    	}
-    		sist.getPaquetes().add(p_alimentacion);
-    		sist.getPaquetes().add(p_estandar);
-    		sist.getPaquetes().add(p_congelado);
-    		sist.getPaquetes().add(p_refrigerado);
-    		sist.getPaquetes().add(p_dim_esp);
+    		this.asignarCola(p_alimentacion);
+    		this.asignarCola(p_estandar);
+    		this.asignarCola(p_congelado);
+    		this.asignarCola(p_refrigerado);
+    		this.asignarCola(p_dim_esp);
     	}  	
 
+    }
+    
+    private int empaquetar(Unidad u, Paquete p, double maxPeso, int num_empaquetado) {
+    	if(p.getPeso()+u.getPeso()<=maxPeso) { 
+    	p.getUnidades().add(u);
+		p.setPeso(u.getPeso()+p.getPeso());
+		u.setEmpaquetado(true);	
+		num_empaquetado++;
+    	}
+    	return num_empaquetado;
     }
     
     private void empaquetar(Unidad u, Paquete p) {
