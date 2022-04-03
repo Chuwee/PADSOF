@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import GlobalVars.TipoPaquete;
+import usuarios.ErrorAlto;
+import usuarios.ErrorAncho;
+import usuarios.ErrorLargo;
+import usuarios.ErrorPeso;
 
 public class Lote extends Unidad {
 	private double tamano;
@@ -32,7 +36,7 @@ public class Lote extends Unidad {
     	return counter;
     }
     
-    public double calcularPeso() {
+    public double calcularPeso(){
     	double counter = 0;
     	for(Producto p: productos) {
     		counter+=p.getPeso();
@@ -41,6 +45,15 @@ public class Lote extends Unidad {
     		counter+=l.getPeso();
     	}
     	return counter;
+    }
+    
+    public void validar() throws ErrorAlto, ErrorAncho, ErrorLargo, ErrorPeso {
+    	for(Producto p : productos) {
+    		p.validar();
+    	}
+    	for(Lote l: lotes) {
+    		l.validar();
+    	}
     }
 
     public double getTamano() {

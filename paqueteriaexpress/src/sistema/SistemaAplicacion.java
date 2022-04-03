@@ -7,7 +7,6 @@ import Paquete.Paquete;
 import Pedido.Pedido;
 import Transporte.Camion;
 import usuarios.UsuarioIdentificado;
-import GlobalVars.ColasPrioridad;
 
 public class SistemaAplicacion {
     private List<Camion> camiones;

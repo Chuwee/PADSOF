@@ -3,6 +3,10 @@ package Prods;
 import java.sql.Date;
 
 import Pedido.Pedido;
+import usuarios.ErrorAlto;
+import usuarios.ErrorAncho;
+import usuarios.ErrorLargo;
+import usuarios.ErrorPeso;
 
 public abstract class Unidad {
 
@@ -18,6 +22,8 @@ public abstract class Unidad {
     	this.direccion=direccion;
     	this.empaquetado=false;
     }
+    
+    public abstract void validar() throws ErrorAlto, ErrorAncho, ErrorLargo, ErrorPeso;
 
     public int getIdentificador() {
         return this.identificador;
@@ -48,13 +54,8 @@ public abstract class Unidad {
     	this.direccion=direccion;
     }
     
-    public double calcularPrecio() {
-    	if (peso < 1) 
-    		return 0.4;
-    	else if(peso < 5)
-    		return 0.6;
-    	return 5;
-    }
+    public abstract double calcularPrecio();
+    
     public boolean isFragil() {
     	return false;
     }
@@ -73,8 +74,6 @@ public abstract class Unidad {
     public boolean isAlimentacion() {
     	return false;
     }
-    
-    
     public void estaEnPedido(Pedido p) {
     	pedido = p;
     }

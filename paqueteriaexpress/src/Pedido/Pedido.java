@@ -2,6 +2,11 @@ package Pedido;
 
 import java.sql.Date;
 import usuarios.Cliente;
+import usuarios.ErrorAlto;
+import usuarios.ErrorAncho;
+import usuarios.ErrorLargo;
+import usuarios.ErrorPeso;
+
 import java.util.ArrayList;
 import Prods.Unidad;
 
@@ -30,6 +35,28 @@ public class Pedido {
         this.estado = estado;
         unidades = new ArrayList<Unidad>();
     }
+    
+    public void validar() {
+    	this.estado = EstadoPedido.Construido;
+    	for(Unidad u : unidades) {
+    		try {
+    			u.validar();
+    		} catch(ErrorAlto e) {
+    			System.out.println("El alto de la unidad con ID: " + u.getIdentificador() + " excede los máximos permitidos.\n");
+    			return;
+    		} catch (ErrorAncho e) {
+    			System.out.println("El ancho de la unidad con ID: " + u.getIdentificador() + " excede los máximos permitidos.\n");
+    			return;
+			} catch (ErrorLargo e) {
+				System.out.println("El largo de la unidad con ID: " + u.getIdentificador() + " excede los máximos permitidos.\n");
+    			return;
+			} catch (ErrorPeso e) {
+				System.out.println("El peso de la unidad con ID: " + u.getIdentificador() + " excede los máximos permitidos.\n");
+    			return;
+			}
+    	}
+    	this.estado = EstadoPedido.Validado;
+    }
 
     /**
      * @return gets the current Unidades from Paquete
@@ -45,6 +72,14 @@ public class Pedido {
     public void anadirUnidad(Unidad newUnit) {
     	newUnit.estaEnPedido(this);
         this.unidades.add(newUnit);
+    }
+    
+    public double calcularPrecio() {
+    	double precio = 0;
+    	for(Unidad u: unidades) {
+    		precio+=u.calcularPrecio();
+    	}
+    	return precio;
     }
 
     public void quitarUnidad(Unidad Unit) {
@@ -122,15 +157,12 @@ public class Pedido {
     public void setEstado(EstadoPedido estado) {
         this.estado = estado;
     }
-    public boolean validarPedido(){
-        return true; 
 
-    }
-    private double calcularPrecio(){
-        return 0; 
-    }
-    private double calcularPrecioUrgente(){
-        return 0; 
-    }
+	public Cliente getCliente() {
+		return cliente;
+	}
 
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 }

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import GlobalVars.Vars;
-import GlobalVars.TipoPaquete;
 import Paquete.Paquete;
 
 class ComparePaquetes implements Comparator<Paquete> {

@@ -1,24 +1,51 @@
 package Prods;
 
+import sistema.SistemaAplicacion;
+import usuarios.ErrorAlto;
+import usuarios.ErrorAncho;
+import usuarios.ErrorLargo;
+import usuarios.ErrorPeso;
+
 public class Producto extends Unidad {
     private String descripcion;
     private int unidades;
     private double largo;
     private double ancho;
     private double alto;
+    boolean valido;
+    SistemaAplicacion sist;
     
-    public Producto(int id, double peso, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
+    public Producto(SistemaAplicacion sist, int id, double peso, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
     	super(id, peso, direccion);
     	this.descripcion=descripcion;
     	this.unidades=unidades;
     	this.largo=largo;
     	this.ancho=ancho;
     	this.alto=alto;	
+    	this.sist = sist;
+    }
+    
+    public void validar() throws ErrorAlto, ErrorAncho, ErrorLargo, ErrorPeso {
+    	if (this.largo > sist.getLargo()) {
+    		throw new ErrorLargo();
+    	}
+    	
+    	if(this.ancho > sist.getAncho()) {
+    		throw new ErrorAncho();
+    	}
+    	
+    	if(this.largo > sist.getAlto()) {
+    		throw new ErrorAlto();
+    	}
+    	
+    	
+    	// TODO: pesos?
+    	
     }
     
     @Override
     public double calcularPrecio() {
-    	return super.calcularPrecio()*unidades;
+    	return this.getPeso()<1?0.4:(this.getPeso()<5?0.6:5);
     }
 
     public double getLargo() {

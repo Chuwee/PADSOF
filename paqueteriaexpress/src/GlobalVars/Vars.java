@@ -6,6 +6,11 @@ import java.util.TreeMap;
 
 public class Vars {
 	private static TreeMap<TipoPaquete, Integer> maxPesoPaquetes = new TreeMap<TipoPaquete, Integer>() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		{
 			put(TipoPaquete.ALIMENTACION, 30);
 			put(TipoPaquete.ESTANDAR, 30);
@@ -14,9 +19,13 @@ public class Vars {
 		}
 	};
 	
-	private static TreeMap<DimensionParam, Double> maxDimsPaquetes = new TreeMap<DimensionParam, Double>();
 	
 	private static List<TipoPaquete> prioridadPaquetes = new ArrayList<TipoPaquete>() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		{
 			add(0, TipoPaquete.REFRIGERADO);
 			add(1, TipoPaquete.CONGELADO);
@@ -28,6 +37,11 @@ public class Vars {
 	};
 	
 	private static List<ColasPrioridad> colasPrioridad = new ArrayList<ColasPrioridad>() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		{
 			add(0, ColasPrioridad.URGENTES);
 			add(1, ColasPrioridad.NOENTREGADOSFALTACAMIONES);
@@ -46,14 +60,6 @@ public class Vars {
 	
 	public static int getSuplementoAsegurado() {
 		return 5;																							
-	}
-	
-	public double getMaxDim_fromParam(DimensionParam param) {
-		return maxDimsPaquetes.get(param);
-	}
-	
-	public void setMaxDim_fromParam(DimensionParam param, Double val) {
-		maxDimsPaquetes.put(param, val);
 	}
 	
 	public static int getNumPriorities() {
