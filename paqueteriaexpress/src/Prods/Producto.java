@@ -1,5 +1,8 @@
 package Prods;
-
+/**
+ * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
+ * 
+ */
 import sistema.SistemaAplicacion;
 import usuarios.ErrorAlto;
 import usuarios.ErrorAncho;
