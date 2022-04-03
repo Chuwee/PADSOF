@@ -125,7 +125,7 @@ public class SistemaAplicacion {
     		}
     	}
     }
-    public void RegistrarCliente(int TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email) {
+    public void RegistrarCliente(String TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email) {
 		Cliente c=new Cliente(TarjetaDeCredito, dirContacto, NIF, Nombre, Usuario, Contrasena, email);
 		clientes.add(c);
 	}
