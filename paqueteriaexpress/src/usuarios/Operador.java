@@ -10,6 +10,10 @@ import Paquete.Paquete;
 import Pedido.*;
 import Prods.*;
 import Transporte.Camion;
+<<<<<<< HEAD
+=======
+import Transporte.EstadoCamion;
+>>>>>>> 8375a2ccdb9b70b6d558b943f8bf0c8f4c1b14c8
 import sistema.SistemaAplicacion;
 
 import java.io.BufferedReader;
@@ -156,14 +160,8 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     	
     public void empaquetarPedido(Pedido pedido){
     	double maxPeso = sist.getPesoMaximo();
-    	int id;
+    	int id=sist.getId_paquetes();
     	int num_empaquetado=0;
-		List<Paquete> paquetes = sist.getPaquetes();
-    	if(sist.getPaquetes().isEmpty()) {
-    		id=0;
-    	}else {
-    		id=sist.getPaquetes().size();
-    	}
     	for(Unidad u : pedido.getUnidades()) {
     		if(u.isFragil()) {
     			Producto prod=(Producto)u;
@@ -181,8 +179,7 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
             			this.empaquetar(u, p);
             			this.anadirPaqueteACola(p);
             			id++;
-            			num_empaquetado++;
-            			
+            			num_empaquetado++;	
     			}
     		}
     	}
@@ -235,7 +232,8 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     		this.anadirPaqueteACola(p_congelado);
     		this.anadirPaqueteACola(p_refrigerado);
     		this.anadirPaqueteACola(p_dim_esp);
-    	}  	
+    	}
+    	sist.setId_paquetes(id);
 
     }
     
@@ -306,6 +304,12 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     }
     public void planificarReparto(Paquete p){
 		sist.planificarReparto(p);
+    }
+    public void marcarCamionAveriado(Camion c) {
+    	c.setEstado(EstadoCamion.AVERIADO);
+    }
+    public void marcarCamionFuncional(Camion c) {
+    	c.setEstado(EstadoCamion.FUNCIONAL);
     }
     
 }

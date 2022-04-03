@@ -23,6 +23,7 @@ public class SistemaAplicacion {
     private double alto;
     private int maxDirecciones;
     private int maxIntentos;
+    private int id_paquetes;
     ArrayList<ColaPrioridadPaquetes> colasPrioridad;
     
     public SistemaAplicacion() {
@@ -96,6 +97,10 @@ public class SistemaAplicacion {
     	colasPrioridad.get(index).addPaquete(p);
     }
     
+    public void asignarCamionRepartidor() {
+    	
+    }
+    
     public List<Paquete> getPaquetes(){
     	return this.paquetes;
     }
@@ -165,6 +170,14 @@ public class SistemaAplicacion {
     public void setMaxIntentos(int maxIntentos) {
         this.maxIntentos = maxIntentos;
     }
+
+	public int getId_paquetes() {
+		return id_paquetes;
+	}
+
+	public void setId_paquetes(int id_paquetes) {
+		this.id_paquetes = id_paquetes;
+	}
 	
 
 }
