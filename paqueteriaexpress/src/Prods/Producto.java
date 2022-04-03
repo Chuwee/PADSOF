@@ -12,16 +12,18 @@ public class Producto extends Unidad {
     private double largo;
     private double ancho;
     private double alto;
+    private double peso;
     boolean valido;
     SistemaAplicacion sist;
     
     public Producto(SistemaAplicacion sist, int id, double peso, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
-    	super(id, peso, direccion);
+    	super(id, direccion);
     	this.descripcion=descripcion;
     	this.unidades=unidades;
     	this.largo=largo;
     	this.ancho=ancho;
-    	this.alto=alto;	
+    	this.alto=alto;
+        this.peso = peso;
     	this.sist = sist;
     }
     
@@ -96,6 +98,11 @@ public class Producto extends Unidad {
     @Override
     public boolean isEstandar() {
     	return true;
+    }
+
+    @Override
+    public double getPeso() {
+        return this.peso;
     }
 
 }

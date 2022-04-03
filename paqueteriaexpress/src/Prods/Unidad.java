@@ -11,14 +11,12 @@ import usuarios.ErrorPeso;
 public abstract class Unidad {
 
     private int identificador;
-    private double peso;
     private String direccion;
     private boolean empaquetado;
     private Pedido pedido;
     
-    public Unidad(int id, double peso, String direccion) {
+    public Unidad(int id, String direccion) {
     	this.identificador=id;
-    	this.peso=peso;
     	this.direccion=direccion;
     	this.empaquetado=false;
     }
@@ -39,14 +37,8 @@ public abstract class Unidad {
         this.identificador = identificador;
     }
 
-    public double getPeso() {
-        return this.peso;
-    }
+    public abstract double getPeso();
 
-    public void setPeso(double peso) {
-        this.peso = peso;
-    }
-    
     public String getDireccion() {
     	return this.direccion;
     }

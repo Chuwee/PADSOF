@@ -9,7 +9,6 @@ import Prods.Unidad;
 public class Paquete {
     private int idPaquete;
     private String direccion;
-    private double peso;
     private ArrayList<Unidad> unidades;
     private boolean entregado;
     private EstadoPaquete estadoPaquete;
@@ -18,7 +17,6 @@ public class Paquete {
 	public Paquete(int idPaquete, String direccion, TipoPaquete tp) {
         this.idPaquete = idPaquete;
         this.direccion = direccion;
-        this.peso = 0;
         this.setTp(tp);
         unidades = new ArrayList<Unidad>();
         this.setEntregado(false);
@@ -72,11 +70,11 @@ public class Paquete {
     }
 
     public double getPeso() {
-        return this.peso;
-    }
-
-    public void setPeso(double d) {
-        this.peso = d;
+        double pesoTotal = 0;
+        for(Unidad u : unidades) {
+            pesoTotal+=u.getPeso();
+        }
+        return pesoTotal;
     }
 
 	public boolean isEntregado() {
@@ -102,4 +100,8 @@ public class Paquete {
 	public void setTp(TipoPaquete tp) {
 		this.tp = tp;
 	}
+
+    public boolean equals(Paquete p) {
+        return this.idPaquete == p.getIdPaquete();
+    }
 }

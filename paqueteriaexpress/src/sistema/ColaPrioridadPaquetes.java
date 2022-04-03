@@ -46,4 +46,12 @@ public class ColaPrioridadPaquetes {
 		}
 		return null;
 	}
+
+	public int size() {
+		int size=0;
+		for(int i = 0; i < Vars.getNumPriorities(); i++) {
+			size+=Colas.get(i).size(); // Testear esto 
+		}
+		return size;
+	}
 }

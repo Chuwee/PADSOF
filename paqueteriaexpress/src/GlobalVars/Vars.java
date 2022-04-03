@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
+import Transporte.TipoCamion;
+
 public class Vars {
 	private static TreeMap<TipoPaquete, Integer> maxPesoPaquetes = new TreeMap<TipoPaquete, Integer>() {
 		/**
@@ -49,6 +51,29 @@ public class Vars {
 			add(3, ColasPrioridad.RESTO);
 		}
 	};
+
+	public static TipoCamion TipoPaquete_to_TipoCamion(TipoPaquete tp) {
+		TipoCamion tipoCamion = null;
+		switch(tp) {
+			case FRAGIL:
+			case ESTANDAR:
+				tipoCamion = TipoCamion.Estandar;
+				break;
+			case REFRIGERADO:
+				tipoCamion = TipoCamion.RefrigeradoRefrigerado;
+				break;
+			case CONGELADO:
+				tipoCamion = TipoCamion.RefrigeradoCongelado;
+				break;
+			case LIQUIDO:
+				tipoCamion = TipoCamion.RefrigeradoLiquido;
+				break;
+			default:
+				tipoCamion = TipoCamion.DimEspeciales;
+				break;
+		}
+		return tipoCamion;
+	}
 	
 	public static int getNumColasPrioridad() {
 		return colasPrioridad.size();
