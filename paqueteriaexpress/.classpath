@@ -6,5 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="src/invoice/invoicesystem.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
