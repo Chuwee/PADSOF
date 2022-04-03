@@ -23,6 +23,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Date;
 
+import es.uam.eps.padsof.telecard.*;
+
 
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María
@@ -382,6 +384,10 @@ public class Operador extends UsuarioIdentificado {
 
 	public void marcarCamionFuncional(Camion c) {
 		c.setEstado(EstadoCamion.FUNCIONAL);
+	}
+	public void cobrarPedido( Pedido p) throws FailedInternetConnectionException, OrderRejectedException{
+		double precio=p.calcularPrecio();
+		TeleChargeAndPaySystem.charge(p.getCliente().getTarjetaDeCredito(), "p.getIdPedido()", precio);
 	}
 
 }
