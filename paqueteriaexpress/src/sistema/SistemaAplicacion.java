@@ -1,12 +1,12 @@
 package sistema;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 
 import GlobalVars.Vars;
-import Paquete.Paquete;
+import Paquete.*;
 import Pedido.Pedido;
 import Transporte.Camion;
-import usuarios.UsuarioIdentificado;
+import usuarios.*;
 
 public class SistemaAplicacion {
     private List<Camion> camiones;
@@ -34,7 +34,31 @@ public class SistemaAplicacion {
     }
     
     public void asignarCamionRepartidor() {
-    	
+    	List<Repartidor> repartidores=new ArrayList<Repartidor>();
+    	List<Camion> camionesValidos=new ArrayList<Camion>();
+    	Iterator<Repartidor> itRep=repartidores.iterator();
+    	Iterator<Camion> itCam=camionesValidos.iterator();
+    	for(UsuarioIdentificado us:usuarios) {
+    		if(us.isRepartidor()) {
+    			Repartidor r=(Repartidor)us;
+    			repartidores.add(r);
+    		}
+    	}
+    	for(Camion c: camiones) {
+    		if(!c.getPaquetes().isEmpty()) {
+    			camionesValidos.add(c);
+    		}
+    	}
+    	while(itRep.hasNext()&&itCam.hasNext()) {
+    		itRep.next().setCamion(itCam.next());
+    	}
+    	if(itCam.hasNext()) {
+    		while(itCam.hasNext()) {
+    			for(Paquete p : itCam.next().getPaquetes()) {
+    				p.setEstadoPaquete(EstadoPaquete.NoEntregadoFaltaCamiones);
+    			}
+    		}
+    	}
     }
     
     public List<Paquete> getPaquetes(){

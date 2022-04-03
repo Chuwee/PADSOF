@@ -60,6 +60,11 @@ public class Repartidor extends UsuarioIdentificado{
 	public void setCamion(Camion camion) {
 		this.camion = camion;
 	}
+	
+	@Override
+	public boolean isRepartidor() {
+    	return true;
+    }
     
     
 }

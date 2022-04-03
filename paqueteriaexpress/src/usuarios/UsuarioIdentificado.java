@@ -44,4 +44,7 @@ public abstract class UsuarioIdentificado{
     public void setEmail(String info){
         this.Email=info;
     }
+    public boolean isRepartidor() {
+    	return false;
+    }
 }
