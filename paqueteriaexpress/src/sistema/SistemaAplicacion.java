@@ -7,14 +7,14 @@ import GlobalVars.Vars;
 import Paquete.*;
 import Pedido.Pedido;
 import Transporte.Camion;
-<<<<<<< HEAD
+
 import usuarios.*;
-=======
+
 import Transporte.EstadoCamion;
 import Transporte.PesoCamionException;
 import Transporte.TipoCamion;
 import usuarios.UsuarioIdentificado;
->>>>>>> 5a94a154c383acb3c8a8fed91a1d4b8540f62d5b
+
 
 public class SistemaAplicacion {
     private List<Camion> camiones;
