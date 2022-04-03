@@ -314,7 +314,7 @@ public class Operador extends UsuarioIdentificado{
         p.setMaxDirecciones(direcciones);
     }
     public void planificarReparto(Paquete p){
-		sist.planificarReparto(Paquete p);
+		sist.planificarReparto(p);
     }
     
 }
