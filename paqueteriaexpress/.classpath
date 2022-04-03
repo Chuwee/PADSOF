@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="src/invoice/invoicesystem.jar"/>
+	<classpathentry kind="lib" path="Tarjeta/TeleChargeAndPaySystem8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
