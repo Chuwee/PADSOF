@@ -8,6 +8,7 @@ import Paquete.EstadoPaquete;
 import Paquete.Paquete;
 import Pedido.*;
 import Prods.*;
+import Transporte.Camion;
 import sistema.SistemaAplicacion;
 
 import java.util.*;
@@ -283,12 +284,17 @@ public class Operador extends UsuarioIdentificado{
     	sist.anadirPaqueteACola(p, cola);
     }
     
+    private void planificarRepartos() {
+    	
+    }
+    
     public boolean validarPedido(Pedido p){
     	p.validar();
     	if(p.getEstado() == EstadoPedido.Validado)
     		return true;
     	return false;
     }
+    
     public void modificarAlto(SistemaAplicacion p, double alto){
         p.setAlto(alto);
     }
@@ -307,8 +313,8 @@ public class Operador extends UsuarioIdentificado{
     public void modificarDirecciones(SistemaAplicacion p, int direcciones){
         p.setMaxDirecciones(direcciones);
     }
-    public void planificarReparto(){
-
+    public void planificarReparto(Paquete p){
+		sist.planificarReparto(Paquete p);
     }
     
 }
