@@ -118,6 +118,7 @@ public class SistemaAplicacion {
     		while(itCam.hasNext()) {
     			for(Paquete p : itCam.next().getPaquetes()) {
     				p.setEstadoPaquete(EstadoPaquete.NoEntregadoFaltaCamiones);
+    				noHayCamiones(p);
     			}
     		}
     	}
@@ -126,15 +127,19 @@ public class SistemaAplicacion {
 		Cliente c=new Cliente(TarjetaDeCredito, dirContacto, NIF, Nombre, Usuario, Contrasena, email);
 		clientes.add(c);
 	}
-    public UsuarioIdentificado login(String usuario, String contrasena) {
+    public UsuarioIdentificado login(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado{
     	for(Cliente c: clientes) {
     		if(c.getUsuario().equals(usuario)&&c.getContrasena().equals(contrasena)) {
     			return c;
     		}
     	}
     	for(Operador o: operadores) {
-    		if(o.getUsuario().equals(usuario)&&o.getContrasena().equals(contrasena)) {
-    			return o;
+    		if(o.getUsuario().equals(usuario)) {
+    			if(o.getContrasena().equals(contrasena)) {
+    				throw new ContrasenaIncorrecta();
+    			}else {
+    				return o;
+    			}
     		}
     	}
     	for(Repartidor r: repartidores) {
@@ -142,7 +147,7 @@ public class SistemaAplicacion {
     			return r;
     		}
     	}
-    	return null;
+    	throw new UsuarioNoEncontrado();
     }
     
     public List<Paquete> getPaquetes(){
