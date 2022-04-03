@@ -118,4 +118,9 @@ public class Lote extends Unidad {
     	return true;
     }
 
+	@Override
+	public TipoPaquete getTipoPaquete() {
+		return productos.get(0).getTipoPaquete();
+	}
+
 }

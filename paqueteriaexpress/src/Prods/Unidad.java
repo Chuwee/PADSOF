@@ -5,6 +5,7 @@ package Prods;
  */
 import java.sql.Date;
 
+import GlobalVars.TipoPaquete;
 import Pedido.Pedido;
 import usuarios.ErrorAlto;
 import usuarios.ErrorAncho;
@@ -75,5 +76,7 @@ public abstract class Unidad {
     public String getDireccion() {
         return this.pedido.getDireccion();
     }
+
+    public abstract TipoPaquete getTipoPaquete();
     
 }

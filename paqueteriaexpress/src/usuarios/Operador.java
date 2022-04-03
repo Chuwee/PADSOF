@@ -128,31 +128,18 @@ public class Operador extends UsuarioIdentificado {
 		return true;
 	}
 
+	private void tratarLote(Lote l, List<Producto> lista, TipoPaquete tp) {
+		l.setTipopaquete(tp);
+		for (Producto producto : lista) {
+			l.anadirProducto(producto);
+		}
+	}
+
 	public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam,
 			int unidades, List<Producto> prod, List<Lote> lot) {
 		Lote l = new Lote(idLote, tam, unidades);
 		int flag = 0;
-		if (prod.get(0).isDimEsp()) {
-			l.setTipopaquete(TipoPaquete.DIMESPECIALES);
-			for (Producto producto : prod) {
-				l.anadirProducto(producto);
-			}
-		} else if (prod.get(0).isRefrigerado()) {
-			l.setTipopaquete(TipoPaquete.REFRIGERADO);
-			for (Producto producto : prod) {
-				l.anadirProducto(producto);
-			}
-		} else if (prod.get(0).isCongelado()) {
-			l.setTipopaquete(TipoPaquete.CONGELADO);
-			for (Producto producto : prod) {
-				l.anadirProducto(producto);
-			}
-		} else if (prod.get(0).isLiquido()) {
-			l.setTipopaquete(TipoPaquete.LIQUIDO);
-			for (Producto producto : prod) {
-				l.anadirProducto(producto);
-			}
-		}
+		tratarLote(l, prod, prod.get(0).getTipoPaquete());
 		for (Producto producto : prod) {
 			if (producto.isFragil()) {
 				flag = 1;
