@@ -1,5 +1,7 @@
 package sistema;
+
 import java.text.SimpleDateFormat;
+
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
  * 
@@ -39,6 +41,7 @@ public class SistemaAplicacion {
     private int id_paquetes;
     private Map<String, Double> ingresosMensuales;
     private Map<String, Integer> pedidosMensuales;
+    private double costeMedioPedido;
     ArrayList<ColaPrioridadPaquetes> colasPrioridad;
     
     public SistemaAplicacion() {
@@ -336,6 +339,19 @@ public class SistemaAplicacion {
 
 	public void setPedidosMensuales(Map<String, Integer> pedidosMensuales) {
 		this.pedidosMensuales = pedidosMensuales;
+	}
+
+	public double getCosteMedioPedido() {
+		double sum=0;
+		for(Pedido p: pedidos) {
+			sum+=p.getPrecio();
+		}
+		costeMedioPedido=sum/pedidos.size();
+		return costeMedioPedido;
+	}
+
+	public void setCosteMedioPedido(double costeMedioPedido) {
+		this.costeMedioPedido = costeMedioPedido;
 	}
 	
 
