@@ -11,6 +11,7 @@ public class Refrigerado extends ProductoAlimentacion {
     	super(sist, id, peso, direccion, descripcion,unidades, largo, ancho, alto);
     	this.congelado=congelado;
     }
+    @Override
 	public boolean isCongelado() {
 		return congelado;
 	}
@@ -21,10 +22,10 @@ public class Refrigerado extends ProductoAlimentacion {
 	
 	@Override
 	public boolean isRefrigerado() {
-    	return true;
+    	if(congelado==true) {
+    		return false;
+    	}
+		return true;
     }
-	/*@Override
-    public boolean isAlimentacion() {
-    	return false;
-    }*/
+
 }

@@ -18,7 +18,9 @@ import usuarios.UsuarioIdentificado;
 
 public class SistemaAplicacion {
     private List<Camion> camiones;
-    private List<UsuarioIdentificado> usuarios;
+    private List<Cliente> clientes;
+    private List<Repartidor> repartidores;
+    private List<Operador> operadores;
     private List<Pedido> pedidos;
     private List<Paquete> paquetes;
 	private double pesoMaximo;
@@ -102,16 +104,9 @@ public class SistemaAplicacion {
     }
     
     public void asignarCamionRepartidor() {
-    	List<Repartidor> repartidores=new ArrayList<Repartidor>();
     	List<Camion> camionesValidos=new ArrayList<Camion>();
     	Iterator<Repartidor> itRep=repartidores.iterator();
     	Iterator<Camion> itCam=camionesValidos.iterator();
-    	for(UsuarioIdentificado us:usuarios) {
-    		if(us.isRepartidor()) {
-    			Repartidor r=(Repartidor)us;
-    			repartidores.add(r);
-    		}
-    	}
     	for(Camion c: camiones) {
     		if(!c.getPaquetes().isEmpty()) {
     			camionesValidos.add(c);
@@ -140,12 +135,6 @@ public class SistemaAplicacion {
     }
     public void setCamiones(List<Camion> camiones) {
         this.camiones = camiones;
-    }
-    public List<UsuarioIdentificado> getUsuarios() {
-        return this.usuarios;
-    }
-    public void setUsuarios(List<UsuarioIdentificado> usuarios) {
-        this.usuarios = usuarios;
     }
     public List<Pedido> getPedidos() {
         return this.pedidos;
@@ -205,6 +194,30 @@ public class SistemaAplicacion {
 
 	public void setId_paquetes(int id_paquetes) {
 		this.id_paquetes = id_paquetes;
+	}
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public List<Repartidor> getRepartidores() {
+		return repartidores;
+	}
+
+	public void setRepartidores(List<Repartidor> repartidores) {
+		this.repartidores = repartidores;
+	}
+
+	public List<Operador> getOperadores() {
+		return operadores;
+	}
+
+	public void setOperadores(List<Operador> operadores) {
+		this.operadores = operadores;
 	}
 	
 

@@ -63,9 +63,12 @@ public abstract class Unidad {
     public boolean isDimEsp() {
     	return false;
     }
-    public boolean isAlimentacion() {
+    public boolean isLiquido() {
     	return false;
     }
+    public boolean isCongelado() {
+		return false;
+	}
     public void estaEnPedido(Pedido p) {
     	pedido = p;
     }

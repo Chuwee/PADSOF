@@ -10,10 +10,6 @@ public abstract class ProductoAlimentacion extends Producto {
     }
     
     @Override
-    public boolean isAlimentacion() {
-    	return true;
-    }
-    @Override
     public boolean isEstandar() {
     	return false;
     }
