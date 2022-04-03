@@ -4,7 +4,6 @@ package Prods;
  * 
  */
 import sistema.SistemaAplicacion;
-
 public class DimensionesEspeciales extends Producto {
 
 	public DimensionesEspeciales(SistemaAplicacion sist, int id, double peso, double precio, String direccion, String descripcion, int unidades,

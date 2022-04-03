@@ -347,6 +347,7 @@ public class Operador extends UsuarioIdentificado {
 
 	public boolean validarPedido(Pedido p) {
 		p.validar();
+	
 		if (p.getEstado() == EstadoPedido.Validado)
 			return true;
 		return false;
