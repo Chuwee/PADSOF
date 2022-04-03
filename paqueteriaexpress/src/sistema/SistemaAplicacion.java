@@ -106,7 +106,7 @@ public class SistemaAplicacion {
         return;
     }
 
-    private Paquete popCola() {
+    public Paquete popCola() {
         Paquete p;
         for(int i = 0; i < colasPrioridad.size(); i++) {
             p = colasPrioridad.get(i).popPaquete();
