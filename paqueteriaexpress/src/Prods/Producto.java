@@ -19,8 +19,8 @@ public class Producto extends Unidad {
     boolean valido;
     SistemaAplicacion sist;
     
-    public Producto(SistemaAplicacion sist, int id, double peso, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
-    	super(id, direccion);
+    public Producto(SistemaAplicacion sist, int id, double peso, String descripcion, int unidades, double largo, double ancho, double alto) {
+    	super(id);
     	this.descripcion=descripcion;
     	this.unidades=unidades;
     	this.largo=largo;

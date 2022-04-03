@@ -14,13 +14,11 @@ import usuarios.ErrorPeso;
 public abstract class Unidad {
 
     private int identificador;
-    private String direccion;
     private boolean empaquetado;
     private Pedido pedido;
     
-    public Unidad(int id, String direccion) {
+    public Unidad(int id) {
     	this.identificador=id;
-    	this.direccion=direccion;
     	this.empaquetado=false;
     }
     
@@ -41,13 +39,6 @@ public abstract class Unidad {
     }
 
     public abstract double getPeso();
-
-    public String getDireccion() {
-    	return this.direccion;
-    }
-    public void setDireccion(String direccion) {
-    	this.direccion=direccion;
-    }
     
     public abstract double calcularPrecio();
     
@@ -80,6 +71,9 @@ public abstract class Unidad {
     }
     public boolean isUrgente() {
     	return pedido.isUrgente();
+    }
+    public String getDireccion() {
+        return this.pedido.getDireccion();
     }
     
 }

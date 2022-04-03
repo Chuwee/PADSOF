@@ -27,7 +27,7 @@ public class SistemaAplicacion {
     private List<Repartidor> repartidores;
     private List<Operador> operadores;
     private List<Pedido> pedidos;
-    private List<Paquete> paquetes;
+    private List<Paquete> paquetesEntregados;
 	private double pesoMaximo;
 	private double largo;
     private double ancho;
@@ -99,9 +99,21 @@ public class SistemaAplicacion {
         return;
     }
 
+    private Paquete popCola() {
+        Paquete p;
+        for(int i = 0; i < colasPrioridad.size(); i++) {
+            p = colasPrioridad.get(i).popPaquete();
+            if(p != null)
+                return p;
+        }
+        return null;
+    }
+
     public void planificarRepartoGlobal() {
-        for(Paquete p: paquetes)
+        Paquete p = popCola();
+        while(p != null) {
             planificarReparto(p);
+        }
     }
     
     public void anadirPaqueteACola(Paquete p, int index) {
@@ -164,11 +176,11 @@ public class SistemaAplicacion {
     	throw new UsuarioNoEncontrado();
     }
     
-    public List<Paquete> getPaquetes(){
-    	return this.paquetes;
+    public List<Paquete> getPaquetesEntregados(){
+    	return this.paquetesEntregados;
     }
     public void setPaquetes(List<Paquete> paquetes) {
-    	this.paquetes=paquetes;
+    	this.paquetesEntregados=paquetes;
     }
     public List<Camion> getCamiones() {
         return this.camiones;
