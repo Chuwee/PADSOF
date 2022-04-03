@@ -160,15 +160,10 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
 	}
     	
     	
-    public void empaquetarPedido(SistemaAplicacion sist, Pedido pedido){
+    public void empaquetarPedido(Pedido pedido){
     	double maxPeso = sist.getPesoMaximo();
-    	int id;
+    	int id=sist.getId_paquetes();
     	int num_empaquetado=0;
-    	if(sist.getPaquetes().isEmpty()) {
-    		id=0;
-    	}else {
-    		id=sist.getPaquetes().size();
-    	}
     	for(Unidad u : pedido.getUnidades()) {
     		if(u.isFragil()) {
     			Producto prod=(Producto)u;
@@ -239,7 +234,8 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     		this.anadirPaqueteACola(p_congelado);
     		this.anadirPaqueteACola(p_refrigerado);
     		this.anadirPaqueteACola(p_dim_esp);
-    	}  	
+    	}
+    	sist.setId_paquetes(id);
 
     }
     
