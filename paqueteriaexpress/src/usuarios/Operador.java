@@ -11,8 +11,11 @@ import Prods.*;
 import Transporte.Camion;
 import sistema.SistemaAplicacion;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Date;
 
 
@@ -124,38 +127,29 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam, int unidades) {
     	return true;
     }
-    public boolean validarPedido(SistemaAplicacion sistema,Pedido p){
-    	
-        return true; 
-    }
     public boolean comprobarCodigoPostal(Pedido p) throws IOException{
-    	boolean contiene=false; 
-    	int codigo;
-    	codigo=p.getCodigoPostal();
+    	int codigo=p.getCodigoPostal();
     	try {
-            File fil= new File("codigos.txt");
-    		BufferedReader buffer=new BufferedReader(new FileReader(fil));
-        	String linea; 
+            File fil = new File("codigos.txt");
+    		BufferedReader buffer = new BufferedReader(new FileReader(fil));
+        	String linea;
+			int lineaInteger;
     		while((linea=buffer.readLine())!=null) {
-        		int linea1=Integer.parseInt(linea);
-        		if(linea1==codigo) {
-        			contiene=true;
-        			return contiene; 
-        		}
-        		else {
-        			contiene=false;
+        		lineaInteger = Integer.parseInt(linea);
+        		if(lineaInteger == codigo) {
+					buffer.close();
+        			return true; 
         		}
         	}
-    		buffer.close();
+			buffer.close();
     	}catch(FileNotFoundException e) {
     		System.out.println("El fichero no se ha encontrado\n");
-    	}catch(NullPointerException e) {
-    		System.out.println("No se ha seleccionado ningún archivo\n");
-    	}catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    	return contiene;
-    	
+    	}catch(NumberFormatException e) {
+			System.out.println(""+e);
+		}catch(IOException e) {
+			System.out.println(""+e);
+		}
+    	return false;
 	}
     	
     	
@@ -278,7 +272,6 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     
     private void empaquetar(Unidad u, Paquete p) {
     	p.getUnidades().add(u);
-		p.setPeso(u.getPeso()+p.getPeso());
 		u.setEmpaquetado(true);	
     }
     
