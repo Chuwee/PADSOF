@@ -1,5 +1,6 @@
 package usuarios;
 import java.util.ArrayList;
+import java.util.List;
 
 import GlobalVars.ColasPrioridad;
 import GlobalVars.TipoPaquete;
@@ -153,10 +154,11 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
 	}
     	
     	
-    public void empaquetarPedido(SistemaAplicacion sist, Pedido pedido){
+    public void empaquetarPedido(Pedido pedido){
     	double maxPeso = sist.getPesoMaximo();
     	int id;
     	int num_empaquetado=0;
+		List<Paquete> paquetes = sist.getPaquetes();
     	if(sist.getPaquetes().isEmpty()) {
     		id=0;
     	}else {
@@ -240,7 +242,6 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     private int empaquetar(Unidad u, Paquete p, double maxPeso, int num_empaquetado) {
     	if(p.getPeso()+u.getPeso()<=maxPeso) { 
     	p.getUnidades().add(u);
-		p.setPeso(u.getPeso()+p.getPeso());
 		u.setEmpaquetado(true);	
 		num_empaquetado++;
     	}
@@ -275,7 +276,7 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     }
     
     private void planificarRepartos() {
-    	
+    	sist.planificarRepartoGlobal();
     }
     
     public boolean validarPedido(Pedido p){
