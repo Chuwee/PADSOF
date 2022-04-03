@@ -1,4 +1,5 @@
 package Prods;
+import GlobalVars.TipoPaquete;
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
  * 
@@ -19,5 +20,9 @@ public class DimensionesEspeciales extends Producto {
     public boolean isEstandar() {
     	return false;
     }
+	@Override
+	public TipoPaquete getTipoPaquete() {
+		return TipoPaquete.DIMESPECIALES;
+	}
     
 }

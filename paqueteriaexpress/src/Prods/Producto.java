@@ -1,4 +1,5 @@
 package Prods;
+import GlobalVars.TipoPaquete;
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
  * 
@@ -50,7 +51,7 @@ public class Producto extends Unidad {
     
     @Override
     public double calcularPrecio() {
-    	return this.unidades*(this.getPeso()<1?0.4:(this.getPeso()<5?0.6:1));
+    	return (this.getPeso()<1?0.4:(this.getPeso()<5?0.6:1));
     }
 
     public double getLargo() {
@@ -106,8 +107,13 @@ public class Producto extends Unidad {
 
     @Override
     public double getPeso() {
-        return this.peso;
+        return this.peso*unidades;
     }
+
+    @Override
+	public TipoPaquete getTipoPaquete() {
+		return TipoPaquete.ESTANDAR;
+	}
 
 
 }
