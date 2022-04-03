@@ -173,7 +173,7 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     			for(int i=0;i<prod.getUnidades();i++) {
     				Paquete p=new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
         			this.empaquetar(u, p);
-        			this.asignarCola(p);
+        			this.anadirPaqueteACola(p);
         			id++;
         			num_empaquetado++;
     			}
@@ -182,7 +182,7 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     				if(lote.getTipopaquete().equals(TipoPaquete.FRAGIL)) {
     					Paquete p=new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
             			this.empaquetar(u, p);
-            			this.asignarCola(p);
+            			this.anadirPaqueteACola(p);
             			id++;
             			num_empaquetado++;
             			
@@ -233,11 +233,11 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     			}
     			}
     		}
-    		this.asignarCola(p_alimentacion);
-    		this.asignarCola(p_estandar);
-    		this.asignarCola(p_congelado);
-    		this.asignarCola(p_refrigerado);
-    		this.asignarCola(p_dim_esp);
+    		this.anadirPaqueteACola(p_alimentacion);
+    		this.anadirPaqueteACola(p_estandar);
+    		this.anadirPaqueteACola(p_congelado);
+    		this.anadirPaqueteACola(p_refrigerado);
+    		this.anadirPaqueteACola(p_dim_esp);
     	}  	
 
     }
