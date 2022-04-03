@@ -58,12 +58,12 @@ public class Operador extends UsuarioIdentificado{
     	if(largo>sist.getLargo()) {
     		throw new ErrorLargo(); 
     	}
-    	Producto prod=new Producto(idProducto, peso, direccion, descripcion, unidades, largo, ancho, alto);
+    	Producto prod=new Producto(sist,idProducto, peso, direccion, descripcion, unidades, largo, ancho, alto);
     	p.getUnidades().add(prod);
     	return true;
     	
     }
-    public boolean añadirProductoAlimentacion(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) 
+    public boolean añadirProductoAlimentacionLiquido(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto) 
     
     		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
 		if(peso>Vars.getMaxPeso_from_type(TipoPaquete.ALIMENTACION)) {
@@ -78,7 +78,27 @@ public class Operador extends UsuarioIdentificado{
     	if(largo>sist.getLargo()) {
     		throw new ErrorLargo();  
     	}
-    	Producto prod= new ProductoAlimentacion(idProducto, peso, direccion, descripcion, unidades, largo, ancho, alto); 
+    	Producto prod= new Liquido(sist,idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto); 
+    	p.getUnidades().add(prod);
+    	return true;
+    	
+    }
+public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto, boolean congelado) 
+    
+    		throws ErrorPeso, ErrorAlto, ErrorAncho, ErrorLargo		{
+		if(peso>Vars.getMaxPeso_from_type(TipoPaquete.ALIMENTACION)) {
+    		throw new ErrorPeso();  
+    	}
+    	if(alto>sist.getAlto()) {
+    		throw new ErrorAlto(); 
+    	}
+    	if(ancho>sist.getAncho()) {
+    		throw new ErrorAncho();  
+    	}
+    	if(largo>sist.getLargo()) {
+    		throw new ErrorLargo();  
+    	}
+    	Producto prod= new Refrigerado(sist,idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto, congelado); 
     	p.getUnidades().add(prod);
     	return true;
     	
@@ -97,7 +117,7 @@ public class Operador extends UsuarioIdentificado{
     	if(largo>sist.getLargo()) {
     		throw new ErrorLargo();  
     	}
-    	Producto prod=new ProductoFragil(asegurado, idProducto, peso, precio,direccion, descripcion, unidades, largo, ancho, alto); 
+    	Producto prod=new ProductoFragil(sist,asegurado, idProducto, peso, precio,direccion, descripcion, unidades, largo, ancho, alto); 
     	p.getUnidades().add(prod);
     	return true;
     }
