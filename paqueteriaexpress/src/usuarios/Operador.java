@@ -8,6 +8,8 @@ import Paquete.EstadoPaquete;
 import Paquete.Paquete;
 import Pedido.*;
 import Prods.*;
+import Transporte.Camion;
+import Transporte.EstadoCamion;
 import sistema.SistemaAplicacion;
 
 import java.util.*;
@@ -184,8 +186,7 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
             			this.empaquetar(u, p);
             			this.anadirPaqueteACola(p);
             			id++;
-            			num_empaquetado++;
-            			
+            			num_empaquetado++;	
     			}
     		}
     	}
@@ -306,6 +307,12 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     }
     public void planificarReparto(){
 
+    }
+    public void marcarCamionAveriado(Camion c) {
+    	c.setEstado(EstadoCamion.AVERIADO);
+    }
+    public void marcarCamionFuncional(Camion c) {
+    	c.setEstado(EstadoCamion.FUNCIONAL);
     }
     
 }

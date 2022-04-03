@@ -32,6 +32,10 @@ public class SistemaAplicacion {
     	colasPrioridad.get(index).addPaquete(p);
     }
     
+    public void asignarCamionRepartidor() {
+    	
+    }
+    
     public List<Paquete> getPaquetes(){
     	return this.paquetes;
     }
