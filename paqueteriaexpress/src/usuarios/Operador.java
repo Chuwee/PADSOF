@@ -109,16 +109,7 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     			l.setTipopaquete(TipoPaquete.FRAGIL);
     			l.anadirProducto(producto);
     		}
-    		else if(producto.isEstandar()) {
-    			l.setTipopaquete(TipoPaquete.ESTANDAR);
-    			l.anadirProducto(producto);
-    		}
-   
-    		else if(producto.isRefrigerado()) {
-    			l.setTipopaquete(TipoPaquete.REFRIGERADO);
-    			l.anadirProducto(producto);
-    		}
-    	}
+       	}
     	for(Lote lotes:lot) {
     		l.anadirLote(lotes);
     		if(lotes.isFragil()) {
