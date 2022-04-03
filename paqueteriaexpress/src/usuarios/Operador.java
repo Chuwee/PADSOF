@@ -232,7 +232,7 @@ public class Operador extends UsuarioIdentificado {
 				num_empaquetado++;
 				
 			} else if (u.isLote()) {
-				if (u.getTipopaquete().equals(TipoPaquete.FRAGIL)) {
+				if (u.getTipoPaquete().equals(TipoPaquete.FRAGIL)) {
 					Paquete p = new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
 					this.empaquetar(u, p);
 					this.anadirPaqueteACola(p);
@@ -266,7 +266,7 @@ public class Operador extends UsuarioIdentificado {
 					} else if (u.isLiquido()) {
 						num_empaquetado = this.empaquetar(u, p_alimentacion, maxPeso, num_empaquetado);
 					} else if (u.isLote()) {
-						switch (u.getTipopaquete()) {
+						switch (u.getTipoPaquete()) {
 							case ESTANDAR:
 								num_empaquetado = this.empaquetar(u, p_estandar, maxPeso, num_empaquetado);
 							case CONGELADO:
