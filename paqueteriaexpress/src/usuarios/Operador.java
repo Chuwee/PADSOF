@@ -186,17 +186,15 @@ public boolean añadirProductoAlimentacionRefrigerado(SistemaAplicacion sist, Pe
     		for(Unidad u : pedido.getUnidades()) {
     			if(u.getEmpaquetado()==false) {
     			if(u.isRefrigerado()) {
-    				Refrigerado r= (Refrigerado)u;
-    				if(r.isCongelado()) {
-						num_empaquetado=this.empaquetar(u, p_congelado, maxPeso, num_empaquetado);
-    				}else {
-						num_empaquetado=this.empaquetar(u, p_refrigerado, maxPeso, num_empaquetado);	
-    				}
+    				num_empaquetado=this.empaquetar(u, p_refrigerado, maxPeso, num_empaquetado);
+    			}else if(u.isCongelado()) {
+					num_empaquetado=this.empaquetar(u, p_congelado, maxPeso, num_empaquetado);
+    				
     			}else if(u.isEstandar()) {
     					num_empaquetado=this.empaquetar(u, p_estandar, maxPeso, num_empaquetado);	
     			}else if(u.isDimEsp()) {
     					num_empaquetado=this.empaquetar(u, p_dim_esp, maxPeso, num_empaquetado);
-    			}else if(u.isAlimentacion()) {
+    			}else if(u.isLiquido()) {
     					num_empaquetado=this.empaquetar(u, p_alimentacion,maxPeso, num_empaquetado);
     			}else if(u.isLote()) {
     				Lote lote=(Lote)u;
