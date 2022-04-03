@@ -14,6 +14,8 @@ import Transporte.EstadoCamion;
 import Transporte.PesoCamionException;
 import Transporte.TipoCamion;
 
+import es.uam.eps.padsof.telecard.*;
+
 
 public class SistemaAplicacion {
     private List<Camion> camiones;
@@ -252,6 +254,12 @@ public class SistemaAplicacion {
 
 	public void setOperadores(List<Operador> operadores) {
 		this.operadores = operadores;
+	}
+	public boolean comprobarTarjeta(String numTarjeta) throws InvalidCardNumberException {
+		if(TeleChargeAndPaySystem.isValidCardNumber(numTarjeta)==true) {
+			return true; 
+		}
+		throw new InvalidCardNumberException(numTarjeta); 
 	}
 	
 

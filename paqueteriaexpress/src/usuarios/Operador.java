@@ -23,6 +23,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Date;
 
+
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María
  *         del Pinar Sacristán Matesanz
@@ -345,6 +346,7 @@ public class Operador extends UsuarioIdentificado {
 			return true;
 		return false;
 	}
+	
 
 	public void modificarAlto(SistemaAplicacion p, double alto) {
 		p.setAlto(alto);

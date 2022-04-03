@@ -9,11 +9,11 @@ import sistema.SistemaAplicacion;
  * 
  */
 public class Cliente extends UsuarioIdentificado {
-    private int TarjetaDeCredito;
+    private String TarjetaDeCredito;
     private String dirContacto;
     private ArrayList<Integer> pedidosUser;
 
-	public Cliente(int TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email){
+	public Cliente(String TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email){
         super(NIF, Nombre, Usuario, Contrasena, email);
         this.TarjetaDeCredito = TarjetaDeCredito;
 		this.dirContacto=dirContacto;
@@ -22,11 +22,11 @@ public class Cliente extends UsuarioIdentificado {
     }
 
 
-	public int getTarjetaDeCredito() {
+	public String getTarjetaDeCredito() {
 		return this.TarjetaDeCredito;
 	}
 
-	public void setTarjetaDeCredito(int TarjetaDeCredito) {
+	public void setTarjetaDeCredito(String TarjetaDeCredito) {
 		this.TarjetaDeCredito = TarjetaDeCredito;
 	}
 
@@ -46,10 +46,6 @@ public class Cliente extends UsuarioIdentificado {
 		this.pedidosUser = pedidosUser;
 	}
 
-    public boolean comprobarTarjeta(){
-		return true; 
-
-    }
     public void descargarFactura(int id_pedido){
 
     }
