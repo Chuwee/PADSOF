@@ -152,7 +152,7 @@ public class Operador extends UsuarioIdentificado{
     		if(u.isFragil()) {
     			Producto prod=(Producto)u;
     			for(int i=0;i<prod.getUnidades();i++) {
-    				Paquete p=new Paquete(id, u.getDireccion());
+    				Paquete p=new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
         			this.empaquetar(u, p);
         			sist.getPaquetes().add(p);
         			id++;
@@ -161,7 +161,7 @@ public class Operador extends UsuarioIdentificado{
     		}else if(u.isLote()) {
     			Lote lote=(Lote)u;
     				if(lote.getTipopaquete().equals(TipoPaquete.FRAGIL)) {
-    					Paquete p=new Paquete(id, u.getDireccion());
+    					Paquete p=new Paquete(id, u.getDireccion(), TipoPaquete.FRAGIL);
             			this.empaquetar(u, p);
             			sist.getPaquetes().add(p);
             			id++;
@@ -171,15 +171,15 @@ public class Operador extends UsuarioIdentificado{
     		}
     	}
     	while(num_empaquetado!=pedido.getUnidades().size()) {
-    		Paquete p_estandar = new Paquete(id, pedido.getDireccion());
+    		Paquete p_estandar = new Paquete(id, pedido.getDireccion(), TipoPaquete.ESTANDAR);
     		id++;
-    		Paquete p_congelado = new Paquete(id, pedido.getDireccion());
+    		Paquete p_congelado = new Paquete(id, pedido.getDireccion(), TipoPaquete.CONGELADO);
     		id++;
-    		Paquete p_refrigerado = new Paquete(id, pedido.getDireccion());
+    		Paquete p_refrigerado = new Paquete(id, pedido.getDireccion(), TipoPaquete.REFRIGERADO);
     		id++;
-    		Paquete p_dim_esp = new Paquete(id, pedido.getDireccion());
+    		Paquete p_dim_esp = new Paquete(id, pedido.getDireccion(), TipoPaquete.DIMESPECIALES);
     		id++;
-    		Paquete p_alimentacion = new Paquete(id, pedido.getDireccion());
+    		Paquete p_alimentacion = new Paquete(id, pedido.getDireccion(), TipoPaquete.ALIMENTACION);
     		id++;
     		for(Unidad u : pedido.getUnidades()) {
     			if(u.getEmpaquetado()==false) {

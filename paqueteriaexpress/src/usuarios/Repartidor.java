@@ -1,6 +1,6 @@
 package usuarios;
 
-import Paquete.Paquete;
+import Paquete.*;
 import Transporte.Camion;
 
 /**
@@ -36,8 +36,18 @@ public class Repartidor extends UsuarioIdentificado{
     		System.out.println("Paquete "+i+": " + p.getDireccion() +"\n");
     	}
     }
-    public void marcar_Paquete_entregados(Paquete p){
+    public void marcarPaqueteEntregado(Paquete p){
     	p.setEntregado(true);
+    	p.setEstadoPaquete(EstadoPaquete.Entregado);
+
+    }
+    public void marcarPaqueteNoEntregado(Paquete p){
+    	p.setEntregado(false);
+    	if(p.getEstadoPaquete().equals(EstadoPaquete.EnReparto)) {
+    		p.setEstadoPaquete(EstadoPaquete.PendienteFallido1);
+    	}else if(p.getEstadoPaquete().equals(EstadoPaquete.EnRepartoFallido1)) {
+    		p.setEstadoPaquete(EstadoPaquete.Fallido);
+    	}
 
     }
     public Camion ver_camion_asignado(){
