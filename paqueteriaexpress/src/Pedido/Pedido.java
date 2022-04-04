@@ -85,6 +85,17 @@ public class Pedido {
     }
 
     /**
+     * @return gets number of units
+     */
+    public int getNumProductos() {
+        int n = 0;
+        for(Unidad u: unidades) {
+            n+=u.getNumUnidades();
+        }
+        return n;
+    }
+
+    /**
      * Añade una Unidad a un Pedido
      * @param newUnit
      */

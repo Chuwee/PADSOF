@@ -188,6 +188,19 @@ public class Lote extends Unidad {
 		return productos.get(0).getTipoPaquete();
 	}
 
-	
+	public int getNumUnidades() {
+		int counter = 0;
+		for(Lote l: lotes) {
+			counter+=l.getNumUnidades();
+		}
+		for(Producto p: productos) {
+			counter+=p.getNumUnidades();
+		}
+		return counter;
+	}
 
+	@Override
+	public String getDesc() {
+		return "";
+	}
 }

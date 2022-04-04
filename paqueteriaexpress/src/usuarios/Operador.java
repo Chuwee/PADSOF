@@ -38,6 +38,11 @@ public class Operador extends UsuarioIdentificado {
 	private int pedidosDistribuidos;
 	private SistemaAplicacion sist;
 	private static ArrayList<TipoPaquete> arrPaquetes = new ArrayList<TipoPaquete>() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		{
 			add(0, TipoPaquete.ESTANDAR);
 			add(1, TipoPaquete.CONGELADO);
@@ -94,7 +99,7 @@ public class Operador extends UsuarioIdentificado {
 			double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto,
 			boolean congelado) {
 
-		Producto prod = new Refrigerado(sist, idProducto, peso, precio, descripcion, unidades, largo, ancho,
+		Producto prod = new Refrigerado(sist, idProducto, peso, descripcion, unidades, largo, ancho,
 				alto, congelado);
 		p.getUnidades().add(prod);
 		return true;
@@ -105,7 +110,7 @@ public class Operador extends UsuarioIdentificado {
 			String direccion, String descripcion, int unidades, double largo, double ancho, double alto,
 			boolean congelado) {
 
-		Producto prod = new Refrigerado(sist, idProducto, peso, precio, descripcion, unidades, largo, ancho,
+		Producto prod = new Refrigerado(sist, idProducto, peso, descripcion, unidades, largo, ancho,
 				alto, congelado);
 		p.getUnidades().add(prod);
 		return true;
