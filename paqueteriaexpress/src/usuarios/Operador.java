@@ -221,6 +221,7 @@ public class Operador extends UsuarioIdentificado {
 			}		
 		}
 		sist.setId_paquetes(id);
+		pedido.setEstado(EstadoPedido.EnReparto);
 
 	}
 
