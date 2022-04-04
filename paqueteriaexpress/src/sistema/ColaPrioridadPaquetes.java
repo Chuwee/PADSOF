@@ -32,11 +32,16 @@ public class ColaPrioridadPaquetes {
 			Colas.add(new PriorityQueue<Paquete>(new ComparePaquetes())); // Testear esto 
 		}
 	}
-	
+	/**
+	 * 
+	 * @param p, paquete que vamos a anadir a la cola de prioridad
+	 */
 	public void addPaquete(Paquete p) {
 		Colas.get(Vars.getPriority_fromType(p.getTp())).add(p);
 	}
-	
+	/**
+	 * este metodo elimina un paquete de la cola de prioridad
+	 */
 	public Paquete popPaquete() {
 		PriorityQueue<Paquete> cola;
 		Paquete p;
