@@ -13,7 +13,7 @@ import sistema.SistemaAplicacion;
 
 public class LoteTest {
 	SistemaAplicacion sist= new SistemaAplicacion();
-	ProductoFragil pf=new ProductoFragil(sist, true, 12, 3, 0, "Taza", 1, 12, 14, 10);
+	ProductoFragil pf=new ProductoFragil(sist, true, 12, 3, "Taza", 1, 12, 14, 10);
 	Producto p = new Producto(sist, 38, 2, "xd", 1, 13, 12, 10);
 	Producto p2 = new Producto(sist, 39, 2, "xd", 1, 33, 12, 10);
 	Lote l=new Lote(3, 4, 2);
@@ -48,7 +48,9 @@ public class LoteTest {
 
 	@Test
 	public void testCalcularPeso() {
-		assertTrue(l.calcularPeso()==2);
+		assertTrue(p.getPeso()==2);
+		assertTrue(pf.getPeso()==3);
+		assertTrue(l.calcularPeso()==5);
 	}
 
 	@Test

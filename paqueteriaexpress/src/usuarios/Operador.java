@@ -127,7 +127,7 @@ public class Operador extends UsuarioIdentificado {
 			String direccion, String descripcion, int unidades, double largo, double ancho, double alto,
 			boolean asegurado) {
 
-		Producto prod = new ProductoFragil(sist, asegurado, idProducto, peso, precio, descripcion, unidades,
+		Producto prod = new ProductoFragil(sist, asegurado, idProducto, peso, descripcion, unidades,
 				largo, ancho, alto);
 		p.getUnidades().add(prod);
 		return true;
