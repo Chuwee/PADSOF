@@ -1,5 +1,9 @@
 package usuarios;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+
 import GlobalVars.ColasPrioridad;
 import GlobalVars.Vars;
 import Paquete.*;
@@ -15,10 +19,14 @@ public class Repartidor extends UsuarioIdentificado{
     private String telefono;
     private Camion camion;
     private SistemaAplicacion sist;
+    private Map<String, Integer> paquetesMensualesEntregados;
+    private Map<String, Integer> paquetesMensualesNoEntregados;
 
     public Repartidor(SistemaAplicacion sist, String telefono, String NIF, String Nombre, String Usuario, String Contrasena, String email){
         super(NIF, Nombre, Usuario, Contrasena, email);
         this.telefono = telefono;
+        this.setPaquetesMensualesEntregados(new HashMap<String,Integer>());
+        this.setPaquetesMensualesNoEntregados(new HashMap<String,Integer>());
         this.setCamion(null);
         this.sist=sist;
 
@@ -45,6 +53,7 @@ public class Repartidor extends UsuarioIdentificado{
     	p.setEntregado(true);
     	p.setEstadoPaquete(EstadoPaquete.Entregado);
     	sist.getPaquetesEntregados().add(p);
+    	anadirEstadistica(p, paquetesMensualesEntregados);
 
     }
     public void marcarPaqueteNoEntregado(Paquete p){
@@ -59,6 +68,7 @@ public class Repartidor extends UsuarioIdentificado{
     	}else if(p.getEstadoPaquete().equals(EstadoPaquete.EnRepartoFallido1)) {
     		p.setEstadoPaquete(EstadoPaquete.Fallido);
     		sist.getPaquetesNoEntregados().add(p);
+    		anadirEstadistica(p, paquetesMensualesNoEntregados);
     	}
 
     }
@@ -73,6 +83,17 @@ public class Repartidor extends UsuarioIdentificado{
 		this.camion = camion;
 	}
 	
+	private void anadirEstadistica(Paquete p, Map<String,Integer> paquetesMensuales) {
+    	SimpleDateFormat formater;
+    	String fecha;
+    	formater=new SimpleDateFormat("MM-yy");
+    	fecha=formater.format(p.getDate());
+    	if(paquetesMensuales.putIfAbsent(fecha, 1)!=null) {
+    		paquetesMensuales.put(fecha, 1+ paquetesMensuales.get(fecha));
+    	}
+    	
+    }
+	
 	@Override
 	public boolean isRepartidor() {
     	return true;
@@ -83,6 +104,19 @@ public class Repartidor extends UsuarioIdentificado{
 	public void setSist(SistemaAplicacion sist) {
 		this.sist = sist;
 	}
+	public Map<String, Integer> getPaquetesMensualesEntregados() {
+		return paquetesMensualesEntregados;
+	}
+	public void setPaquetesMensualesEntregados(Map<String, Integer> paquetesMensualesEntregados) {
+		this.paquetesMensualesEntregados = paquetesMensualesEntregados;
+	}
+	public Map<String, Integer> getPaquetesMensualesNoEntregados() {
+		return paquetesMensualesNoEntregados;
+	}
+	public void setPaquetesMensualesNoEntregados(Map<String, Integer> paquetesMensualesNoEntregados) {
+		this.paquetesMensualesNoEntregados = paquetesMensualesNoEntregados;
+	}
+	
     
     
 }
