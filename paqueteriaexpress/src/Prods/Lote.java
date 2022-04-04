@@ -111,7 +111,19 @@ public class Lote extends Unidad {
 
 	@Override
 	public TipoPaquete getTipoPaquete() {
+		for(Producto p:productos) {
+			if(p.getTipoPaquete().equals(TipoPaquete.FRAGIL)) {
+				return TipoPaquete.FRAGIL;
+			}	
+		}
+		for(Lote l:lotes) {
+			if(l.getTipoPaquete().equals(TipoPaquete.FRAGIL)) {
+				return TipoPaquete.FRAGIL;
+			}
+		}
 		return productos.get(0).getTipoPaquete();
 	}
+
+	
 
 }
