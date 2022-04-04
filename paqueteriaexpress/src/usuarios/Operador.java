@@ -94,7 +94,7 @@ public class Operador extends UsuarioIdentificado {
 			double precio, String direccion, String descripcion, int unidades, double largo, double ancho, double alto,
 			boolean congelado) {
 
-		Producto prod = new Refrigerado(sist, idProducto, peso, precio, descripcion, unidades, largo, ancho,
+		Producto prod = new Refrigerado(sist, idProducto, peso, descripcion, unidades, largo, ancho,
 				alto, congelado);
 		p.getUnidades().add(prod);
 		return true;
@@ -105,7 +105,7 @@ public class Operador extends UsuarioIdentificado {
 			String direccion, String descripcion, int unidades, double largo, double ancho, double alto,
 			boolean congelado) {
 
-		Producto prod = new Refrigerado(sist, idProducto, peso, precio, descripcion, unidades, largo, ancho,
+		Producto prod = new Refrigerado(sist, idProducto, peso, descripcion, unidades, largo, ancho,
 				alto, congelado);
 		p.getUnidades().add(prod);
 		return true;

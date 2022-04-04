@@ -192,9 +192,9 @@ public class SistemaAplicacion {
     		}
     	}
     }
-<<<<<<< HEAD
-    public Cliente RegistrarCliente(String TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email) {
-=======
+
+   
+
     /**
      * esta función registra a un cliente en la aplicacion
      * @param TarjetaDeCredito String
@@ -205,24 +205,22 @@ public class SistemaAplicacion {
      * @param Contrasena String
      * @param email String
      */
-    public void RegistrarCliente(String TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email) {
->>>>>>> 72e480379ae08fee6c0cc40f7e59e98068376db1
+    public Cliente RegistrarCliente(String TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email) {
+
 		Cliente c=new Cliente(TarjetaDeCredito, dirContacto, NIF, Nombre, Usuario, Contrasena, email);
 		clientes.add(c);
 		return c;
 	}
-<<<<<<< HEAD
-    public Cliente loginCliente(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado{
-=======
+
     /**
-     * esta función sirve para que un usuario inicie sesion
+     * esta función sirve para que un Cliente inicie sesion
      * @param usuario
      * @param contrasena
      * @throws ContrasenaIncorrecta en caso de que la contraseña no coincida
      * @throws UsuarioNoEncontrado en caso de que el usuario no se encuentre en el sistema
      */
-    public UsuarioIdentificado login(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado{
->>>>>>> 72e480379ae08fee6c0cc40f7e59e98068376db1
+    public Cliente loginCliente(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado{
+
     	for(Cliente c: clientes) {
     		if(c.getUsuario().equals(usuario)) {
     			if(c.getContrasena().equals(contrasena)) {
@@ -259,15 +257,11 @@ public class SistemaAplicacion {
     	}
     	throw new UsuarioNoEncontrado();
     }
-<<<<<<< HEAD
-    
 
-    
-=======
     /**
      * esta funcion calcula los ingresos mensuales para las estadisticas
      */
->>>>>>> 72e480379ae08fee6c0cc40f7e59e98068376db1
+
     private void calcularIngresosMensuales() {
     	ingresosMensuales=new LinkedHashMap<String, Double>();
     	SimpleDateFormat formater;
