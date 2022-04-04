@@ -1,4 +1,5 @@
 package Prods;
+import GlobalVars.TipoPaquete;
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
  * 
@@ -33,5 +34,10 @@ public class Liquido extends ProductoAlimentacion {
     @Override
     public boolean isLiquido() {
     	return true;
+    }
+
+    @Override
+    public TipoPaquete getTipoPaquete() {
+        return TipoPaquete.LIQUIDO;
     }
 }

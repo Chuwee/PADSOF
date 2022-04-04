@@ -12,6 +12,8 @@ import sistema.SistemaAplicacion;
  */
 public class Refrigerado extends ProductoAlimentacion {
     private boolean congelado;
+
+
 /**
  * constructor
  * @param sist SistemaAplicacion
@@ -25,8 +27,8 @@ public class Refrigerado extends ProductoAlimentacion {
  * @param alto double
  * @param congelado boolean
  */
-    public Refrigerado(SistemaAplicacion sist, int id, double peso, double precio, String descripcion, int unidades, double largo, double ancho, double alto, boolean congelado) {
-    	super(sist, id, peso, descripcion,unidades, largo, ancho, alto);
+public Refrigerado(SistemaAplicacion sist, int id, double peso, String descripcion, int unidades, double largo, double ancho, double alto, boolean congelado) {
+		super(sist, id, peso, descripcion,unidades, largo, ancho, alto);
     	this.congelado=congelado;
     }
     /**
