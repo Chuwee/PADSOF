@@ -19,6 +19,8 @@ public abstract class Camion {
     private TipoCamion tipo;
     private ArrayList<Paquete> paquetes;
     private Map<String, Integer> paquetesMensuales;
+    private int numpaquetes;
+    private int numrepartos;
    
 
     public Camion(double pesoMaximo, String matricula, EstadoCamion estado, TipoCamion tipo){
@@ -28,6 +30,9 @@ public abstract class Camion {
         this.paquetes=new ArrayList<Paquete>();
         this.tipo = tipo;
         this.currentPeso = 0;
+        this.paquetesMensuales=new HashMap<String,Integer>();
+        this.numpaquetes=0;
+        this.numrepartos=0;
     }
 
     public TipoCamion getTipo() {
@@ -93,6 +98,8 @@ public abstract class Camion {
     				paquetesMensuales.put(fecha, 1+ paquetesMensuales.get(fecha));
     			}
     	}
+    	this.numpaquetes+=paquetes.size();
+    	this.numrepartos++;
     }
 
 	public Map<String, Integer> getPaquetesMensuales() {
@@ -101,6 +108,26 @@ public abstract class Camion {
 
 	public void setPaquetesMensuales(Map<String, Integer> paquetesMensuales) {
 		this.paquetesMensuales = paquetesMensuales;
+	}
+
+	public int getNumpaquetes() {
+		return numpaquetes;
+	}
+
+	public void setNumpaquetes(int numpaquetes) {
+		this.numpaquetes = numpaquetes;
+	}
+
+	public int getNumrepartos() {
+		return numrepartos;
+	}
+
+	public void setNumrepartos(int numrepartos) {
+		this.numrepartos = numrepartos;
+	}
+	
+	public double getNumPaquetesReparto() {
+		return numpaquetes/numrepartos;
 	}
 
 }
