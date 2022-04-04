@@ -126,72 +126,21 @@ public class Operador extends UsuarioIdentificado {
 			String direccion, String descripcion, int unidades, double largo, double ancho, double alto,
 			boolean asegurado) {
 
-		Producto prod = new ProductoFragil(sist, asegurado, idProducto, peso, precio, descripcion, unidades,
+		Producto prod = new ProductoFragil(sist, asegurado, idProducto, peso, descripcion, unidades,
 				largo, ancho, alto);
 		p.getUnidades().add(prod);
 		return true;
 	}
 
-	private void tratarLote(Lote l, List<Producto> lista, TipoPaquete tp) {
-		l.setTipopaquete(tp);
-		for (Producto producto : lista) {
-			l.anadirProducto(producto);
-		}
-	}
 
 	public boolean añadirLote(Pedido p, int idLote, double peso, double precio, String direccion, double tam,
 			int unidades, List<Producto> prod, List<Lote> lot) {
 		Lote l = new Lote(idLote, tam, unidades);
-		int flag = 0;
-		tratarLote(l, prod, prod.get(0).getTipoPaquete());
 		for (Producto producto : prod) {
-			if (producto.isFragil()) {
-				flag = 1;
-				l.setTipopaquete(TipoPaquete.FRAGIL);
-				l.anadirProducto(producto);
-			}
+			l.anadirProducto(producto);
 		}
-		if (flag == 0) {
-			l.setTipopaquete(TipoPaquete.ESTANDAR);
-			for (Producto producto : prod) {
-				l.anadirProducto(producto);
-			}
-		}
-		if (lot.get(0).isDimEsp()) {
-			l.setTipopaquete(TipoPaquete.DIMESPECIALES);
-			for (Lote l1 : lot) {
-				l.anadirLote(l1);
-			}
-		} else if (lot.get(0).isRefrigerado()) {
-			l.setTipopaquete(TipoPaquete.REFRIGERADO);
-			for (Lote l1 : lot) {
-				l.anadirLote(l1);
-				;
-			}
-		} else if (lot.get(0).isCongelado()) {
-			l.setTipopaquete(TipoPaquete.CONGELADO);
-			for (Lote l1 : lot) {
-				l.anadirLote(l1);
-				;
-			}
-		} else if (lot.get(0).isLiquido()) {
-			l.setTipopaquete(TipoPaquete.LIQUIDO);
-			for (Lote l1 : lot) {
-				l.anadirLote(l1);
-			}
-		}
-		for (Lote l1 : lot) {
-			if (l1.isFragil()) {
-				flag = 1;
-				l.setTipopaquete(TipoPaquete.FRAGIL);
-				l.anadirLote(l1);
-			}
-		}
-		if (flag == 0) {
-			l.setTipopaquete(TipoPaquete.ESTANDAR);
-			for (Lote l1 : lot) {
-				l.anadirLote(l1);
-			}
+		for(Lote lotes:lot) {
+			l.anadirLote(lotes);
 		}
 		p.getUnidades().add(l);
 		return true;
