@@ -179,5 +179,8 @@ public class Producto extends Unidad {
     public String getDesc() {
         return this.descripcion;
     }
-
+    @Override
+    public String getPriceDetailString() {
+        return this.getNumUnidades()+" units, all cost " + this.calcularPrecio() +  " euros";
+    }
 }

@@ -1,4 +1,5 @@
 package usuarios;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import Pedido.Pedido;
@@ -26,7 +27,7 @@ class Product implements IProductInfo {
 	}
 	public String getDescription() { return u.getDesc(); }
 	public double getPrice() { return u.calcularPrecio(); }
-	public String getPriceDetails() { return ""; }
+	public String getPriceDetails() { return u.getPriceDetailString(); }
 }
 
 class InvoiceCliente implements IInvoiceInfo {  
@@ -43,7 +44,12 @@ class InvoiceCliente implements IInvoiceInfo {
 	public String getCompanyLogo () { return ""; } // jpg, gif and png formats are supported	
 	public double getDiscount() { return (p.getNumProductos()>100?0.1*p.calcularPrecio():0); }
 	public double getUrgent() { return p.isUrgente()?5:0; }
-	public String getOrderDate() { return "March 2nd 2022"; }
+	public String getOrderDate() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		String dateString = format.format( p.getFecha()  );
+		return dateString;
+	 }
 	public String getOrderIdentifier() { return "INV"+p.getIdPedido(); }
 	public double getPrice() { return p.calcularPrecio(); }
 	public List<IProductInfo> getProducts() { 

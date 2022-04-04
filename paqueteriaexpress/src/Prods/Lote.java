@@ -201,6 +201,26 @@ public class Lote extends Unidad {
 
 	@Override
 	public String getDesc() {
-		return "";
+		String A="";
+		for(Producto p: productos) {
+			A+=p.getDesc()+ ", ";
+		}
+		for(Lote l: lotes) {
+			A+=l.getDesc()+ ", ";
+		}
+		A = A.substring(0, A.length()-2);
+		A+=".";
+		return A;
+	}
+
+	public String getPriceDetailString() {
+		String A="";
+		for(Producto p: productos) {
+			A+=p.getPriceDetailString()+"\n";
+		}
+		for(Lote l: lotes) {
+			A+=l.getPriceDetailString()+"\n";
+		}
+		return A;
 	}
 }
