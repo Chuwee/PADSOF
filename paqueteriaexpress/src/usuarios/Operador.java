@@ -79,8 +79,13 @@ public class Operador extends UsuarioIdentificado {
 	public boolean añadirProductoStandard(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio,
 			String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
 
-		Producto prod = new Producto(sist, idProducto, peso, descripcion, unidades, largo, ancho, alto);
-		p.getUnidades().add(prod);
+		if(largo<=sist.getLargo()&&ancho<=sist.getAncho()&&alto<=sist.getAlto()) {
+			Producto prod = new Producto(sist, idProducto, peso, descripcion, unidades, largo, ancho, alto);
+			p.getUnidades().add(prod);
+		}else {
+			añadirProductoDimEsp(sist, p, idProducto, peso, precio, direccion, descripcion, unidades, largo, ancho, alto);
+		}
+		
 		return true;
 
 	}
@@ -256,6 +261,12 @@ public class Operador extends UsuarioIdentificado {
 	}
 
 	public boolean validarPedido(Pedido p) {
+		try {
+			this.comprobarCodigoPostal(p);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		p.validar();
 	
 		if (p.getEstado() == EstadoPedido.Validado) {

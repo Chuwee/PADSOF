@@ -62,16 +62,28 @@ public class Pedido {
     			u.validar();
     		} catch(ErrorAlto e) {
     			System.out.println("El alto de la unidad con ID: " + u.getIdentificador() + " excede los máximos permitidos.\n");
+    			if(u.isDimEsp()) {
+    				System.out.println("La unidad con ID: " + u.getIdentificador() + " sera de dimensiones especiales.\n");
+    				this.estado = EstadoPedido.Validado;
+    			}
     			return;
     		} catch (ErrorAncho e) {
     			System.out.println("El ancho de la unidad con ID: " + u.getIdentificador() + " excede los máximos permitidos.\n");
+    			if(u.isDimEsp()) {
+    				System.out.println("La unidad con ID: " + u.getIdentificador() + " sera de dimensiones especiales.\n");
+    				this.estado = EstadoPedido.Validado;
+    			}
     			return;
 			} catch (ErrorLargo e) {
 				System.out.println("El largo de la unidad con ID: " + u.getIdentificador() + " excede los máximos permitidos.\n");
-    			return;
+				if(u.isDimEsp()) {
+					System.out.println("La unidad con ID: " + u.getIdentificador() + " sera de dimensiones especiales.\n");
+    				this.estado = EstadoPedido.Validado;
+    			}
+				return;
 			} catch (ErrorPeso e) {
 				System.out.println("El peso de la unidad con ID: " + u.getIdentificador() + " excede los máximos permitidos.\n");
-    			return;
+				return;
 			}
     	}
     	this.estado = EstadoPedido.Validado;
