@@ -38,7 +38,7 @@ public class LoteTest {
 	public void testCalcularPrecio() {
 		assertTrue(p.calcularPrecio()==0.6);
 		assertTrue(pf.calcularPrecio()==5.6);
-		assertTrue(l.calcularPrecio()==0);
+		assertTrue(l.calcularPrecio()==p.calcularPrecio()+pf.calcularPrecio());
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public class LoteTest {
 	public void testCalcularPeso() {
 		assertTrue(p.getPeso()==2);
 		assertTrue(pf.getPeso()==3);
-		assertTrue(l.calcularPeso()==5);
+		assertTrue(l.calcularPeso()==5.0);
 	}
 
 	@Test

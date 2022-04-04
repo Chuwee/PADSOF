@@ -24,22 +24,22 @@ public class Lote extends Unidad {
 		this.unidades=unidades;
 		this.productos=null;
 		this.lotes = null;
+		productos=new ArrayList<Producto>();
+		lotes=new ArrayList<Lote>();
 	}
     
     
     @Override
     public double calcularPrecio() {
     	double counter = 0;
-    	if(!productos.isEmpty()) {
     		for(Producto p : productos) {
         		counter+=p.calcularPrecio();
         	}
-    	}
-    	if(!lotes.isEmpty()) {
+    	
     		for(Lote l: lotes) {
         		counter+=l.calcularPrecio();
         	}
-    	}
+    	
   
     	return counter;
     }
