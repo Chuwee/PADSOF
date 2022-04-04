@@ -137,7 +137,9 @@ public class SistemaAplicacion {
     		}
     	}
     	while(itRep.hasNext()&&itCam.hasNext()) {
-    		itRep.next().setCamion(itCam.next());
+    		Camion c=itCam.next();
+    		c.CalcularPaquetesMensuales();
+    		itRep.next().setCamion(c);
     	}
     	if(itCam.hasNext()) {
     		while(itCam.hasNext()) {

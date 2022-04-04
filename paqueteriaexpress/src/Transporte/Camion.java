@@ -1,11 +1,15 @@
 package Transporte;
+import java.text.SimpleDateFormat;
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
  * 
  */
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import Paquete.Paquete;
+import Pedido.Pedido;
 
 public abstract class Camion {
     private double pesoMaximo;
@@ -14,6 +18,8 @@ public abstract class Camion {
     private EstadoCamion estado;
     private TipoCamion tipo;
     private ArrayList<Paquete> paquetes;
+    private Map<String, Integer> paquetesMensuales;
+   
 
     public Camion(double pesoMaximo, String matricula, EstadoCamion estado, TipoCamion tipo){
         this.pesoMaximo=pesoMaximo; 
@@ -77,5 +83,24 @@ public abstract class Camion {
     public boolean canAdd(double peso) {
         return (peso+currentPeso)>pesoMaximo?false:true;
     }
+    public void CalcularPaquetesMensuales() {
+    	SimpleDateFormat formater;
+    	String fecha;
+    	formater=new SimpleDateFormat("MM-yy");
+    	for(Paquete p: paquetes) {
+    			fecha=formater.format(p.getDate());
+    			if(paquetesMensuales.putIfAbsent(fecha, 1)!=null) {
+    				paquetesMensuales.put(fecha, 1+ paquetesMensuales.get(fecha));
+    			}
+    	}
+    }
+
+	public Map<String, Integer> getPaquetesMensuales() {
+		return paquetesMensuales;
+	}
+
+	public void setPaquetesMensuales(Map<String, Integer> paquetesMensuales) {
+		this.paquetesMensuales = paquetesMensuales;
+	}
 
 }

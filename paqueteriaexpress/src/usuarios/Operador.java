@@ -253,8 +253,11 @@ public class Operador extends UsuarioIdentificado {
 					num_empaquetado = empaquetar(u, paquetes.get(index), maxPeso, num_empaquetado);
 				}
 			}
-			for(Paquete p : paquetes)
-				anadirPaqueteACola(p);
+			for(Paquete p : paquetes) {
+				if(!p.getUnidades().isEmpty()) {
+					anadirPaqueteACola(p);
+				}
+			}		
 		}
 		sist.setId_paquetes(id);
 
