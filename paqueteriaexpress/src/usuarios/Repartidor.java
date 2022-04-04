@@ -71,10 +71,6 @@ public class Repartidor extends UsuarioIdentificado{
     	}
 
     }
-    public Camion ver_camion_asignado(){
-        return null; 
-        
-    }
 	public Camion getCamion() {
 		return camion;
 	}

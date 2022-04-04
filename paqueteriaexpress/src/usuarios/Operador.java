@@ -36,7 +36,7 @@ import es.uam.eps.padsof.telecard.*;
  */
 public class Operador extends UsuarioIdentificado {
 	private int pedidosDistribuidos;
-	SistemaAplicacion sist;
+	private SistemaAplicacion sist;
 	private static ArrayList<TipoPaquete> arrPaquetes = new ArrayList<TipoPaquete>() {
 		{
 			add(0, TipoPaquete.ESTANDAR);
@@ -113,8 +113,7 @@ public class Operador extends UsuarioIdentificado {
 	}
 
 	public boolean añadirProductoDimEsp(SistemaAplicacion sist, Pedido p, int idProducto, double peso, double precio,
-			String direccion, String descripcion, int unidades, double largo, double ancho, double alto,
-			boolean congelado) {
+			String direccion, String descripcion, int unidades, double largo, double ancho, double alto) {
 
 		Producto prod = new DimensionesEspeciales(sist, idProducto, peso, precio, descripcion, unidades,
 				largo, ancho, alto);
