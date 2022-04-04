@@ -1,3 +1,6 @@
+/**
+ * @author  Paloma Ballester Asesio María del Pinar Sacristán Matesanz
+ */
 package Tests;
 
 import static org.junit.Assert.*;

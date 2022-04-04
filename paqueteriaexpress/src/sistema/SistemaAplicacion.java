@@ -124,7 +124,6 @@ public class SistemaAplicacion {
          * Debemos meterlo en un camión apropiado.
          */
         TipoCamion tipo = Vars.TipoPaquete_to_TipoCamion(p.getTp());
-        System.out.println(p.getTp() + ", " + tipo + " id:" + p.getIdPaquete());
         Camion c = getCamionApropiado_fromTipo(tipo, p);
         if (c != null) {
             try {
@@ -171,7 +170,7 @@ public class SistemaAplicacion {
     }
 
     /**
-     * 
+     * @author Ignacio Ildefonso de Miguel Ruano
      * @param p     paquete que agregamos a la cola
      * @param index indice en el que se inserta
      */
@@ -180,6 +179,7 @@ public class SistemaAplicacion {
     }
 
     /**
+     * @author Paloma Ballester
      * esta funcion asigna un camion a un repartidor
      */
     public void asignarCamionRepartidor() {
@@ -207,6 +207,7 @@ public class SistemaAplicacion {
     }
 
     /**
+     * @author Paloma Ballester
      * esta función registra a un cliente en la aplicacion
      * 
      * @param TarjetaDeCredito String
@@ -226,6 +227,7 @@ public class SistemaAplicacion {
     }
 
     /**
+     * @author Paloma Ballester
      * esta función sirve para que un Cliente inicie sesion
      * 
      * @param usuario
@@ -247,7 +249,6 @@ public class SistemaAplicacion {
         }
         throw new UsuarioNoEncontrado();
     }
-
     public Operador loginOperador(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado {
 
         for (Operador o : operadores) {
@@ -280,6 +281,9 @@ public class SistemaAplicacion {
      * esta funcion calcula los ingresos mensuales para las estadisticas
      */
 
+     /**
+      * @author Paloma Ballester
+      */
     private void calcularIngresosMensuales() {
         ingresosMensuales = new LinkedHashMap<String, Double>();
         SimpleDateFormat formater;
@@ -297,6 +301,7 @@ public class SistemaAplicacion {
     }
 
     /**
+     * @author Paloma Ballester
      * esta funcion calcula los pedidos mensuales para las estadisticas
      */
     private void calcularPedidosMensuales() {

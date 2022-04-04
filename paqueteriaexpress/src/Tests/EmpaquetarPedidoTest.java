@@ -1,3 +1,6 @@
+/**
+ * @author Ignacio Ildefonso de Miguel Ruano, Paloma Ballester Asesio
+ */
 package Tests;
 
 import static org.junit.Assert.*;

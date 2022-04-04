@@ -1,7 +1,7 @@
 package Prods;
 import GlobalVars.TipoPaquete;
 /**
- * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
+ * @author Ignacio Ildefonso del Miguel Ruano 
  * 
  */
 import sistema.SistemaAplicacion;

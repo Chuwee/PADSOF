@@ -1,19 +1,14 @@
 package GlobalVars;
 /**
- * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
- * 
- */
-/**
+ * @author Ignacio Ildefonso del Miguel Ruano
  * 
  * esta enumeracion es de los diferentes tipos de los que puede ser un paquete
- *
  */
 public enum TipoPaquete {
 	FRAGIL,
 	ALIMENTACION,
-	ESTANDAR,
 	TOTAL,
-	SUPLEMENTOFRAGIL,
+	ESTANDAR,
 	REFRIGERADO,
 	LIQUIDO,
 	CONGELADO,
