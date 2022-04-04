@@ -41,7 +41,7 @@ public abstract class Unidad {
 
     public abstract double getPeso();
     
-    public abstract double calcularPrecio();
+    public abstract double calcularPrecio() ;
     
     public boolean isFragil() {
     	return false;

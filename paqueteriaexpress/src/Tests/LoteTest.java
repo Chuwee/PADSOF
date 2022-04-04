@@ -38,7 +38,7 @@ public class LoteTest {
 	public void testCalcularPrecio() {
 		assertTrue(p.calcularPrecio()==0.6);
 		assertTrue(pf.calcularPrecio()==5.6);
-		assertTrue(l.calcularPrecio()==6.2);
+		assertTrue(l.calcularPrecio()==0);
 	}
 
 	@Test
