@@ -96,6 +96,8 @@ public abstract class Unidad {
     public abstract int getNumUnidades();
 
     public abstract String getDesc();
+
+    public abstract String getPriceDetailString();
 	
     
 }
