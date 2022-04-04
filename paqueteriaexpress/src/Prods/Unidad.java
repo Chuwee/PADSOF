@@ -11,18 +11,31 @@ import usuarios.ErrorAlto;
 import usuarios.ErrorAncho;
 import usuarios.ErrorLargo;
 import usuarios.ErrorPeso;
-
+/**
+ * 
+ * clase abstracta de la que heredan tanto producto como lote
+ *
+ */
 public abstract class Unidad {
 
     private int identificador;
     private boolean empaquetado;
     private Pedido pedido;
-    
+    /**
+     * 
+     * @param id, int
+     */
     public Unidad(int id) {
     	this.identificador=id;
     	this.empaquetado=false;
     }
-    
+    /**
+     * 
+     * @throws ErrorAlto, en caso de que supere el alto permitido
+     * @throws ErrorAncho en caso de que supere el ancho permitido
+     * @throws ErrorLargo en caso de que supere el largo permitido
+     * @throws ErrorPeso en caso de que supere el peso permitido
+     */
     public abstract void validar() throws ErrorAlto, ErrorAncho, ErrorLargo, ErrorPeso;
 
     public int getIdentificador() {
