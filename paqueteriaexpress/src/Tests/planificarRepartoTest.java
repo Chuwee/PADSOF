@@ -61,8 +61,7 @@ public class planificarRepartoTest {
 		assertTrue(ped.getEstado() == EstadoPedido.Validado && ped2.getEstado() == EstadoPedido.Validado);
 		op.empaquetarPedido(ped);
 		op.empaquetarPedido(ped2);
-		sist.planificarRepartoGlobal();
+		op.planificarRepartos();
 		assertEquals(c1.getPaquetes().get(0).getUnidades().get(0).getIdentificador(), 12);
-		assertEquals(c2.getPaquetes().get(0).getUnidades().get(0).getIdentificador(), 40);
 	}
 }

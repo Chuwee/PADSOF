@@ -44,6 +44,7 @@ public class Producto extends Unidad {
     	this.sist = sist;
     }
     /**
+     * @author Ignacio Ildefonso de Miguel Ruano
      * este método sirve para validar cada producto y ver que no sobrepasa los límites de las dimensiones
      */
     public void validar() throws ErrorAlto, ErrorAncho, ErrorLargo, ErrorPeso {

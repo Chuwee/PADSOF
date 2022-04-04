@@ -38,6 +38,7 @@ public class Lote extends Unidad {
 	}
     
     /**
+     * @author Ignacio Ildefonso de Miguel Ruano
      * este método va a calcular el precio del lote calculando el precio de cada uno de sus productos y de sus lotes
      * @return double precio
      */
@@ -60,7 +61,10 @@ public class Lote extends Unidad {
      * @return double peso
      */
 
-    
+    /**
+     * @author Ignacio Ildefonso de Miguel Ruano
+     * @return
+     */
     public double calcularPeso(){
     	double counter = 0;
     	for(Producto p: productos) {
@@ -81,6 +85,7 @@ public class Lote extends Unidad {
 		return calcularPeso();
 	}
     /**
+     * @author Ignacio Ildefonso de Miguel Ruano
      * este método valida un lote, comprobando que las unidades que lo componen no superan los umbrales establecidos
      */
     public void validar() throws ErrorAlto, ErrorAncho, ErrorLargo, ErrorPeso {
@@ -170,6 +175,7 @@ public class Lote extends Unidad {
     	return true;
     }
 /**
+ * @author Ignacio Ildefonso de Miguel Ruano
  * en el momento en que haya algo frágil, el tipo va a ser frágil, en otro caso,
  * el tipo será el del primer elemento
  */
@@ -188,6 +194,10 @@ public class Lote extends Unidad {
 		return productos.get(0).getTipoPaquete();
 	}
 
+	/**
+	 * @author Ignacio Ildefonso de Miguel Ruano
+	 * This function returns the number of units inside of a group of products
+	 */
 	public int getNumUnidades() {
 		int counter = 0;
 		for(Lote l: lotes) {
@@ -199,6 +209,9 @@ public class Lote extends Unidad {
 		return counter;
 	}
 
+	/**
+	 * @author Ignacio Ildefonso de Miguel Ruano
+	 */
 	@Override
 	public String getDesc() {
 		String A="";
@@ -213,6 +226,9 @@ public class Lote extends Unidad {
 		return A;
 	}
 
+	/**
+	 * @author Ignacio Ildefonso de Miguel Ruano
+	 */
 	public String getPriceDetailString() {
 		String A="";
 		for(Producto p: productos) {

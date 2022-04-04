@@ -90,6 +90,8 @@ public abstract class Unidad {
     public String getDireccion() {
         return this.pedido.getDireccion();
     }
+    
+    // Prototipos de funciones abstractas
 
     public abstract TipoPaquete getTipoPaquete();
 

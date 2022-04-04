@@ -15,6 +15,10 @@ import es.uam.eps.padsof.invoices.InvoiceSystem;
 import es.uam.eps.padsof.invoices.NonExistentFileException;
 import es.uam.eps.padsof.invoices.UnsupportedImageTypeException;
 
+/**
+ * @author Ignacio Ildefonso de Miguel Ruano
+ */
+
 class Product implements IProductInfo {	
 
 	Unidad u;
@@ -26,6 +30,10 @@ class Product implements IProductInfo {
 	public double getPrice() { return u.calcularPrecio(); }
 	public String getPriceDetails() { return u.getPriceDetailString(); }
 }
+
+/**
+ * @author Ignacio Ildefonso de Miguel Ruano
+ */
 
 class InvoiceCliente implements IInvoiceInfo {  
 	Cliente c;

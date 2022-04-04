@@ -1,6 +1,6 @@
 package sistema;
 /**
- * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
+ * @author Ignacio Ildefonso del Miguel Ruano
  * 
  */
 import java.util.List;
@@ -48,6 +48,19 @@ public class ColaPrioridadPaquetes {
 		for(int i = 0; i < Colas.size(); i++) {
 			cola = Colas.get(i);
 			p = cola.poll();
+			if(p != null) {
+				return p;
+			}
+		}
+		return null;
+	}
+
+	public Paquete peekPaquete() {
+		PriorityQueue<Paquete> cola;
+		Paquete p;
+		for(int i = 0; i < Colas.size(); i++) {
+			cola = Colas.get(i);
+			p = cola.peek();
 			if(p != null) {
 				return p;
 			}

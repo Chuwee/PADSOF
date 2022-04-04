@@ -182,6 +182,10 @@ public class Operador extends UsuarioIdentificado {
 
 	}
 
+	/**
+	 * @author Ignacio Ildefonso de Miguel, Paloma Ballester
+	 * @param pedido
+	 */
 	public void empaquetarPedido(Pedido pedido) {
 		double maxPeso = sist.getPesoMaximo();
 		int id = sist.getId_paquetes();
@@ -234,6 +238,9 @@ public class Operador extends UsuarioIdentificado {
 		u.setEmpaquetado(true);
 	}
 
+	/**
+	 * @author Ignacio Ildefonso de Miguel Ruano
+	 */
 	private int asignarCola(Paquete p) {
 
 		if (p.isUrgente())
@@ -256,7 +263,7 @@ public class Operador extends UsuarioIdentificado {
 		sist.anadirPaqueteACola(p, cola);
 	}
 
-	private void planificarRepartos() {
+	public void planificarRepartos() {
 		sist.planificarRepartoGlobal();
 	}
 

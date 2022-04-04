@@ -1,6 +1,7 @@
 package Paquete;
 /**
- * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
+ * @author Ignacio Ildefonso del Miguel Ruano
+ * (autoría de funciones puesta encima de las mismas)
  * 
  */
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Paquete {
     private boolean entregado;
     private EstadoPaquete estadoPaquete;
     private TipoPaquete tp;
+    private boolean tried;
 /**
  * 
  * @param idPaquete int, identificador del paquete
@@ -33,6 +35,7 @@ public class Paquete {
         unidades = new ArrayList<Unidad>();
         this.setEntregado(false);
         estadoPaquete=EstadoPaquete.EnReparto;
+        tried = false;
     }
 	/**
 	 * 
@@ -64,7 +67,7 @@ public class Paquete {
         this.unidades.add(newUnit);
     }
     /**
-     * 
+     * @author Ignacio Ildefonso de Miguel Ruano
      * @return devuelve DAte, la fecha del oaquete
      */
     public Date getDate() {
@@ -138,7 +141,7 @@ public class Paquete {
 		this.entregado = entregado;
 	}
     /**
-     * 
+     * @author Ignacio Ildefonso de Miguel Ruano
      * @return boolean, true si el pedido es urgente
      */
 	public boolean isUrgente() {
@@ -163,11 +166,18 @@ public class Paquete {
 		this.tp = tp;
 	}
 /**
- * 
+ * @author Ignacio Ildefonso de Miguel Ruano
  * @param p, paquete
  * @return true en caso de que el id del paquete coincida
  */
     public boolean equals(Paquete p) {
         return this.idPaquete == p.getIdPaquete();
+    }
+
+    public boolean getTried() {
+        return this.tried;
+    }
+    public void setTried(boolean tried) {
+        this.tried = tried;
     }
 }

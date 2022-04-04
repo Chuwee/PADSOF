@@ -52,6 +52,7 @@ public class Pedido {
         unidades = new ArrayList<Unidad>();
     }
     /**
+     * @author Ignacio Ildefonso de Miguel Ruano
      * Esta función va a cambiar el estado del pedido a validado en caso de que todas las unidades que forman parte del pedido
      * cumplan los límites de dimensiones, en caso contrario entraría en alguna excepcion
      */
@@ -97,6 +98,7 @@ public class Pedido {
     }
 
     /**
+     * @author Ignacio Ildefonso de Miguel Ruano
      * @return gets number of units
      */
     public int getNumProductos() {
@@ -117,7 +119,7 @@ public class Pedido {
     }
     
     /**
-     * 
+     * @author Ignacio Ildefonso de Miguel Ruano
      * @return precio double, el precio del pedido una vez que ya hemos aplicado los extras. 
      */
     public double calcularPrecio() {
@@ -131,7 +133,7 @@ public class Pedido {
     	return precio;
     }
 /**
- * 
+ *
  * @param Unit, unidad que queremos eliminar del pedido
  */
     public void quitarUnidad(Unidad Unit) {
