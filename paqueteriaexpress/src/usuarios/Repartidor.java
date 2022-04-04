@@ -86,7 +86,6 @@ public class Repartidor extends UsuarioIdentificado{
     	if(paquetesMensuales.putIfAbsent(fecha, 1)!=null) {
     		paquetesMensuales.put(fecha, 1+ paquetesMensuales.get(fecha));
     	}
-    	
     }
 	
 	@Override
