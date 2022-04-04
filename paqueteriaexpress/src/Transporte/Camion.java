@@ -9,7 +9,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import Paquete.Paquete;
-
+/**
+ * 
+Esta es la clase de camion
+ *
+ */
 public class Camion {
     private double pesoMaximo;
     private double currentPeso;
@@ -21,7 +25,13 @@ public class Camion {
     private int numpaquetes;
     private int numrepartos;
    
-
+/**
+ * 
+ * @param pesoMaximo que se puede meter el camion
+ * @param matricula 
+ * @param estado estado en el que se encuentra el camion
+ * @param tipo tipo del camion
+ */
     public Camion(double pesoMaximo, String matricula, EstadoCamion estado, TipoCamion tipo){
         this.pesoMaximo=pesoMaximo; 
         this.matricula=matricula; 
@@ -73,20 +83,34 @@ public class Camion {
 	public void setPaquetes(ArrayList<Paquete> paquetes) {
 		this.paquetes = paquetes;
 	}
-    
+    /**
+     * 
+     * @param paquete que queremos anadir al camion
+     * @throws PesoCamionException en caso de que haya error se lanza la excepcion
+     */
     public void anadirPaquete(Paquete paquete) throws PesoCamionException {
         if(!canAdd(paquete.getPeso()))
             throw new PesoCamionException();
         this.paquetes.add(paquete);
     }
-
+/**
+ * 
+ * @param paquete que queremos quitar del camion
+ */
     public void quitarPaquete(Paquete paquete) {
         this.paquetes.remove(paquete);
     }
-
+/**
+ * 
+ * @param peso que vamos a comprobar si entra en el camion
+ * @return true en caso de que no lo supere
+ */
     public boolean canAdd(double peso) {
         return (peso+currentPeso)>pesoMaximo?false:true;
     }
+    /**
+     * va a calcular los paquetes mensuales para hacer las estadisticas
+     */
     public void CalcularPaquetesMensuales() {
     	SimpleDateFormat formater;
     	String fecha;
