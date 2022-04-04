@@ -6,9 +6,6 @@ import Pedido.Pedido;
 import Prods.Unidad;
 import sistema.SistemaAplicacion;
 
-
-package test_invoicesystem;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,10 +50,12 @@ class InvoiceCliente implements IInvoiceInfo {
 	public String getOrderIdentifier() { return "INV"+p.getIdPedido(); }
 	public double getPrice() { return p.calcularPrecio(); }
 	public List<IProductInfo> getProducts() { 
-		ArrayList<Product> productos;
+		List<IProductInfo> productos = new ArrayList<IProductInfo>();
 		for(Unidad u : p.getUnidades()) {
 			productos.add(new Product(u));
-		}	}
+		}
+		return productos;
+	}
 }
 
 /**
