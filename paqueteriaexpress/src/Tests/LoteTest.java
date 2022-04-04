@@ -5,57 +5,74 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import GlobalVars.TipoPaquete;
 import Prods.Lote;
 import Prods.Producto;
+import Prods.ProductoFragil;
 import sistema.SistemaAplicacion;
 
 public class LoteTest {
 	SistemaAplicacion sist= new SistemaAplicacion();
+	ProductoFragil pf=new ProductoFragil(sist, true, 12, 3, 0, "Taza", 1, 12, 14, 10);
+	Producto p = new Producto(sist, 38, 2, "xd", 1, 13, 12, 10);
+	Producto p2 = new Producto(sist, 39, 2, "xd", 1, 33, 12, 10);
 	Lote l=new Lote(3, 4, 2);
-	Producto p1=new 
 	
 	@Before
 	public void setup() {
 		sist.setAlto(50);
 		sist.setAncho(50);
 		sist.setLargo(50);
-		Producto p=l.getProductos().get(0);
-		Lote l1=l.
+		l.anadirProducto(p);
+		l.anadirProducto(pf);
+		
 	}
 
 	@Test
 	public void testValidar() {
-		assertTrue(l.getProductos());
+		assertFalse(l.getProductos().isEmpty());
+		assertTrue(l.getProductos().size()==2);
 	}
 
 	@Test
 	public void testCalcularPrecio() {
-		fail("Not yet implemented");
+		assertTrue(p.calcularPrecio()==0.6);
+		assertTrue(pf.calcularPrecio()==5.6);
+		assertTrue(l.calcularPrecio()==6.2);
 	}
 
 	@Test
 	public void testIsLote() {
-		fail("Not yet implemented");
+		assertTrue(l.isLote());
 	}
 
 	@Test
 	public void testCalcularPeso() {
-		fail("Not yet implemented");
+		assertTrue(l.calcularPeso()==2);
 	}
 
 	@Test
 	public void testAnadirProducto() {
-		fail("Not yet implemented");
+		l.anadirProducto(p2);
+		assertTrue(l.getProductos().size()==3);
 	}
 
 	@Test
 	public void testAnadirLote() {
-		fail("Not yet implemented");
+		l.anadirLote(l);
+		assertTrue(l.getLotes().size()==1);
 	}
 
 	@Test
 	public void testEliminarProducto() {
-		fail("Not yet implemented");
+		l.eliminarProducto(pf);
+		assertTrue(l.getProductos().size()==1);
 	}
+	
+	@Test
+	public void testTipoPaquete() {
+		assertTrue(l.getTipoPaquete()==TipoPaquete.FRAGIL);
+	}
+
 
 }

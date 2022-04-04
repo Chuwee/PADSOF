@@ -36,7 +36,7 @@ import es.uam.eps.padsof.telecard.*;
  */
 public class Operador extends UsuarioIdentificado {
 	private int pedidosDistribuidos;
-	SistemaAplicacion sist;
+	private SistemaAplicacion sist;
 	private static ArrayList<TipoPaquete> arrPaquetes = new ArrayList<TipoPaquete>() {
 		{
 			add(0, TipoPaquete.ESTANDAR);
