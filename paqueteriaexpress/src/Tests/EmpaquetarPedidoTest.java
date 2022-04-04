@@ -51,26 +51,16 @@ public class EmpaquetarPedidoTest {
 		assertTrue(p.isUrgente() == false);
 		assertTrue(p.getUnidades().get(0).getIdentificador() == 38);
 		assertTrue(sist.popCola() == null);
-		
 	}
 	
-	@Test
+	/*@Test
 	public void testValidarPedido2() {
-		Producto p3 = new Producto(sist, 63, 2, "xd", 1, 10, 12, 10);
-		ped.anadirUnidad(p);
-		ped.anadirUnidad(p3);
-		ped.anadirUnidad(pf);
-		ped.validar();
-		op.empaquetarPedido(ped);
-		Paquete p=sist.popCola();
-		assertTrue(p.getUnidades().get(0).getIdentificador() == 12);
-		p=sist.popCola();
-		assertTrue(p.getUnidades().size()==2);
-		assertTrue(p.getUnidades().get(0).getIdentificador()==38);
-		assertTrue(p.getUnidades().get(1).getIdentificador()==63);
-		assertTrue(sist.popCola() == null);
-		
-	}
+		ped2.anadirUnidad(p);
+		ped2.anadirUnidad(pf);
+		ped2.anadirUnidad(p2);
+		ped2.validar();
+		assertTrue(ped.getEstado()==EstadoPedido.Construido);
+	}*/
 
 
 }

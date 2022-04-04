@@ -127,8 +127,11 @@ public class SistemaAplicacion {
 
     public void planificarRepartoGlobal() {
         Paquete p = popCola();
-        while(p != null) {
+        int counter = 0;
+        int a = colasPrioridad.size();
+        while(p != null && counter < a) {
             planificarReparto(p);
+            counter++;
         }
     }
     
@@ -224,6 +227,9 @@ public class SistemaAplicacion {
     	
     }
     
+    public void anadirCamion(Camion c) {
+    	camiones.add(c);
+    }
     
     public List<Paquete> getPaquetesEntregados(){
     	return this.paquetesEntregados;

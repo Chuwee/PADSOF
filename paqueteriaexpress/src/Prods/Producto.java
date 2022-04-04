@@ -43,9 +43,9 @@ public class Producto extends Unidad {
     	if(this.largo > sist.getAlto()) {
     		throw new ErrorAlto();
     	}
-    	
-    	
-    	// TODO: pesos?
+    	if(this.peso > sist.getPesoMaximo()) {
+    		throw new ErrorPeso();
+    	}
     	
     }
     

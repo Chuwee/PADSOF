@@ -5,14 +5,12 @@ import java.text.SimpleDateFormat;
  * 
  */
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import Paquete.Paquete;
-import Pedido.Pedido;
 
-public abstract class Camion {
+public class Camion {
     private double pesoMaximo;
     private double currentPeso;
     private String matricula;
