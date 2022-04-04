@@ -50,14 +50,12 @@ public class Cliente extends UsuarioIdentificado {
 
     }
     public void verPedidos(SistemaAplicacion sist){
-    	for(int id : this.pedidosUser) {
     		for(Pedido p :sist.getPedidos()) {
-    			if(p.getCliente().equals(this)) {
+    			if(this.equals(p.getCliente())) {
     				System.out.println("Nº de pedido: "+ p.getIdPedido()+" Estado: "+ p.getEstado()+"\n");
     			}
     		}
-    	}
-  
+    	
     }
     public void logout(){
 

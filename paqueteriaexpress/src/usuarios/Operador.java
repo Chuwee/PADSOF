@@ -212,6 +212,7 @@ public class Operador extends UsuarioIdentificado {
 			}		
 		}
 		sist.setId_paquetes(id);
+		pedido.setEstado(EstadoPedido.EnReparto);
 
 	}
 
@@ -251,7 +252,7 @@ public class Operador extends UsuarioIdentificado {
 		sist.anadirPaqueteACola(p, cola);
 	}
 
-	private void planificarRepartos() {
+	public void planificarRepartos() {
 		sist.planificarRepartoGlobal();
 	}
 
