@@ -192,6 +192,9 @@ public class SistemaAplicacion {
     		}
     	}
     }
+
+   
+
     /**
      * esta función registra a un cliente en la aplicacion
      * @param TarjetaDeCredito String
@@ -202,18 +205,22 @@ public class SistemaAplicacion {
      * @param Contrasena String
      * @param email String
      */
-    public void RegistrarCliente(String TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email) {
+    public Cliente RegistrarCliente(String TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email) {
+
 		Cliente c=new Cliente(TarjetaDeCredito, dirContacto, NIF, Nombre, Usuario, Contrasena, email);
 		clientes.add(c);
+		return c;
 	}
+
     /**
-     * esta función sirve para que un usuario inicie sesion
+     * esta función sirve para que un Cliente inicie sesion
      * @param usuario
      * @param contrasena
      * @throws ContrasenaIncorrecta en caso de que la contraseña no coincida
      * @throws UsuarioNoEncontrado en caso de que el usuario no se encuentre en el sistema
      */
-    public UsuarioIdentificado login(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado{
+    public Cliente loginCliente(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado{
+
     	for(Cliente c: clientes) {
     		if(c.getUsuario().equals(usuario)) {
     			if(c.getContrasena().equals(contrasena)) {
@@ -223,6 +230,10 @@ public class SistemaAplicacion {
     			}
     		}
     	}
+    	throw new UsuarioNoEncontrado();
+    }
+    public Operador loginOperador(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado{
+    
     	for(Operador o: operadores) {
     		if(o.getUsuario().equals(usuario)) {
     			if(o.getContrasena().equals(contrasena)) {
@@ -232,6 +243,9 @@ public class SistemaAplicacion {
     			}
     		}
     	}
+    	throw new UsuarioNoEncontrado();
+    }
+    public Repartidor loginRepartidor(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado{
     	for(Repartidor r: repartidores) {
     		if(r.getUsuario().equals(usuario)) {
     			if(r.getContrasena().equals(contrasena)) {
@@ -243,9 +257,11 @@ public class SistemaAplicacion {
     	}
     	throw new UsuarioNoEncontrado();
     }
+
     /**
      * esta funcion calcula los ingresos mensuales para las estadisticas
      */
+
     private void calcularIngresosMensuales() {
     	ingresosMensuales=new LinkedHashMap<String, Double>();
     	SimpleDateFormat formater;
