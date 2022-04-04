@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
  */
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import Paquete.Paquete;
@@ -30,7 +31,7 @@ public abstract class Camion {
         this.paquetes=new ArrayList<Paquete>();
         this.tipo = tipo;
         this.currentPeso = 0;
-        this.paquetesMensuales=new HashMap<String,Integer>();
+        this.paquetesMensuales=new LinkedHashMap<String,Integer>();
         this.numpaquetes=0;
         this.numrepartos=0;
     }

@@ -1,8 +1,7 @@
 package usuarios;
 
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import GlobalVars.ColasPrioridad;
 import GlobalVars.Vars;
@@ -25,8 +24,8 @@ public class Repartidor extends UsuarioIdentificado{
     public Repartidor(SistemaAplicacion sist, String telefono, String NIF, String Nombre, String Usuario, String Contrasena, String email){
         super(NIF, Nombre, Usuario, Contrasena, email);
         this.telefono = telefono;
-        this.setPaquetesMensualesEntregados(new HashMap<String,Integer>());
-        this.setPaquetesMensualesNoEntregados(new HashMap<String,Integer>());
+        this.setPaquetesMensualesEntregados(new LinkedHashMap<String,Integer>());
+        this.setPaquetesMensualesNoEntregados(new LinkedHashMap<String,Integer>());
         this.setCamion(null);
         this.sist=sist;
 

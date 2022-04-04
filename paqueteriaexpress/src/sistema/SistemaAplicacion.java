@@ -186,7 +186,7 @@ public class SistemaAplicacion {
     }
     
     private void calcularIngresosMensuales() {
-    	ingresosMensuales=new HashMap<String, Double>();
+    	ingresosMensuales=new LinkedHashMap<String, Double>();
     	SimpleDateFormat formater;
     	String fecha;
     	formater=new SimpleDateFormat("MM-yy");
@@ -202,7 +202,7 @@ public class SistemaAplicacion {
     }
     
     private void calcularPedidosMensuales() {
-    	pedidosMensuales= new HashMap<String, Integer>();
+    	pedidosMensuales= new LinkedHashMap<String, Integer>();
     	SimpleDateFormat formater;
     	String fecha;
     	formater=new SimpleDateFormat("MM-yy");

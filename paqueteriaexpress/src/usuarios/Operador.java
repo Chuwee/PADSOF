@@ -3,8 +3,7 @@ package usuarios;
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz
  * 
  */
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import GlobalVars.ColasPrioridad;
 import GlobalVars.TipoPaquete;
@@ -351,6 +350,50 @@ public class Operador extends UsuarioIdentificado {
 	public void cobrarPedido( Pedido p) throws FailedInternetConnectionException, OrderRejectedException{
 		double precio=p.calcularPrecio();
 		TeleChargeAndPaySystem.charge(p.getCliente().getTarjetaDeCredito(), "p.getIdPedido()", precio);
+	}
+	public void getEstadisticasCamiones() {
+		for(Camion c: sist.getCamiones()) {
+			System.out.println("Camion matricula: "+ c.getMatricula()+"\n");
+			for(String s:c.getPaquetesMensuales().keySet()) {
+				System.out.println(s +": "+ c.getPaquetesMensuales().get(s)+ "\n");
+			}
+			System.out.println("Paquetes por reparto "+ c.getNumPaquetesReparto());
+		}
+		System.out.println("\n");
+	}
+	public void getEstadisticasRepartidores() {
+		for(Repartidor r: sist.getRepartidores()) {
+			System.out.println("Repartidor "+ r.getUsuario() +"\n");
+			System.out.println("Paquetes mensuales entregados:\n");
+			for(String s:r.getPaquetesMensualesEntregados().keySet()) {
+				System.out.println(s +": "+ r.getPaquetesMensualesEntregados().get(s)+ "\n");
+			}
+			System.out.println("Paquetes mensuales no entregados:\n");
+			for(String s:r.getPaquetesMensualesNoEntregados().keySet()) {
+				System.out.println(s +": "+ r.getPaquetesMensualesNoEntregados().get(s)+ "\n");
+			}
+		}
+		System.out.println("\n");
+	}
+	
+	public void getEstadisticasPedidos() {
+		System.out.println("Pedidos mensuales \n");
+		for(String s: sist.getPedidosMensuales().keySet()) {
+			System.out.println(s +": "+ sist.getPedidosMensuales().get(s)+ "\n");
+		}
+		System.out.println("Coste medio del pedido: "+ sist.getCosteMedioPedido()+"\n");
+		System.out.println("\n");
+	}
+	
+	public void getEstadisticas() {
+		System.out.println("Ingresos: mensuales \n");
+		for(String s: sist.getIngresosMensuales().keySet()) {
+			System.out.println(s +": "+ sist.getIngresosMensuales().get(s)+ "\n");
+		}
+		System.out.println("\n");
+		getEstadisticasPedidos();
+		getEstadisticasRepartidores();
+		getEstadisticasCamiones();	
 	}
 
 }
