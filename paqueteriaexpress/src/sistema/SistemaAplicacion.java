@@ -49,6 +49,15 @@ public class SistemaAplicacion {
     	for(int i = 0; i < Vars.getNumColasPrioridad(); i++) {
     		colasPrioridad.add(new ColaPrioridadPaquetes());
     	}
+    	costeMedioPedido=0;
+    	camiones=new ArrayList<Camion>();
+    	clientes=new ArrayList<Cliente>();
+    	repartidores=new ArrayList<Repartidor>();
+    	operadores=new ArrayList<Operador>();
+    	pedidos=new ArrayList<Pedido>();
+    	paquetesEntregados=new ArrayList<Paquete>();
+    	paquetesNoEntregados=new ArrayList<Paquete>();
+    	id_paquetes=0;
     }
 
     public int numPaquetesTotal() {
