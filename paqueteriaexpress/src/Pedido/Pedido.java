@@ -77,10 +77,14 @@ public class Pedido {
         this.unidades.add(newUnit);
     }
     
+    
     public double calcularPrecio() {
     	double precio = 0;
     	for(Unidad u: unidades) {
     		precio+=u.calcularPrecio();
+    	}
+    	if(this.urgente) {
+    		precio=precio+5; 
     	}
     	return precio;
     }
