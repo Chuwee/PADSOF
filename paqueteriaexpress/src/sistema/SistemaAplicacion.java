@@ -23,7 +23,11 @@ import Transporte.TipoCamion;
 
 import es.uam.eps.padsof.telecard.*;
 
-
+/**
+ * 
+ * esta es la clase del sistema de la aplicacion
+ *
+ */
 public class SistemaAplicacion {
     private List<Camion> camiones;
     private List<Cliente> clientes;
@@ -43,7 +47,9 @@ public class SistemaAplicacion {
     private Map<String, Integer> pedidosMensuales;
     private double costeMedioPedido;
     ArrayList<ColaPrioridadPaquetes> colasPrioridad;
-    
+    /**
+     * este es el constructor
+     */
     public SistemaAplicacion() {
     	colasPrioridad = new ArrayList<ColaPrioridadPaquetes>();
     	for(int i = 0; i < Vars.getNumColasPrioridad(); i++) {
@@ -59,7 +65,10 @@ public class SistemaAplicacion {
     	paquetesNoEntregados=new ArrayList<Paquete>();
     	id_paquetes=0;
     }
-
+/**
+ * 
+ * @return int, el numero total de paquetes
+ */
     public int numPaquetesTotal() {
         int counter = 0;
         for(ColaPrioridadPaquetes cola : colasPrioridad) {
@@ -67,7 +76,12 @@ public class SistemaAplicacion {
         }
         return counter;
     }
-
+/**
+ * 
+ * @param tipo tipo del camion
+ * @param p paquete
+ * @return el camion que va a llevar ese paquete por el tipo
+ */
     private Camion getCamionApropiado_fromTipo(TipoCamion tipo, Paquete p) {
         double peso = p.getPeso();
         boolean lookForRefrigerado = (tipo == TipoCamion.RefrigeradoCongelado)
@@ -85,7 +99,10 @@ public class SistemaAplicacion {
         }
         return null;
     }
-
+/**
+ * va a mostrar si no hay camiones disponibles para llevar ese paquete
+ * @param p paquete
+ */
     public void noHayCamiones(Paquete p) {
         if(p.isUrgente()) {
             anadirPaqueteACola(p, Vars.getColaPrioridad(ColasPrioridad.URGENTES));
@@ -93,7 +110,10 @@ public class SistemaAplicacion {
         }
         anadirPaqueteACola(p, Vars.getColaPrioridad(ColasPrioridad.NOENTREGADOSFALTACAMIONES));
     }
-
+/**
+ * 
+ * @param p paquete que va a entrar en la planificacion para ser repartido
+ */
     public void planificarReparto(Paquete p) {
         /*Debemos planificar el reparto del paquete p*/
         /**
@@ -114,7 +134,9 @@ public class SistemaAplicacion {
             noHayCamiones(p);
         return;
     }
-
+/**
+ * elimina un paquete de la cola de prioridad
+ */
     public Paquete popCola() {
         Paquete p;
         for(int i = 0; i < colasPrioridad.size(); i++) {
@@ -124,18 +146,29 @@ public class SistemaAplicacion {
         }
         return null;
     }
-
+/**
+ * esta funcion organiza el reparto de todos los paquetes 
+ */
     public void planificarRepartoGlobal() {
         Paquete p = popCola();
-        while(p != null) {
+        int counter = 0;
+        int a = colasPrioridad.size();
+        while(p != null && counter < a) {
             planificarReparto(p);
+            counter++;
         }
     }
-    
+    /**
+     * 
+     * @param p paquete que agregamos a la cola
+     * @param index indice en el que se inserta
+     */
     public void anadirPaqueteACola(Paquete p, int index) {
     	colasPrioridad.get(index).addPaquete(p);
     }
-    
+    /**
+     * esta funcion asigna un camion a un repartidor
+     */
     public void asignarCamionRepartidor() {
     	List<Camion> camionesValidos=new ArrayList<Camion>();
     	Iterator<Repartidor> itRep=repartidores.iterator();
@@ -159,12 +192,37 @@ public class SistemaAplicacion {
     		}
     	}
     }
+<<<<<<< HEAD
     public Cliente RegistrarCliente(String TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email) {
+=======
+    /**
+     * esta función registra a un cliente en la aplicacion
+     * @param TarjetaDeCredito String
+     * @param dirContacto String
+     * @param NIF String
+     * @param Nombre String
+     * @param Usuario String
+     * @param Contrasena String
+     * @param email String
+     */
+    public void RegistrarCliente(String TarjetaDeCredito, String dirContacto, String NIF, String Nombre, String Usuario, String Contrasena, String email) {
+>>>>>>> 72e480379ae08fee6c0cc40f7e59e98068376db1
 		Cliente c=new Cliente(TarjetaDeCredito, dirContacto, NIF, Nombre, Usuario, Contrasena, email);
 		clientes.add(c);
 		return c;
 	}
+<<<<<<< HEAD
     public Cliente loginCliente(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado{
+=======
+    /**
+     * esta función sirve para que un usuario inicie sesion
+     * @param usuario
+     * @param contrasena
+     * @throws ContrasenaIncorrecta en caso de que la contraseña no coincida
+     * @throws UsuarioNoEncontrado en caso de que el usuario no se encuentre en el sistema
+     */
+    public UsuarioIdentificado login(String usuario, String contrasena) throws ContrasenaIncorrecta, UsuarioNoEncontrado{
+>>>>>>> 72e480379ae08fee6c0cc40f7e59e98068376db1
     	for(Cliente c: clientes) {
     		if(c.getUsuario().equals(usuario)) {
     			if(c.getContrasena().equals(contrasena)) {
@@ -201,9 +259,15 @@ public class SistemaAplicacion {
     	}
     	throw new UsuarioNoEncontrado();
     }
+<<<<<<< HEAD
     
 
     
+=======
+    /**
+     * esta funcion calcula los ingresos mensuales para las estadisticas
+     */
+>>>>>>> 72e480379ae08fee6c0cc40f7e59e98068376db1
     private void calcularIngresosMensuales() {
     	ingresosMensuales=new LinkedHashMap<String, Double>();
     	SimpleDateFormat formater;
@@ -219,7 +283,9 @@ public class SistemaAplicacion {
     		}
     	}
     }
-    
+    /**
+     * esta funcion calcula los pedidos mensuales para las estadisticas
+     */
     private void calcularPedidosMensuales() {
     	pedidosMensuales= new LinkedHashMap<String, Integer>();
     	SimpleDateFormat formater;
@@ -234,6 +300,9 @@ public class SistemaAplicacion {
     	
     }
     
+    public void anadirCamion(Camion c) {
+    	camiones.add(c);
+    }
     
     public List<Paquete> getPaquetesEntregados(){
     	return this.paquetesEntregados;
@@ -330,6 +399,12 @@ public class SistemaAplicacion {
 	public void setOperadores(List<Operador> operadores) {
 		this.operadores = operadores;
 	}
+	/**
+	 * verifica que la tarjeta de credito del cliente es valida
+	 * @param numTarjeta
+	 * @return true en caso de que sea valida
+	 * @throws InvalidCardNumberException en caso de que no sea valida
+	 */
 	public boolean comprobarTarjeta(String numTarjeta) throws InvalidCardNumberException {
 		if(TeleChargeAndPaySystem.isValidCardNumber(numTarjeta)==true) {
 			return true; 

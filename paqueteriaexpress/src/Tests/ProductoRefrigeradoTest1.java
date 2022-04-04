@@ -11,7 +11,7 @@ import sistema.SistemaAplicacion;
 
 public class ProductoRefrigeradoTest1 {
 	SistemaAplicacion sist=new SistemaAplicacion();
-	Producto pr=new Refrigerado(sist,13, 3, 0, "Pescado", 4, 23, 15, 25, true);
+	Producto pr=new Refrigerado(sist,13, 3, "Pescado", 4, 23, 15, 25, true);
 	@Before
 	public void setup() {
 		sist.setAlto(30);
