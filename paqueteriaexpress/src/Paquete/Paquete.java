@@ -23,6 +23,7 @@ public class Paquete {
         this.setTp(tp);
         unidades = new ArrayList<Unidad>();
         this.setEntregado(false);
+        estadoPaquete=EstadoPaquete.EnReparto;
     }
 	
 	public EstadoPaquete getEstadoPaquete() {
