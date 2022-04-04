@@ -5,13 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import Prods.Liquido;
 import Prods.Producto;
 import sistema.SistemaAplicacion;
 
-public class ProductoLiquidoTest {
-	SistemaAplicacion sist= new SistemaAplicacion();
-	Producto pl= new Liquido(sist, 4,6, 0,  "Botellas de agua", 2, 12, 14, 20);
+public class ProductoEstandarTest {
+	SistemaAplicacion sist=new SistemaAplicacion();
+	Producto p=new Producto(sist,3, 7, "juguetes", 5, 23, 15, 25);
 	@Before
 	public void setup() {
 		sist.setAlto(30);
@@ -19,20 +18,28 @@ public class ProductoLiquidoTest {
 		sist.setLargo(30);
 		sist.setPesoMaximo(60);
 	}
-	@Test
-	public void testIsLiquido() {
-		assertTrue(pl.isLiquido());
-	}
+
 	@Test
 	public void testValidar() {
-		double alto=pl.getAlto();
-		double largo=pl.getLargo();
-		double ancho=pl.getAncho();
-		double peso=pl.getPeso();
+		double alto=p.getAlto();
+		double largo=p.getLargo();
+		double ancho=p.getAncho();
+		double peso=p.getPeso();
 		assertTrue(alto<=sist.getAlto());
 		assertTrue(ancho<=sist.getAncho());
 		assertTrue(largo<=sist.getLargo());
 		assertTrue(peso<=sist.getPesoMaximo());
+	}
+
+	@Test
+	public void testCalcularPrecio() {
+		double precio=p.calcularPrecio();
+		assertTrue(precio==1);
+	}
+
+	@Test
+	public void testIsEstandar() {
+		assertTrue(p.isEstandar());
 	}
 
 }

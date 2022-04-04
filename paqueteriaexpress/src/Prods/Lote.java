@@ -83,6 +83,9 @@ public class Lote extends Unidad {
 	public List<Producto> getProductos() {
 		return productos;
 	}
+	public List<Lote> getLotes() {
+		return lotes;
+	}
 
 
 	public void anadirProducto(Producto p) {

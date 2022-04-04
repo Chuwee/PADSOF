@@ -17,6 +17,7 @@ public class ProductoRefrigeradoTest2 {
 		sist.setAlto(30);
 		sist.setAncho(30);
 		sist.setLargo(30);
+		sist.setPesoMaximo(60);
 	}
 	@Test
 	public void testIsRefrigerado() {
@@ -39,9 +40,11 @@ public class ProductoRefrigeradoTest2 {
 		double alto=pr.getAlto();
 		double largo=pr.getLargo();
 		double ancho=pr.getAncho();
+		double peso=pr.getPeso();
 		assertTrue(alto<=sist.getAlto());
 		assertTrue(ancho<=sist.getAncho());
 		assertTrue(largo<=sist.getLargo());
+		assertTrue(peso<=sist.getPesoMaximo());
 	}
 
 	@Test

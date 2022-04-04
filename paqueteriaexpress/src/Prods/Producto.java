@@ -107,7 +107,7 @@ public class Producto extends Unidad {
 
     @Override
     public double getPeso() {
-        return this.peso*unidades;
+        return this.peso;
     }
 
     @Override

@@ -17,6 +17,7 @@ public class ProductoFragilTest2 {
 		sist.setAlto(30);
 		sist.setAncho(30);
 		sist.setLargo(30);
+		sist.setPesoMaximo(60);
 	}
 	
 	@Test
@@ -35,6 +36,17 @@ public class ProductoFragilTest2 {
 	@Test
 	public void testIsEstandar() {
 		assertFalse(pf.isEstandar());
+	}
+	@Test
+	public void testValidar() {
+		double alto=pf.getAlto();
+		double largo=pf.getLargo();
+		double ancho=pf.getAncho();
+		double peso=pf.getPeso();
+		assertTrue(alto<=sist.getAlto());
+		assertTrue(ancho<=sist.getAncho());
+		assertTrue(largo<=sist.getLargo());
+		assertTrue(peso<=sist.getPesoMaximo());
 	}
 
 
