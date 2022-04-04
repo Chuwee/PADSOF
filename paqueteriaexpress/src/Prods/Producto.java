@@ -171,5 +171,16 @@ public class Producto extends Unidad {
 		return TipoPaquete.ESTANDAR;
 	}
 
+    public int getNumUnidades() {
+        return this.getUnidades();
+    }
 
+    @Override
+    public String getDesc() {
+        return this.descripcion;
+    }
+    @Override
+    public String getPriceDetailString() {
+        return this.getNumUnidades()+" units, all cost " + this.calcularPrecio() +  " euros";
+    }
 }

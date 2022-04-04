@@ -86,6 +86,7 @@ public class SistemaAplicacion {
         double peso = p.getPeso();
         boolean lookForRefrigerado = (tipo == TipoCamion.RefrigeradoCongelado)
             || (tipo == TipoCamion.RefrigeradoLiquido) || (tipo == TipoCamion.RefrigeradoRefrigerado);
+        System.out.println(lookForRefrigerado);
         
         for(Camion c : camiones) {
             if(c.getEstado()!=EstadoCamion.AVERIADO && 

@@ -1,8 +1,62 @@
 package usuarios;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import Pedido.Pedido;
+import Prods.Unidad;
 import sistema.SistemaAplicacion;
+
+import java.util.Arrays;
+import java.util.List;
+
+import es.uam.eps.padsof.invoices.IInvoiceInfo;
+import es.uam.eps.padsof.invoices.IProductInfo;
+import es.uam.eps.padsof.invoices.InvoiceSystem;
+import es.uam.eps.padsof.invoices.NonExistentFileException;
+import es.uam.eps.padsof.invoices.UnsupportedImageTypeException;
+
+class Product implements IProductInfo {	
+
+	Unidad u;
+
+	public Product(Unidad u) {
+		this.u = u;
+	}
+	public String getDescription() { return u.getDesc(); }
+	public double getPrice() { return u.calcularPrecio(); }
+	public String getPriceDetails() { return u.getPriceDetailString(); }
+}
+
+class InvoiceCliente implements IInvoiceInfo {  
+	Cliente c;
+	Pedido p;
+
+	public InvoiceCliente(Cliente c, Pedido p) {
+		this.c = c;
+		this.p = p;
+	}
+
+	public String getClientCif() { return c.getNIF(); }
+	public String getCompanyName() { return "Paquetería Express"; }
+	public String getCompanyLogo () { return ""; } // jpg, gif and png formats are supported	
+	public double getDiscount() { return (p.getNumProductos()>100?0.1*p.calcularPrecio():0); }
+	public double getUrgent() { return p.isUrgente()?5:0; }
+	public String getOrderDate() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		String dateString = format.format( p.getFecha()  );
+		return dateString;
+	 }
+	public String getOrderIdentifier() { return "INV"+p.getIdPedido(); }
+	public double getPrice() { return p.calcularPrecio(); }
+	public List<IProductInfo> getProducts() { 
+		List<IProductInfo> productos = new ArrayList<IProductInfo>();
+		for(Unidad u : p.getUnidades()) {
+			productos.add(new Product(u));
+		}
+		return productos;
+	}
+}
 
 /**
  * @author Paloma Ballester Asesio, Ignacio Ildefonso del Miguel Ruano y María del Pinar Sacristán Matesanz

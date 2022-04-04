@@ -38,6 +38,11 @@ public class Operador extends UsuarioIdentificado {
 	private int pedidosDistribuidos;
 	private SistemaAplicacion sist;
 	private static ArrayList<TipoPaquete> arrPaquetes = new ArrayList<TipoPaquete>() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		{
 			add(0, TipoPaquete.ESTANDAR);
 			add(1, TipoPaquete.CONGELADO);

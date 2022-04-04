@@ -93,7 +93,11 @@ public abstract class Unidad {
 
     public abstract TipoPaquete getTipoPaquete();
 
+    public abstract int getNumUnidades();
 
+    public abstract String getDesc();
+
+    public abstract String getPriceDetailString();
 	
     
 }
