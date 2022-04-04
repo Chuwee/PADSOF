@@ -71,6 +71,7 @@ public class paqueteriaMain {
 				Contrasena=leer.next();
 				
 				c=sist.RegistrarCliente(TarjetaDeCredito, dirContacto, NIF, Nombre, Usuario, Contrasena, email);
+				break;
 			case 2:
 				try {
 					System.out.println("Usuario: ");
@@ -85,6 +86,7 @@ public class paqueteriaMain {
 				catch(UsuarioNoEncontrado usn) {
 					
 				}
+				break;
 			
 			case 3:
 				if(c.getNombre().isBlank()) {
@@ -101,9 +103,11 @@ public class paqueteriaMain {
 					System.out.println("Elija un pedido (id): \n");
 					c.descargarFactura(leer.nextInt());
 				}
+				break;
 				
 			case 5:
 				System.out.println("Adios!\n");
+				return ;
 			default:
 				System.out.println("Opcion no valida\n");
 			}
@@ -111,8 +115,122 @@ public class paqueteriaMain {
 		leer.close();
 		
 	}
-	private static void MenuOperador() {
-		System.out.println("Operador:\n");
+	private static void MenuOperador(SistemaAplicacion sist) {
+		int opcion=0, opc=1;
+		int flag=0;
+		Operador o=sist.getOperadores().get(0);
+		Scanner leer=new Scanner(System.in);
+		int idPedido, codigoPostal;
+		boolean urgente;
+		String  direccion, descripcion, urgente1;
+		while(opcion!=5) {
+			System.out.println("Operador:\n");
+			System.out.println("1.Nuevo pedido\n");
+			System.out.println("2.Empaquetar\n");
+			System.out.println("3.Planificar Reparto\n");
+			System.out.println("4.Estadisticas\n");
+			System.out.println("5.Salir\n");
+			System.out.println("Eliga una opcion: ");
+			opcion=leer.nextInt();
+			switch(opcion) {
+			case 1:
+				System.out.println("Nuevo pedido\n");
+				System.out.println("Id: ");
+				idPedido=leer.nextInt();
+				flag=0;
+				while(flag==0) {
+					System.out.println("Urgente(S/N):  ");
+					urgente1=leer.next();
+					if(urgente1.contentEquals("S")) {
+						urgente=true;
+						flag=1;
+					}else if(urgente1.contentEquals("N")) {
+						urgente=false;
+						flag=1;
+					}else {
+						System.out.println("Tiene que ser S/N");
+					}
+				}
+				System.out.println("Direccion de envio:  ");
+				direccion=leer.next();
+				System.out.println("Codigo Postal:");
+				codigoPostal=leer.nextInt();
+				System.out.println("Descripcion:  ");
+				descripcion=leer.next();
+				Pedido pedido= o.nuevoPedido(idPedido, urgente, direccion, codigoPostal, descripcion, 
+						sist.getClientes().get(0), new Date(System.currentTimeMillis()));
+				flag=0;
+				while(opc==1) {
+					System.out.println("1.Anadir producto ");
+					System.out.println("2.Validar pedido ");
+					System.out.println("Opcion: ");
+					opc=leer.nextInt();
+					if(opc==1) {
+						
+					}else if(opc==2) {
+						o.validarPedido(pedido);
+						System.out.println("1.Estandar ");
+						System.out.println("2.Liquido ");
+						System.out.println("3.Refrigerado ");
+						System.out.println("4.Congelado ");
+						System.out.println("5.Fragil ");
+						System.out.println("Opcion: ");
+						flag=leer.nextInt();
+						switch(flag) {
+						case 1:
+							System.out.println("Id del producto: ");
+							int idProducto=leer.nextInt();
+							System.out.println("Peso: ");
+							double peso=leer.nextDouble();
+							o.añadirProductoStandard(sist, pedido, idProducto, peso, 0, pedido.getDireccion(), descripcion, 
+									unidades, largo, ancho, alto);
+						}
+						
+					}
+					
+					
+				}
+			case 2:
+				try {
+					System.out.println("Usuario: ");
+					Usuario=leer.next();
+					System.out.println("Contrasena: ");
+					Contrasena=leer.next();
+					c=sist.loginCliente(Usuario, Contrasena);
+				}
+				catch(ContrasenaIncorrecta cinc) {
+					
+				}
+				catch(UsuarioNoEncontrado usn) {
+					
+				}
+				break;
+			
+			case 3:
+				if(c.getNombre().isBlank()) {
+					System.out.println("Tiene que iniciar sesion o registrarse: \n");
+				}else {
+					c.verPedidos(sist);
+				}
+				
+			case 4:
+				if(c.getNombre().isBlank()) {
+					System.out.println("Tiene que iniciar sesion o registrarse: \n");
+				}else {
+					c.verPedidos(sist);
+					System.out.println("Elija un pedido (id): \n");
+					c.descargarFactura(leer.nextInt());
+				}
+				break;
+			
+			case 5:
+				System.out.println("Adios!\n");
+				return ;
+			default:
+				System.out.println("Opcion no valida\n");
+			}
+		}
+		leer.close();
 		
 	}
 	private static void MenuRepartidor() {
@@ -131,16 +249,25 @@ public class paqueteriaMain {
 			System.out.println("3.Repartidor\n");
 			System.out.println("4.Salir\n");
 			System.out.println("Eliga una opcion: ");
-			opcion=leer.nextInt();
+			try{
+				opcion=leer.nextInt();
+			}
+			catch(NoSuchElementException e) {
+				System.out.println("No se lee");
+			}
 			switch(opcion) {
 			case 1:
 				MenuCliente(sist);
+				break;
 			case 2:
-				MenuOperador();
+				MenuOperador(sist);
+				break;
 			case 3:
 				MenuRepartidor();
+				break;
 			case 4:
 				System.out.println("Adios!\n");
+				break;
 			default:
 				System.out.println("Opcion no valida\n");
 			}
